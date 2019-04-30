@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Karina Golovin](https://up.htmlacademy.ru/react/1/user/681179).
-* Наставник: `Неизвестно`.
+* Наставник: `Алексей Балесный`.
 
 ---
 
