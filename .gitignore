@@ -15,3 +15,4 @@ node_modules/
 build/
 
 public/bundle.js
+bundle.map.js
