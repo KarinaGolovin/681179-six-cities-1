@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Main = () => {
+const MainEmpty = () => {
   return (
     <div>
       <div style={{
@@ -86,5 +86,5 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainEmpty;
 
