@@ -35,7 +35,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{props.title}</a>
+          <a href="#" onClick={props.onClick}>{props.title}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
@@ -44,7 +44,8 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 export default PlaceCard;

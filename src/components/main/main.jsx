@@ -105,6 +105,7 @@ const Main = () => {
                     return <PlaceCard
                       title={el}
                       key={el}
+                      onClick={() => {}}
                     />;
                   })
                 }
