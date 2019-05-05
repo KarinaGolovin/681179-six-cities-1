@@ -1,9 +1,8 @@
 import React from 'react';
 import PlaceCard from '../place-card/place-card.jsx';
+import Settings from '../../settings';
 
 const Main = () => {
-  const cardTitles = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
-
   return (
     <div>
       <div style={{
@@ -102,10 +101,11 @@ const Main = () => {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {
-                  cardTitles.map(function (el) {
+                  Settings.CARD_TITLES.map(function (el) {
                     return <PlaceCard
                       title={el}
                       key={el}
+                      onClick={() => {}}
                     />;
                   })
                 }
