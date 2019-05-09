@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
-import Settings from '../../settings';
 
-const Main = () => {
+const Main = (props) => {
+  const {offers, settings} = props;
+
   return (
     <div>
       <div style={{
@@ -97,19 +99,10 @@ const Main = () => {
                   <option className="places__option" value="to-low">Price: high to low</option>
                   <option className="places__option" value="top-rated">Top rated first</option>
                 </select>
-
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {
-                  Settings.CARD_TITLES.map(function (el) {
-                    return <PlaceCard
-                      title={el}
-                      key={el}
-                      onClick={() => {}}
-                    />;
-                  })
-                }
-              </div>
+              <PlaceCard
+                offers = {offers}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -120,6 +113,10 @@ const Main = () => {
       </main>
     </div>
   );
+};
+
+Main.propTypes = {
+  offers: PropTypes.object.isRequired,
 };
 
 export default Main;
