@@ -7,7 +7,10 @@ class PlacesList extends PureComponent {
     super(props);
 
     this.state = {
+      active: null,
     };
+
+    this._handleClick = this._handleClick.bind(this);
   }
 
   render() {
@@ -16,7 +19,7 @@ class PlacesList extends PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content">
         {
-          offers.map((it, i) => {
+          offers.map((it) => {
             return <PlaceCard
               title={it.title}
               type={it.type}
@@ -25,18 +28,23 @@ class PlacesList extends PureComponent {
               link={it.link}
               rating={it.rating}
               isPremium={it.isPremium}
-              onClick={() => { }}
-              key={i + it.title}
+              onClick={this._handleClick}
+              id={it.id}
+              key={it.id}
             />;
           })
         }
       </div>
     );
   }
+
+  _handleClick() {
+
+  }
 }
 
 PlacesList.propTypes = {
-  offers: PropTypes.object.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PlacesList;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card.jsx';
+import PlacesList from '../places-list/places-list.jsx';
 
 const Main = (props) => {
-  const {offers, settings} = props;
+  const {offers} = props;
 
   return (
     <div>
@@ -100,7 +100,7 @@ const Main = (props) => {
                   <option className="places__option" value="top-rated">Top rated first</option>
                 </select>
               </form>
-              <PlaceCard
+              <PlacesList
                 offers = {offers}
               />
             </section>
@@ -116,7 +116,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.object.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Main;
