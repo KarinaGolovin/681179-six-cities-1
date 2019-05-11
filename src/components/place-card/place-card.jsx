@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlaceCard = (props) => {
-  const {title, type, price, picture, link, onClick, id} = props;
+  const { title, type, price, picture, link, onPictureClick, onPictureMouseEnter, onPictureMouseLeave, onLinkClick, id} = props;
 
   return (
     <article className="cities__place-card place-card" id={id}>
@@ -37,7 +37,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={link} onClick={onClick}>{title}</a>
+          <a href={link} onClick={onLinkClick}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -47,14 +47,17 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  picture: PropTypes.string,
-  link: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  price: PropTypes.number,
+  picture: PropTypes.string.isRequired,
+  link: PropTypes.string,
   // rating: PropTypes.number,
   // isPremium: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
+  onPictureClick: PropTypes.func,
+  onLinkClick: PropTypes.func,
+  onPictureMouseEnter: PropTypes.func,
+  onPictureMouseLeave: PropTypes.func,
+  id: PropTypes.string,
 };
 
 export default PlaceCard;

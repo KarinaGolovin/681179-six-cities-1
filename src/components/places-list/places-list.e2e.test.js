@@ -26,10 +26,19 @@ describe(`Check PlaseList state works correctly`, () => {
 
     const card = component.find(`.place-card`);
 
-    card.simulate(`mouseover`);
+    card.simulate(`mouseenter`);
     component.update();
 
-    expect(component.state(`active`)).toMatch(`000 Test`);
+    expect(component.state(`activeCard`)).toMatchObject({
+      title: `Test test`,
+      type: `Test`,
+      price: 0,
+      picture: ``,
+      link: ``,
+      rating: 0,
+      isPremium: true,
+      id: `000 Test`
+    });
   });
 
   it(`Place card state change to not to be active on mouse leave`, () => {
@@ -39,10 +48,13 @@ describe(`Check PlaseList state works correctly`, () => {
 
     const card = component.find(`.place-card`);
 
-    card.simulate(`mouseout`);
+    card.simulate(`mouseenter`);
     component.update();
 
-    expect(component.state(`active`)).toMatch(``);
+    card.simulate(`mouseleave`);
+    component.update();
+
+    expect(component.state(`activeCard`)).toMatchObject({});
   });
 });
 

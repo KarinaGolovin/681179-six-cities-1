@@ -3,7 +3,7 @@ const Offers = [
     title: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
     price: 100,
-    picture: `../../../public/img/apartment-01.jpg`,
+    picture: `img/apartment-01.jpg`,
     link: `#`,
     rating: 5,
     isPremium: true,

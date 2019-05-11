@@ -7,7 +7,7 @@ class PlacesList extends PureComponent {
     super(props);
 
     this.state = {
-      active: null,
+      activeCard: {},
     };
 
     this._handleClick = this._handleClick.bind(this);
@@ -24,11 +24,20 @@ class PlacesList extends PureComponent {
               title={it.title}
               type={it.type}
               price={it.price}
-              picture={it.placeImgSrc}
+              picture={it.picture}
               link={it.link}
               rating={it.rating}
               isPremium={it.isPremium}
-              onClick={this._handleClick}
+              onLinkClick={() => {}}
+              onPictureClick={() => {
+                this._handlePictureClick(it);
+              }}
+              onPictureMouseEnter={() => {
+                this._onPictureMouseEnter(it);
+              }}
+              onPictureMouseLeave={() => {
+                this._onPictureMouseLeave(it);
+              }}
               id={it.id}
               key={it.id}
             />;
@@ -38,8 +47,16 @@ class PlacesList extends PureComponent {
     );
   }
 
-  _handleClick() {
+  _handlePictureClick(card) {
+    console.log(card);
+  }
 
+  _onPictureMouseEnter(card) {
+    console.log(`Hover on ` + card);
+  }
+
+  _onPictureMouseLeave(card) {
+    console.log(`Hover out ` + card);
   }
 }
 
