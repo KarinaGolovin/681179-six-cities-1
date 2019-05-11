@@ -30,12 +30,12 @@ it(`PlaceCard picture click works`, () => {
       />
   );
 
-  component.find(`.place-card__image`).simulate(`click`);
+  component.find(`.place-card__image-wrapper a`).simulate(`click`);
 
   expect(onPictureClick).toHaveBeenCalledTimes(1);
 });
 
-it(`PlaceCard mouseover on picture correctly works`, () => {
+it(`PlaceCard mouseenter on picture correctly works`, () => {
   const onPictureMouseEnter = jest.fn();
   const component = shallow(
       <PlaceCard
@@ -50,7 +50,7 @@ it(`PlaceCard mouseover on picture correctly works`, () => {
   expect(onPictureMouseEnter).toHaveBeenCalledTimes(1);
 });
 
-it(`PlaceCard mouseover on picture correctly works`, () => {
+it(`PlaceCard mouseleave on picture correctly works`, () => {
   const onPictureMouseLeave = jest.fn();
   const component = shallow(
       <PlaceCard

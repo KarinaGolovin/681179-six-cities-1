@@ -49,16 +49,14 @@ class PlacesList extends PureComponent {
     );
   }
 
-  _handlePictureClick(card) {
-    console.log(card);
-  }
+  _handlePictureClick() {}
 
   _onPictureMouseEnter(card) {
-    console.log(`Hover on ` + card);
+    return card;
   }
 
   _onPictureMouseLeave(card) {
-    console.log(`Hover out ` + card);
+    return card;
   }
 }
 

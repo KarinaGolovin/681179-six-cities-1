@@ -21,7 +21,6 @@ exports[`PlaceCard correctly renders 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
         width="260"
       />
     </a>
@@ -38,7 +37,7 @@ exports[`PlaceCard correctly renders 1`] = `
         <b
           className="place-card__price-value"
         >
-          €120
+          €
         </b>
         <span
           className="place-card__price-text"
@@ -89,18 +88,13 @@ exports[`PlaceCard correctly renders 1`] = `
     <h2
       className="place-card__name"
     >
-      <a
-        href="#"
-        onClick={[MockFunction]}
-      >
+      <a>
         Some text
       </a>
     </h2>
     <p
       className="place-card__type"
-    >
-      Apartment
-    </p>
+    />
   </div>
 </article>
 `;

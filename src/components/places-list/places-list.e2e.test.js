@@ -18,7 +18,7 @@ const mock = [
   }
 ];
 
-describe(`Check PlaseList state works correctly`, () => {
+describe(`Check PlacesList state works correctly`, () => {
   it(`Place card state changed to is active on mouse over`, () => {
     const component = mount(<PlacesList
       offers={mock}
