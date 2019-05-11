@@ -10,7 +10,9 @@ class PlacesList extends PureComponent {
       activeCard: {},
     };
 
-    this._handleClick = this._handleClick.bind(this);
+    this._handlePictureClick = this._handlePictureClick.bind(this);
+    this._onPictureMouseEnter = this._onPictureMouseEnter.bind(this);
+    this._onPictureMouseLeave = this._onPictureMouseLeave.bind(this);
   }
 
   render() {
