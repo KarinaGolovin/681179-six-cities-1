@@ -28,7 +28,7 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/apartment-01.jpg"
+          src=""
           width="260"
         />
       </a>
@@ -135,7 +135,7 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/apartment-01.jpg"
+          src=""
           width="260"
         />
       </a>
@@ -242,7 +242,7 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/apartment-01.jpg"
+          src=""
           width="260"
         />
       </a>
@@ -349,7 +349,7 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/apartment-01.jpg"
+          src=""
           width="260"
         />
       </a>

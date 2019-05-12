@@ -14,8 +14,18 @@ const mock = [
     link: ``,
     rating: 0,
     isPremium: true,
-    id: `000 Test`
-  }
+    id: `001 Test`
+  },
+  {
+    title: `Test test`,
+    type: `Test`,
+    price: 0,
+    picture: ``,
+    link: ``,
+    rating: 0,
+    isPremium: true,
+    id: `002 Test`
+  },
 ];
 
 describe(`Check PlacesList state works correctly`, () => {
@@ -29,7 +39,7 @@ describe(`Check PlacesList state works correctly`, () => {
     card.simulate(`mouseenter`);
     component.update();
 
-    expect(component.state(`activeCard`)).toMatchObject({
+    expect(component.state(`activeCard`)).toEqual({
       title: `Test test`,
       type: `Test`,
       price: 0,
@@ -37,7 +47,7 @@ describe(`Check PlacesList state works correctly`, () => {
       link: ``,
       rating: 0,
       isPremium: true,
-      id: `000 Test`
+      id: `001 Test`
     });
   });
 
@@ -54,7 +64,7 @@ describe(`Check PlacesList state works correctly`, () => {
     card.simulate(`mouseleave`);
     component.update();
 
-    expect(component.state(`activeCard`)).toMatchObject({});
+    expect(component.state(`activeCard`)).toEqual(null);
   });
 });
 

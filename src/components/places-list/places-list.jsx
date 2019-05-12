@@ -7,7 +7,7 @@ class PlacesList extends PureComponent {
     super(props);
 
     this.state = {
-      activeCard: {},
+      activeCard: null,
     };
 
     this._handlePictureClick = this._handlePictureClick.bind(this);
@@ -49,14 +49,16 @@ class PlacesList extends PureComponent {
     );
   }
 
-  _handlePictureClick() {}
-
-  _onPictureMouseEnter(card) {
+  _handlePictureClick(card) {
     return card;
   }
 
-  _onPictureMouseLeave(card) {
-    return card;
+  _onPictureMouseEnter(card) {
+    this.setState({activeCard: card});
+  }
+
+  _onPictureMouseLeave() {
+    this.setState({activeCard: null});
   }
 }
 
