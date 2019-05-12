@@ -293,6 +293,9 @@ exports[`Main correctly renders 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              id="001"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -306,12 +309,13 @@ exports[`Main correctly renders 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src=""
                     width="260"
                   />
                 </a>
@@ -328,7 +332,8 @@ exports[`Main correctly renders 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      0
                     </b>
                     <span
                       className="place-card__price-text"
@@ -383,18 +388,21 @@ exports[`Main correctly renders 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Beautiful & luxurious apartment at great location
+                    Test
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Test
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              id="002"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -408,12 +416,13 @@ exports[`Main correctly renders 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src=""
                     width="260"
                   />
                 </a>
@@ -430,7 +439,8 @@ exports[`Main correctly renders 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      0
                     </b>
                     <span
                       className="place-card__price-text"
@@ -485,18 +495,21 @@ exports[`Main correctly renders 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Wood and stone place
+                    Test
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Test
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              id="003"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -510,12 +523,13 @@ exports[`Main correctly renders 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src=""
                     width="260"
                   />
                 </a>
@@ -532,7 +546,8 @@ exports[`Main correctly renders 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      0
                     </b>
                     <span
                       className="place-card__price-text"
@@ -587,18 +602,21 @@ exports[`Main correctly renders 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Canal View Prinsengracht
+                    Test
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Test
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              id="004"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -612,12 +630,13 @@ exports[`Main correctly renders 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src=""
                     width="260"
                   />
                 </a>
@@ -634,7 +653,8 @@ exports[`Main correctly renders 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      0
                     </b>
                     <span
                       className="place-card__price-text"
@@ -689,13 +709,13 @@ exports[`Main correctly renders 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Nice, cozy, warm big bed apartment
+                    Test
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Test
                 </p>
               </div>
             </article>

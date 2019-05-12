@@ -2,20 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlaceCard = (props) => {
+  const {title, type, price, picture, link, onPictureClick, onPictureMouseEnter, onPictureMouseLeave, onLinkClick, id} = props;
+
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseEnter={onPictureMouseEnter} onMouseLeave={onPictureMouseLeave} id={id}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
+        <a href="#" onClick={onPictureClick}>
+          <img className="place-card__image" width="260" height="200" alt="Place image" src={picture}/>
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -35,17 +37,27 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" onClick={props.onClick}>{props.title}</a>
+          <a href={link} onClick={onLinkClick}>{title}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
 };
 
 PlaceCard.propTypes = {
-  title: PropTypes.string,
-  onClick: PropTypes.func
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  price: PropTypes.number,
+  picture: PropTypes.string,
+  link: PropTypes.string,
+  rating: PropTypes.number,
+  isPremium: PropTypes.bool,
+  onPictureClick: PropTypes.func,
+  onLinkClick: PropTypes.func,
+  onPictureMouseEnter: PropTypes.func,
+  onPictureMouseLeave: PropTypes.func,
+  id: PropTypes.string,
 };
 
 export default PlaceCard;

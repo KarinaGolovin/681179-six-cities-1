@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
+import PlacesList from './places-list.jsx';
 
 const mock = [
   {
@@ -45,9 +45,9 @@ const mock = [
   },
 ];
 
-it(`Main correctly renders`, () => {
+it(`PlaceCard correctly renders`, () => {
   const component = renderer.create(
-      <Main
+      <PlacesList
         offers={mock}
       />
   ).toJSON();
