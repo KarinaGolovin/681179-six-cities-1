@@ -11,7 +11,7 @@ it(`PlaceCard title link works correctly`, () => {
       <PlaceCard
         title={`Some text`}
         picture={`http://placehold.it/134x134`}
-        onClick={onLinkClick}
+        onLinkClick={onLinkClick}
       />
   );
 
@@ -26,7 +26,7 @@ it(`PlaceCard picture click works`, () => {
       <PlaceCard
         title={`Some text`}
         picture={`http://placehold.it/134x134`}
-        onClick={onPictureClick}
+        onPictureClick={onPictureClick}
       />
   );
 
@@ -41,7 +41,7 @@ it(`PlaceCard mouseenter on picture correctly works`, () => {
       <PlaceCard
         title={`Some text`}
         picture={`http://placehold.it/134x134`}
-        onMouseEnter={onPictureMouseEnter}
+        onPictureMouseEnter={onPictureMouseEnter}
       />
   );
 
@@ -56,7 +56,7 @@ it(`PlaceCard mouseleave on picture correctly works`, () => {
       <PlaceCard
         title={`Some text`}
         picture={`http://placehold.it/134x134`}
-        onMouseLeave={onPictureMouseLeave}
+        onPictureMouseLeave={onPictureMouseLeave}
       />
   );
 

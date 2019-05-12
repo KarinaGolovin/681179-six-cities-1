@@ -34,10 +34,9 @@ describe(`Check PlacesList state works correctly`, () => {
       offers={mock}
     />);
 
-    const card = component.find(`.place-card`);
+    const card = component.find(`.place-card`).first();
 
     card.simulate(`mouseenter`);
-    component.update();
 
     expect(component.state(`activeCard`)).toEqual({
       title: `Test test`,
@@ -56,13 +55,10 @@ describe(`Check PlacesList state works correctly`, () => {
       offers={mock}
     />);
 
-    const card = component.find(`.place-card`);
+    const card = component.find(`.place-card`).first();
 
     card.simulate(`mouseenter`);
-    component.update();
-
     card.simulate(`mouseleave`);
-    component.update();
 
     expect(component.state(`activeCard`)).toEqual(null);
   });
