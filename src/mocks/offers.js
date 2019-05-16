@@ -8,6 +8,7 @@ const Offers = [
     rating: 5,
     isPremium: true,
     id: `001`,
+    coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
     title: `Wood and stone place`,
@@ -18,6 +19,7 @@ const Offers = [
     rating: 4.5,
     isPremium: false,
     id: `002`,
+    coordinates: [52.369553943508, 4.85309666406198],
   },
   {
     title: `Canal View Prinsengracht`,
@@ -28,6 +30,7 @@ const Offers = [
     rating: 4.7,
     isPremium: false,
     id: `003`,
+    coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
     title: `Nice, cozy, warm big bed apartment`,
@@ -38,6 +41,7 @@ const Offers = [
     rating: 3,
     isPremium: true,
     id: `004`,
+    coordinates: [52.3809553943508, 4.939309666406198],
   },
 ];
 
