@@ -5,13 +5,7 @@ import L from 'leaflet';
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    const {city, placesList} = this.props;
-
-    this.cityCoordinates = city;
     this.mapZoom = 12;
-    this.offersCoordsList = placesList.map((place) => {
-      return place.coordinates;
-    });
     this._mapRef = React.createRef();
   }
 
@@ -23,7 +17,7 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const map = L.map(this._mapRef.current, {
-      center: this.cityCoordinates,
+      center: this.props.cityCoords,
       zoom: this.mapZoom,
       zoomControl: false,
       marker: true,
@@ -40,9 +34,11 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
 
-    map.setView(this.cityCoordinates, this.mapZoom);
+    map.setView(this.props.cityCoords, this.mapZoom);
 
-    this.offersCoordsList.map((offerCoords) => {
+    this.props.placesList.map((place) => {
+      return place.coordinates;
+    }).map((offerCoords) => {
       return L
         .marker(offerCoords, {mapIcon})
         .addTo(map);
@@ -52,7 +48,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  city: PropTypes.array.isRequired,
+  cityCoords: PropTypes.array.isRequired,
   placesList: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     type: PropTypes.string,
