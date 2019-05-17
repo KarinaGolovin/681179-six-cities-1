@@ -1,5 +1,14 @@
 const leaflet = jest.genMockFromModule(`leaflet`);
 
+const marker = {
+  getLatLng: () => {
+    return {lat: 0, lng: 0};
+  },
+  addTo: () => {
+    return {};
+  }
+};
+
 leaflet.tileLayer = () => {};
 
 leaflet.icon = () => {};
@@ -11,10 +20,14 @@ leaflet.map = () => {
 };
 
 leaflet.marker = () => {
+  return marker;
+};
+
+leaflet.remove = () => {
   return leaflet;
 };
 
-leaflet.addTo = () => {
+leaflet.removeLayer = () => {
   return leaflet;
 };
 

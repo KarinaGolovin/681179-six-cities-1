@@ -55,7 +55,6 @@ it(`Map correctly renders`, () => {
       <Map
         placesList={mock}
         cityCoords={[0, 0]}
-        // offers={mock}
       />
   ).toJSON();
 
