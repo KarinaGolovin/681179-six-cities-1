@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
+import Map from './map.jsx';
+
 
 const mock = [
   {
@@ -12,6 +13,7 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `001`,
+    coordinates: [],
   },
   {
     title: `Test`,
@@ -22,6 +24,7 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `002`,
+    coordinates: [],
   },
   {
     title: `Test`,
@@ -32,6 +35,7 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `003`,
+    coordinates: [],
   },
   {
     title: `Test`,
@@ -42,14 +46,15 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `004`,
+    coordinates: [],
   },
 ];
 
-it(`Main correctly renders`, () => {
+it(`Map correctly renders`, () => {
   const component = renderer.create(
-      <Main
+      <Map
+        placesList={mock}
         cityCoords={[0, 0]}
-        offers={mock}
       />
   ).toJSON();
 
