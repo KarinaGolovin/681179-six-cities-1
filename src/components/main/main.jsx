@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {changeCity, setOfferList} from '../../store/actions';
+import {changeCity} from '../../store/actions';
 import PlacesList from '../places-list/places-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
+import {getCityOffers, getCurrentCity} from '../../store/reducers';
 
 export const Main = (props) => {
-  const {offers, currentCity, currentPlaces, setNewCity, offerListByCity} = props;
+  const {coordinatesByCity, currentCity, currentPlaces, setNewCity} = props;
 
   return (
     <div>
@@ -45,28 +46,9 @@ export const Main = (props) => {
         <div className="cities tabs">
           <section className="locations container">
             <CitiesList
-              cities={Object.key(() => {
-                let cities = {};
-
-                offers.map((it) => {
-                  cities[it.city] = true;
-                });
-
-                return cities;
-              })}
+              cities={Object.keys(coordinatesByCity)}
               onCityClick={(city) => {
                 setNewCity(city);
-                offerListByCity(() => {
-                  let offerList = [];
-
-                  offers.map((it) => {
-                    if (it.city === city) {
-                      offerList.push(it);
-                    }
-                  });
-
-                  return offerList;
-                });
               }}
             />
           </section>
@@ -84,12 +66,12 @@ export const Main = (props) => {
                     <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
-                <ul className="places__options places__options--custom places__options--opened">
+                {/* <ul className="places__options places__options--custom places__options--opened">
                   <li className="places__option places__option--active" tabIndex="0">Popular</li>
                   <li className="places__option" tabIndex="0">Price: low to high</li>
                   <li className="places__option" tabIndex="0">Price: high to low</li>
                   <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
+                </ul> */}
 
                 <select className="places__sorting-type" id="places-sorting">
                   <option className="places__option" value="popular" defaultValue="">Popular</option>
@@ -105,7 +87,7 @@ export const Main = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  cityCoords={currentCity.cityCoordinates}
+                  cityCoords={coordinatesByCity[currentCity]}
                   placesList={currentPlaces}
                 />
               </section>
@@ -116,52 +98,34 @@ export const Main = (props) => {
       </main>
     </div>
   );
-
-  // _sortCities(arrOfOffers) {
-  //   let cities = {};
-
-  //   arrOfOffers.map((it) => {
-  //     cities[it.city] = true;
-  //   })
-
-  //   return cities;
-  // };
-
-  // _createOfferListByCity(city, offers) {
-  //   let offerList = [];
-
-  //   offers.map((it) => {
-  //     if (it.city === city) {
-  //       offerList.push.it;
-  //     }
-  //   })
-
-  //   return offerList;
-  // }
 };
 
 const mapStateToProps = (state) => {
+  const currentCity = getCurrentCity(state);
+
+  const coordinatesByCity = state.offers.reduce((result, it) => {
+    result[it.city] = it.cityCoordinates;
+    return result;
+  }, {});
+
   return {
-    currentCity: state.currentCity,
-    currentPlaces: state.currentPlaces,
+    currentCity,
+    currentPlaces: getCityOffers(currentCity, state.offers),
+    coordinatesByCity
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setNewCity: (city) => {
     dispatch(changeCity(city));
-  },
-  offerListByCity: (cityOffers) => {
-    dispatch(setOfferList(cityOffers));
-  },
+  }
 });
 
 Main.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  coordinatesByCity: PropTypes.object,
   currentCity: PropTypes.string.isRequired,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setNewCity: PropTypes.func.isRequired,
-  offerListByCity: PropTypes.func.isRequired,
+  setNewCity: PropTypes.func.isRequired
 };
 
 export default connect(

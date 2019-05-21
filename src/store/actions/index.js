@@ -1,12 +1,10 @@
-export const changeCity = () => {
+export const SET_CURRENT_CITY = `SET_CURRENT_CITY`;
+
+export const changeCity = (city) => {
   return {
-    type: `CITY_CHANGE`
+    type: SET_CURRENT_CITY,
+    currentCity: city
   };
 };
 
-export const setOfferList = () => {
-  return {
-    type: `SET_OFFER_LIST`
-  };
-};
 

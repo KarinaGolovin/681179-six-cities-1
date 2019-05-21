@@ -10,7 +10,7 @@ class Map extends PureComponent {
 
     this._mapInstance = null;
     this._mapIcon = null;
-    this._markers = null;
+    this._markers = [];
   }
 
   render() {
@@ -49,34 +49,35 @@ class Map extends PureComponent {
 
     if (this.props.placesList !== prevProps.placesList) {
       const pinDiff = this._getArrsDiff(this.props.placesList, prevProps.placesList);
+
       this._removeMarkers(pinDiff.remove);
       this._addMarkers(pinDiff.add);
     }
   }
 
   _addMarkers(placesList) {
-    this._markers = placesList.map((place) => {
-      return place.coordinates;
-    }).map((offerCoords) => {
-      return L
-        .marker(offerCoords, {mapIcon: this._mapIcon})
-        .addTo(this._mapInstance);
+    const newMarkers = placesList.map((place) => {
+      return {
+        id: place.id,
+        marker: L
+          .marker(place.coordinates, {mapIcon: this._mapIcon})
+          .addTo(this._mapInstance)
+      };
     });
+
+    this._markers = [].concat(this._markers, newMarkers);
   }
 
   _removeMarkers(placesList) {
-    const byLatLng = this._markers.reduce((result, marker) => {
-      const markerLatLng = marker.getLatLng();
-      result[`${markerLatLng.lat}_${markerLatLng.lng}`] = marker;
+    const ids = placesList.map((place) => place.id);
 
-      return result;
-    }, {});
+    this._markers = this._markers.filter((marker) => {
+      const shouldRemove = ids.includes(marker.id);
 
-    placesList.forEach(([lat, lng]) => {
-      const marker = byLatLng[`${lat}_${lng}`];
-      if (marker) {
-        this._mapInstance.removeLayer(marker);
+      if (shouldRemove) {
+        this._mapInstance.removeLayer(marker.marker);
       }
+      return !shouldRemove;
     });
   }
 
@@ -99,11 +100,11 @@ class Map extends PureComponent {
     const curById = this._arrById(arr);
 
     return {
-      add: prevArr.filter((item) => {
-        return !curById[item.id];
-      }),
-      remove: arr.filter((item) => {
+      add: arr.filter((item) => {
         return !prevById[item.id];
+      }),
+      remove: prevArr.filter((item) => {
+        return !curById[item.id];
       })
     };
   }
