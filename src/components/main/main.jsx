@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {changeCity, setOfferList} from '../../store/actions';
 import PlacesList from '../places-list/places-list.jsx';
+import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
 
-const Main = (props) => {
-  const {offers} = props;
+export const Main = (props) => {
+  const {offers, currentCity, currentPlaces, setNewCity, offerListByCity} = props;
 
   return (
     <div>
@@ -41,44 +44,38 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="cities tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section></div>
+            <CitiesList
+              cities={Object.key(() => {
+                let cities = {};
+
+                offers.map((it) => {
+                  cities[it.city] = true;
+                });
+
+                return cities;
+              })}
+              onCityClick={(city) => {
+                setNewCity(city);
+                offerListByCity(() => {
+                  let offerList = [];
+
+                  offers.map((it) => {
+                    if (it.city === city) {
+                      offerList.push(it);
+                    }
+                  });
+
+                  return offerList;
+                });
+              }}
+            />
+          </section>
+        ß</div>
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{currentPlaces.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -102,14 +99,14 @@ const Main = (props) => {
                 </select>
               </form>
               <PlacesList
-                offers = {offers}
+                offers={currentPlaces}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  cityCoords={[52.38333, 4.9]}
-                  placesList={offers}
+                  cityCoords={currentCity.cityCoordinates}
+                  placesList={currentPlaces}
                 />
               </section>
             </div>
@@ -119,10 +116,55 @@ const Main = (props) => {
       </main>
     </div>
   );
+
+  // _sortCities(arrOfOffers) {
+  //   let cities = {};
+
+  //   arrOfOffers.map((it) => {
+  //     cities[it.city] = true;
+  //   })
+
+  //   return cities;
+  // };
+
+  // _createOfferListByCity(city, offers) {
+  //   let offerList = [];
+
+  //   offers.map((it) => {
+  //     if (it.city === city) {
+  //       offerList.push.it;
+  //     }
+  //   })
+
+  //   return offerList;
+  // }
 };
+
+const mapStateToProps = (state) => {
+  return {
+    currentCity: state.currentCity,
+    currentPlaces: state.currentPlaces,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setNewCity: (city) => {
+    dispatch(changeCity(city));
+  },
+  offerListByCity: (cityOffers) => {
+    dispatch(setOfferList(cityOffers));
+  },
+});
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentCity: PropTypes.string.isRequired,
+  currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setNewCity: PropTypes.func.isRequired,
+  offerListByCity: PropTypes.func.isRequired,
 };
 
-export default Main;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Main);
