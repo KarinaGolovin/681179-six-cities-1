@@ -15,6 +15,7 @@ class Map extends PureComponent {
 
   render() {
     return (
+      // <section className="cities__map map" id="map" ref={this._mapRef}/>
       <div id="map" ref={this._mapRef} style={{height: `100%`}}></div>
     );
   }

@@ -48,8 +48,11 @@ const mock = [
 it(`Main correctly renders`, () => {
   const component = renderer.create(
       <Main
+        coordinatesByCity={{Test: [0, 0]}}
+        currentCity={`Test Test`}
+        currentPlaces={mock}
+        setNewCity={()=>{}}
         cityCoords={[0, 0]}
-        offers={mock}
       />
   ).toJSON();
 

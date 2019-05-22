@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import {App} from './app.jsx';
 
 const mock = [
   {
@@ -48,7 +48,7 @@ const mock = [
 it(`App correctly renders`, () => {
   const component = renderer.create(
       <App
-        offers={mock}
+        // offers={mock}
       />
   ).toJSON();
 

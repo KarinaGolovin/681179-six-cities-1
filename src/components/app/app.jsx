@@ -1,9 +1,6 @@
 import React from 'react';
 import Main from '../main/main.jsx';
 
-const App = () => {
+export const App = () => {
   return <Main />;
 };
-
-export default App;
-
