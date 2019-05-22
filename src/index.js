@@ -9,7 +9,7 @@ import offers from './mocks/offers.js';
 const init = () => {
   ReactDOM.render(
       <Provider store={createStore(rootReducer, {
-        currentCity: ``,
+        currentCity: null,
         offers
       })}>
         <App />
