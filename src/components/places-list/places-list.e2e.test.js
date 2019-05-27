@@ -28,17 +28,19 @@ const mock = [
   },
 ];
 
-describe(`Check PlacesList state works correctly`, () => {
-  it(`Place card state changed to is active on mouse over`, () => {
+describe(`Check PlacesList functions works correctly`, () => {
+  it(`Place card return target value on mouse over`, () => {
+    const clickHandler = jest.fn();
     const component = mount(<PlacesList
       offers={mock}
+      onActiveItemChange={clickHandler}
     />);
 
     const card = component.find(`.place-card`).first();
 
     card.simulate(`mouseenter`);
 
-    expect(component.state(`activeCard`)).toEqual({
+    expect(clickHandler).toHaveBeenCalledWith({
       title: `Test test`,
       type: `Test`,
       price: 0,
@@ -50,17 +52,19 @@ describe(`Check PlacesList state works correctly`, () => {
     });
   });
 
-  it(`Place card state change to not to be active on mouse leave`, () => {
+  it(`Place card mouse leave works`, () => {
+    const clickHandler = jest.fn();
+
     const component = mount(<PlacesList
       offers={mock}
+      onActiveItemChange={clickHandler}
     />);
 
     const card = component.find(`.place-card`).first();
-
     card.simulate(`mouseenter`);
     card.simulate(`mouseleave`);
 
-    expect(component.state(`activeCard`)).toEqual(null);
+    expect(clickHandler).toHaveBeenCalledTimes(2);
   });
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Main} from './main.jsx';
+import { Main } from './main.jsx';
 
 const mock = [
   {
@@ -12,6 +12,7 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `001`,
+    city: `Test`,
   },
   {
     title: `Test`,
@@ -22,6 +23,7 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `002`,
+    city: `Amsterdam`,
   },
   {
     title: `Test`,
@@ -32,6 +34,7 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `003`,
+    city: `Amsterdam`,
   },
   {
     title: `Test`,
@@ -42,17 +45,19 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `004`,
+    city: `Amsterdam`,
   },
 ];
 
 it(`Main correctly renders`, () => {
   const component = renderer.create(
       <Main
-        coordinatesByCity={{Test: [0, 0]}}
-        currentCity={`Test Test`}
+        currentCity={`Test`}
         currentPlaces={mock}
-        setNewCity={()=>{}}
-        cityCoords={[0, 0]}
+        setNewCity={() => { }}
+        coordinatesByCity={{
+          Test: [0, 0]
+        }}
       />
   ).toJSON();
 

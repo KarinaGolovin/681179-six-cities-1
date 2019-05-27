@@ -6,10 +6,6 @@ class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeCard: null,
-    };
-
     this._handlePictureClick = this._handlePictureClick.bind(this);
     this._onPictureMouseEnter = this._onPictureMouseEnter.bind(this);
     this._onPictureMouseLeave = this._onPictureMouseLeave.bind(this);
@@ -50,20 +46,22 @@ class PlacesList extends PureComponent {
   }
 
   _handlePictureClick(card) {
+    this.props.onActiveItemChange(card);
     return card;
   }
 
   _onPictureMouseEnter(card) {
-    this.setState({activeCard: card});
+    this.props.onActiveItemChange(card);
   }
 
   _onPictureMouseLeave() {
-    this.setState({activeCard: null});
+    this.props.onActiveItemChange(null);
   }
 }
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object),
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

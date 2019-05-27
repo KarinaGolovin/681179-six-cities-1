@@ -6,6 +6,7 @@ import {createStore} from 'redux';
 
 const mock = [
   {
+    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
@@ -14,8 +15,10 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `001`,
+    cityCoordinates: [0, 0]
   },
   {
+    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
@@ -24,8 +27,10 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `002`,
+    cityCoordinates: [0, 0]
   },
   {
+    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
@@ -34,8 +39,10 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `003`,
+    cityCoordinates: [0, 0]
   },
   {
+    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
@@ -44,13 +51,17 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: `004`,
+    cityCoordinates: [0, 0]
   },
 ];
-const reducer = () => {
-  return {
-    currentCity: null,
-    offers: {mock}
-  };
+
+const initialState = {
+  currentCity: null,
+  offers: mock
+};
+
+const reducer = (state = initialState) => {
+  return state;
 };
 
 it(`App correctly renders`, () => {

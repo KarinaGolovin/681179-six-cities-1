@@ -6,6 +6,10 @@ import PlacesList from '../places-list/places-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
 import {getCityOffers, getCurrentCity} from '../../store/reducers';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
+
+const PlacesListWrapped = withActiveItem(PlacesList);
+const CitiesListWrapped = withActiveItem(CitiesList);
 
 export const Main = (props) => {
   const {coordinatesByCity, currentCity, currentPlaces, setNewCity} = props;
@@ -45,14 +49,14 @@ export const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="cities tabs">
           <section className="locations container">
-            <CitiesList
+            <CitiesListWrapped
               cities={Object.keys(coordinatesByCity)}
               onCityClick={(city) => {
                 setNewCity(city);
               }}
             />
           </section>
-        ß</div>
+        </div>
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -80,7 +84,7 @@ export const Main = (props) => {
                   <option className="places__option" value="top-rated">Top rated first</option>
                 </select>
               </form>
-              <PlacesList
+              <PlacesListWrapped
                 offers={currentPlaces}
               />
             </section>
