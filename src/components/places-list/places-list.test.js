@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlacesList from './places-list.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
 const mock = [
   {
@@ -45,10 +46,13 @@ const mock = [
   },
 ];
 
+const PlacesListWrapped = withActiveItem(PlacesList);
+
 it(`PlaceCard correctly renders`, () => {
   const component = renderer.create(
-      <PlacesList
+      <PlacesListWrapped
         offers={mock}
+        onActiveItemChange={() => {}}
       />
   ).toJSON();
 

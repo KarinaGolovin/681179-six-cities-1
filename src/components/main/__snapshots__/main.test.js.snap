@@ -126,7 +126,6 @@ exports[`Main correctly renders 1`] = `
           </li>
         </ul>
       </section>
-      ß
     </div>
     <div
       className="cities__places-wrapper"
@@ -147,7 +146,7 @@ exports[`Main correctly renders 1`] = `
           >
             4
              places to stay in 
-            Test Test
+            Test
           </b>
           <form
             action="#"
