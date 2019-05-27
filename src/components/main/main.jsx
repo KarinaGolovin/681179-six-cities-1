@@ -15,7 +15,7 @@ export const Main = (props) => {
   const {coordinatesByCity, currentCity, currentPlaces, setNewCity} = props;
 
   return (
-    <div>
+    <>
       <div style={{
         display: `none`
       }}>
@@ -100,7 +100,7 @@ export const Main = (props) => {
         </div>
 
       </main>
-    </div>
+    </>
   );
 };
 
