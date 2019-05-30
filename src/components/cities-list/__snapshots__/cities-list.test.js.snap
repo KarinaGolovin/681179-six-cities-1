@@ -8,7 +8,7 @@ exports[`CitiesList correctly renders 1`] = `
     className="locations__item"
   >
     <a
-      className="locations__item-link tabs__item"
+      className="locations__item-link tabs__item null"
       href="#"
       onClick={[Function]}
     >
@@ -21,7 +21,7 @@ exports[`CitiesList correctly renders 1`] = `
     className="locations__item"
   >
     <a
-      className="locations__item-link tabs__item"
+      className="locations__item-link tabs__item null"
       href="#"
       onClick={[Function]}
     >

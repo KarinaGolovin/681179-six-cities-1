@@ -6,7 +6,7 @@ exports[`PlaceCard correctly renders 1`] = `
 >
   <article
     className="cities__place-card place-card"
-    id="001"
+    id={1}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -28,7 +28,6 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src=""
           width="260"
         />
       </a>
@@ -113,7 +112,7 @@ exports[`PlaceCard correctly renders 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    id="002"
+    id={2}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -135,7 +134,6 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src=""
           width="260"
         />
       </a>
@@ -220,7 +218,7 @@ exports[`PlaceCard correctly renders 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    id="003"
+    id={3}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -242,7 +240,6 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src=""
           width="260"
         />
       </a>
@@ -327,7 +324,7 @@ exports[`PlaceCard correctly renders 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    id="004"
+    id={4}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -349,7 +346,6 @@ exports[`PlaceCard correctly renders 1`] = `
           alt="Place image"
           className="place-card__image"
           height="200"
-          src=""
           width="260"
         />
       </a>

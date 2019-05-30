@@ -14,7 +14,7 @@ const mock = [
     link: ``,
     rating: 0,
     isPremium: true,
-    id: `001 Test`
+    id: 1
   },
   {
     title: `Test test`,
@@ -24,7 +24,7 @@ const mock = [
     link: ``,
     rating: 0,
     isPremium: true,
-    id: `002 Test`
+    id: 2
   },
 ];
 
@@ -48,7 +48,7 @@ describe(`Check PlacesList functions works correctly`, () => {
       link: ``,
       rating: 0,
       isPremium: true,
-      id: `001 Test`
+      id: 1
     });
   });
 

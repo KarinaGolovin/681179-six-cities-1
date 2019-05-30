@@ -11,7 +11,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `001`,
+    id: 1,
     city: `Test`,
   },
   {
@@ -22,7 +22,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `002`,
+    id: 2,
     city: `Amsterdam`,
   },
   {
@@ -33,7 +33,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `003`,
+    id: 3,
     city: `Amsterdam`,
   },
   {
@@ -44,7 +44,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `004`,
+    id: 4,
     city: `Amsterdam`,
   },
 ];

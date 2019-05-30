@@ -12,7 +12,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `001`,
+    id: 1,
     coordinates: [],
   },
   {
@@ -23,7 +23,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `002`,
+    id: 2,
     coordinates: [],
   },
   {
@@ -34,7 +34,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `003`,
+    id: 3,
     coordinates: [],
   },
   {
@@ -45,7 +45,7 @@ const mock = [
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `004`,
+    id: 4,
     coordinates: [],
   },
 ];
