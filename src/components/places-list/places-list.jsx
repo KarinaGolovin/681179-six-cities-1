@@ -22,10 +22,10 @@ class PlacesList extends PureComponent {
               title={it.title}
               type={it.type}
               price={it.price}
-              picture={it.picture}
+              previewImage={it.preview_image}
               link={it.link}
               rating={it.rating}
-              isPremium={it.isPremium}
+              isPremium={it.is_premium}
               onLinkClick={() => {}}
               onPictureClick={() => {
                 this._handlePictureClick(it);

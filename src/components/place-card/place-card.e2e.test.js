@@ -10,7 +10,7 @@ it(`PlaceCard title link works correctly`, () => {
   const component = shallow(
       <PlaceCard
         title={`Some text`}
-        picture={`http://placehold.it/134x134`}
+        previewImage={`http://placehold.it/134x134`}
         onLinkClick={onLinkClick}
       />
   );
@@ -25,7 +25,7 @@ it(`PlaceCard picture click works`, () => {
   const component = shallow(
       <PlaceCard
         title={`Some text`}
-        picture={`http://placehold.it/134x134`}
+        previewImage={`http://placehold.it/134x134`}
         onPictureClick={onPictureClick}
       />
   );
@@ -40,7 +40,7 @@ it(`PlaceCard mouseenter on picture correctly works`, () => {
   const component = shallow(
       <PlaceCard
         title={`Some text`}
-        picture={`http://placehold.it/134x134`}
+        previewImage={`http://placehold.it/134x134`}
         onPictureMouseEnter={onPictureMouseEnter}
       />
   );
@@ -55,7 +55,7 @@ it(`PlaceCard mouseleave on picture correctly works`, () => {
   const component = shallow(
       <PlaceCard
         title={`Some text`}
-        picture={`http://placehold.it/134x134`}
+        previewImage={`http://placehold.it/134x134`}
         onPictureMouseLeave={onPictureMouseLeave}
       />
   );

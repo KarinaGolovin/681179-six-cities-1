@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Main } from './main.jsx';
+import {Main} from './main.jsx';
 
 const mock = [
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
@@ -18,7 +18,7 @@ const mock = [
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
@@ -29,7 +29,7 @@ const mock = [
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
@@ -40,7 +40,7 @@ const mock = [
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,

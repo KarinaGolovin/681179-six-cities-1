@@ -14,6 +14,10 @@ const CitiesListWrapped = withActiveItem(CitiesList);
 export const Main = (props) => {
   const {coordinatesByCity, currentCity, currentPlaces, setNewCity} = props;
 
+  if (!currentCity) {
+    return `loading...`;
+  }
+
   return (
     <>
       <div style={{
@@ -89,12 +93,10 @@ export const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  cityCoords={coordinatesByCity[currentCity]}
-                  placesList={currentPlaces}
-                />
-              </section>
+              <Map
+                cityCoords={coordinatesByCity[currentCity]}
+                placesList={currentPlaces}
+              />
             </div>
           </div>
         </div>
@@ -108,14 +110,15 @@ const mapStateToProps = (state) => {
   const currentCity = getCurrentCity(state);
 
   const coordinatesByCity = state.offers.reduce((result, it) => {
-    result[it.city] = it.cityCoordinates;
+    const cityCoordinates = [it.city.location.latitude, it.city.location.longitude];
+    result[it.city.name] = cityCoordinates;
     return result;
   }, {});
 
   return {
     currentCity,
     currentPlaces: getCityOffers(currentCity, state.offers),
-    coordinatesByCity
+    coordinatesByCity,
   };
 };
 
@@ -126,8 +129,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Main.propTypes = {
+  mapZoom: PropTypes.number,
   coordinatesByCity: PropTypes.object,
-  currentCity: PropTypes.string.isRequired,
+  currentCity: PropTypes.string,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
   setNewCity: PropTypes.func.isRequired
 };

@@ -11,16 +11,11 @@ import App from './components/app/app.jsx';
 
 const init = () => {
   const api = configureAPI((...args) => store.dispatch(...args));
-  const store = createStore(
-      rootReducer,
-      {currentCity: null},
-      compose(
-          applyMiddleware(thunk.withExtraArgument(api)),
-          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-      )
-  );
+  const store = createStore(rootReducer, compose(
+      applyMiddleware(thunk.withExtraArgument(api)),
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  ));
 
-  // Список предложений должен загружаться сразу при старте приложения.
   store.dispatch(getOfferList());
 
   ReactDOM.render(

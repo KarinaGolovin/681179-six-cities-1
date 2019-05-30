@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
     case LOAD_OFFERS:
       return {
         ...state,
-        offers: action.offers
+        offers: action.offers || []
       };
   }
 
@@ -27,12 +27,12 @@ export function getCurrentCity(state) {
     return state.currentCity;
   }
 
-  return state.offers.length ? state.offers[0].city : null;
+  return state.offers.length ? state.offers[0].city.name : null;
 }
 
 export function getCityOffers(city, offers) {
   return offers.filter((it) => {
-    return it.city === city;
+    return it.city.name === city;
   });
 }
 
