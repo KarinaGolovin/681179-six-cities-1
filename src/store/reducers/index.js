@@ -1,4 +1,4 @@
-import {SET_CURRENT_CITY} from '../actions';
+import {SET_CURRENT_CITY, LOAD_OFFERS} from '../actions';
 
 const initialState = {
   currentCity: null,
@@ -8,9 +8,15 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_CITY:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         currentCity: action.currentCity
-      });
+      };
+    case LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.offers
+      };
   }
 
   return state;
