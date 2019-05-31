@@ -10,21 +10,21 @@ const mock = [
     title: `Test test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: ``,
     rating: 0,
     isPremium: true,
-    id: `001 Test`
+    id: 1
   },
   {
     title: `Test test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: ``,
     rating: 0,
     isPremium: true,
-    id: `002 Test`
+    id: 2
   },
 ];
 
@@ -44,11 +44,11 @@ describe(`Check PlacesList functions works correctly`, () => {
       title: `Test test`,
       type: `Test`,
       price: 0,
-      picture: ``,
+      previewImage: ``,
       link: ``,
       rating: 0,
       isPremium: true,
-      id: `001 Test`
+      id: 1
     });
   });
 

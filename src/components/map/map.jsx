@@ -15,8 +15,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      // <section className="cities__map map" id="map" ref={this._mapRef}/>
-      <div id="map" ref={this._mapRef} style={{height: `100%`}}></div>
+      <section className="cities__map map" id="map" ref={this._mapRef}/>
     );
   }
 
@@ -61,7 +60,10 @@ class Map extends PureComponent {
       return {
         id: place.id,
         marker: L
-          .marker(place.coordinates, {mapIcon: this._mapIcon})
+          .marker({
+            lat: place.location.latitude,
+            lng: place.location.longitude
+          }, {mapIcon: this._mapIcon})
           .addTo(this._mapInstance)
       };
     });
@@ -121,11 +123,11 @@ Map.propTypes = {
     title: PropTypes.string,
     type: PropTypes.string,
     price: PropTypes.number,
-    picture: PropTypes.string,
+    previewImage: PropTypes.string,
     link: PropTypes.string,
     rating: PropTypes.number,
     isPremium: PropTypes.bool,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     coordinates: PropTypes.array,
   })).isRequired,
 };

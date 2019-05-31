@@ -1,51 +1,83 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Main } from './main.jsx';
+import {Main} from './main.jsx';
 
 const mock = [
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `001`,
-    city: `Test`,
+    id: 1,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Test`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `002`,
-    city: `Amsterdam`,
+    id: 2,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `003`,
-    city: `Amsterdam`,
+    id: 3,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `004`,
-    city: `Amsterdam`,
+    id: 4,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
 ];
 

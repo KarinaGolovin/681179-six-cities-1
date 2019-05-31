@@ -8,45 +8,77 @@ const mock = [
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `001`,
-    coordinates: [],
+    id: 1,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Test`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `002`,
-    coordinates: [],
+    id: 2,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `003`,
-    coordinates: [],
+    id: 3,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `004`,
-    coordinates: [],
+    id: 4,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
 ];
 

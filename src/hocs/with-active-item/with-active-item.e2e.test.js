@@ -10,7 +10,7 @@ const mockItem = {
   title: `Test test`,
   type: `Test`,
   price: 0,
-  picture: ``,
+  previewImage: ``,
   link: ``,
   rating: 0,
   isPremium: true,

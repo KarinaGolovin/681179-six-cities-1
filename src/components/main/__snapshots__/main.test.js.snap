@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Main correctly renders 1`] = `
-<div>
+Array [
   <div
     style={
       Object {
@@ -41,7 +41,7 @@ exports[`Main correctly renders 1`] = `
         />
       </symbol>
     </svg>
-  </div>
+  </div>,
   <header
     className="header"
   >
@@ -93,7 +93,7 @@ exports[`Main correctly renders 1`] = `
         </nav>
       </div>
     </div>
-  </header>
+  </header>,
   <main
     className="page__main page__main--index"
   >
@@ -115,7 +115,7 @@ exports[`Main correctly renders 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item "
               href="#"
               onClick={[Function]}
             >
@@ -209,7 +209,7 @@ exports[`Main correctly renders 1`] = `
           >
             <article
               className="cities__place-card place-card"
-              id="001"
+              id={1}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -231,7 +231,6 @@ exports[`Main correctly renders 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src=""
                     width="260"
                   />
                 </a>
@@ -316,7 +315,7 @@ exports[`Main correctly renders 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id="002"
+              id={2}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -338,7 +337,6 @@ exports[`Main correctly renders 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src=""
                     width="260"
                   />
                 </a>
@@ -423,7 +421,7 @@ exports[`Main correctly renders 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id="003"
+              id={3}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -445,7 +443,6 @@ exports[`Main correctly renders 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src=""
                     width="260"
                   />
                 </a>
@@ -530,7 +527,7 @@ exports[`Main correctly renders 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id="004"
+              id={4}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -552,7 +549,6 @@ exports[`Main correctly renders 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src=""
                     width="260"
                   />
                 </a>
@@ -642,19 +638,11 @@ exports[`Main correctly renders 1`] = `
         >
           <section
             className="cities__map map"
-          >
-            <div
-              id="map"
-              style={
-                Object {
-                  "height": "100%",
-                }
-              }
-            />
-          </section>
+            id="map"
+          />
         </div>
       </div>
     </div>
-  </main>
-</div>
+  </main>,
+]
 `;

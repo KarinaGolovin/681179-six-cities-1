@@ -6,52 +6,80 @@ import {createStore} from 'redux';
 
 const mock = [
   {
-    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `001`,
-    cityCoordinates: [0, 0]
+    id: 1,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Test`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
-    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `002`,
-    cityCoordinates: [0, 0]
+    id: 2,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
-    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `003`,
-    cityCoordinates: [0, 0]
+    id: 3,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
-    city: `Amsterdam`,
     title: `Test`,
     type: `Test`,
     price: 0,
-    picture: ``,
+    previewImage: ``,
     link: `#`,
     rating: 0,
     isPremium: true,
-    id: `004`,
-    cityCoordinates: [0, 0]
+    id: 4,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
 ];
 
