@@ -12,7 +12,15 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: 1,
-    city: `Test`,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Test`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
@@ -23,7 +31,15 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: 2,
-    city: `Amsterdam`,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
@@ -34,7 +50,15 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: 3,
-    city: `Amsterdam`,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
   {
     title: `Test`,
@@ -45,7 +69,15 @@ const mock = [
     rating: 0,
     isPremium: true,
     id: 4,
-    city: `Amsterdam`,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   },
 ];
 

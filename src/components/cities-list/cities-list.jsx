@@ -9,7 +9,7 @@ const CitiesList = (props) => {
       {cities.slice(0, 6).map((it, i) => {
         return (
           <li className="locations__item" key={it + i}>
-            <a className={`locations__item-link tabs__item ${activeItem === it ? `tabs__item--active` : null}`} href="#" onClick={() => {
+            <a className={`locations__item-link tabs__item ${activeItem === it ? `tabs__item--active` : ``}`} href="#" onClick={() => {
               onActiveItemChange(it);
               onCityClick(it);
             }}>
