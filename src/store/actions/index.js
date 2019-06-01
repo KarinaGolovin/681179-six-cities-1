@@ -37,9 +37,61 @@ export const getOfferList = () => {
     // }, 2000);
 
     return api.get(`/hotels`).then((response) => {
-      dispatch(loadOffers(response.data));
+      dispatch(loadOffers(response.data))
+      .catch((err) => {
+        console.log(err.response.data.error);
+        return err;
+      });
     });
   };
 };
 
+// Example
+// export const onGetRequest = () => {
+//   return api.get(`/login`)
+//     .then(res => {
+//       console.log(res.data);
+//     })
+//     .catch((err) => {
+//       console.log(err.response.data.error)
+//     });
+// };
 
+// export onPOstRequest/onPOstRequest = () => {
+//   return api.post(`/login`, {
+//     email: `test@test.com`,
+//     password: 1234
+//   })
+//     .then(res => {
+//       console.log(res.data);
+//     })
+//     .catch((err) => {
+//       console.log(err.response.data.error)
+//     });
+// }
+
+// const onLogoutRequest = () => {
+//   return api.get(`/logout`)
+//     .then(res => {
+//       console.log(res);
+//     })
+//     .catch((err) => {
+//       console.log(err.response.data.error)
+//     });
+// };
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <button type="button" onClick={onGetRequest}>
+//         GET
+//       </button>
+//       <button type="button" onClick={onPostRequest}>
+//         POST
+//       </button>
+//       <button type="button" onClick={onLogoutRequest}>
+//         logout
+//       </button>
+//     </div>
+//   );
+// }
