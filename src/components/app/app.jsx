@@ -20,7 +20,6 @@ export class App extends PureComponent {
         <>
           <Header />
           <SignIn
-            // onLogin={() => {запрос пост на сервер}}
             onLogin={{validateLogIn}}
           />
         </>
