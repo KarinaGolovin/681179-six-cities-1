@@ -18,7 +18,7 @@ it(`Expect it return correct value on city change`, () => {
 
   const result = reducer(initialState, {
     type: SET_CURRENT_CITY,
-    currentCity: `Paris`
+    payload: `Paris`
   });
 
   expect(result).toEqual(expected);
@@ -26,14 +26,14 @@ it(`Expect it return correct value on city change`, () => {
 
 it(`Expect correct API call to server`, () => {
   const dispatch = jest.fn();
-  const api = configureAPI(jest.fn());
+  const api = configureAPI();
   const mock = new MockAdapter(api);
 
   mock.onGet(`/hotels`).reply(200, [{
     test: `Test`
   }]);
 
-  return getOfferList(dispatch, jest.fn(), api).then(() => {
+  return getOfferList()(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
       type: LOAD_OFFERS,

@@ -10,7 +10,7 @@ import {getOfferList} from './store/actions';
 import App from './components/app/app.jsx';
 
 const init = () => {
-  const api = configureAPI((...args) => store.dispatch(...args));
+  const api = configureAPI();
   const store = createStore(rootReducer, compose(
       applyMiddleware(thunk.withExtraArgument(api)),
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

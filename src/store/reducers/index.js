@@ -1,8 +1,10 @@
-import {SET_CURRENT_CITY, LOAD_OFFERS} from '../actions';
+import {SET_CURRENT_CITY, LOAD_OFFERS, REQUIRED_AUTHORIZATION} from '../actions';
 
 const initialState = {
   currentCity: null,
-  offers: []
+  offers: [],
+  user: {},
+  isAuthorizationRequired: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,12 +12,17 @@ const reducer = (state = initialState, action) => {
     case SET_CURRENT_CITY:
       return {
         ...state,
-        currentCity: action.currentCity
+        currentCity: action.payload
       };
     case LOAD_OFFERS:
       return {
         ...state,
-        offers: action.offers || []
+        offers: action.payload || []
+      };
+    case REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        isAuthorizationRequired: action.payload,
       };
   }
 
@@ -28,6 +35,14 @@ export function getCurrentCity(state) {
   }
 
   return state.offers.length ? state.offers[0].city.name : null;
+}
+
+export function getCoordinatesByCity(state) {
+  state.offers.reduce((result, it) => {
+    const cityCoordinates = [it.city.location.latitude, it.city.location.longitude];
+    result[it.city.name] = cityCoordinates;
+    return result;
+  }, {});
 }
 
 export function getCityOffers(city, offers) {

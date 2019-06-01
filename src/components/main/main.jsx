@@ -5,7 +5,7 @@ import {changeCity} from '../../store/actions';
 import PlacesList from '../places-list/places-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
-import {getCityOffers, getCurrentCity} from '../../store/reducers';
+import { getCityOffers, getCurrentCity, getCoordinatesByCity} from '../../store/reducers';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -109,16 +109,10 @@ export const Main = (props) => {
 const mapStateToProps = (state) => {
   const currentCity = getCurrentCity(state);
 
-  const coordinatesByCity = state.offers.reduce((result, it) => {
-    const cityCoordinates = [it.city.location.latitude, it.city.location.longitude];
-    result[it.city.name] = cityCoordinates;
-    return result;
-  }, {});
-
   return {
     currentCity,
     currentPlaces: getCityOffers(currentCity, state.offers),
-    coordinatesByCity,
+    coordinatesByCity: getCoordinatesByCity(state),
   };
 };
 
