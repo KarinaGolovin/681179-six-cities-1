@@ -2,6 +2,7 @@
 export const SET_CURRENT_CITY = `SET_CURRENT_CITY`;
 export const LOAD_OFFERS = `LOAD_OFFERS`;
 export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
+export const SET_USER_DATA = `SET_USER_DATA`;
 
 export const changeCity = (city) => {
   return {
@@ -24,74 +25,51 @@ export const requiredAutorization = (status) => {
   };
 };
 
+export const setUser = (user) => {
+  return {
+    type: SET_USER_DATA,
+    payload: user,
+  };
+};
+
 export const getAutorizationStatus = (state) => {
-  return state.user.isAuthorizationRequired;
+  return state.isAuthorizationRequired;
 };
 
 export const getOfferList = () => {
   return (dispatch, getState, api) => {
-
-    // temp solution cos server does not respond
-    // setTimeout(() => {
-    //   dispatch(loadOffers(mockOffers));
-    // }, 2000);
-
     return api.get(`/hotels`).then((response) => {
-      dispatch(loadOffers(response.data))
-      .catch((err) => {
-        console.log(err.response.data.error);
-        return err;
-      });
+      dispatch(loadOffers(response.data));
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+      return err;
+
+      // temp solution cos server does not respond
+      // setTimeout(() => {
+      //   dispatch(loadOffers(mockOffers));
+      // }, 2000);
     });
   };
 };
 
-// Example
-// export const onGetRequest = () => {
-//   return api.get(`/login`)
-//     .then(res => {
-//       console.log(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err.response.data.error)
-//     });
-// };
-
-// export onPOstRequest/onPOstRequest = () => {
-//   return api.post(`/login`, {
-//     email: `test@test.com`,
-//     password: 1234
-//   })
-//     .then(res => {
-//       console.log(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err.response.data.error)
-//     });
-// }
+export const signIn = ({email, password}) => {
+  return (dispatch, getState, api) => {
+    return api.post(`/login`, {email, password}).then((response) => {
+      dispatch(setUser(response.data));
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
+  };
+};
 
 // const onLogoutRequest = () => {
 //   return api.get(`/logout`)
-//     .then(res => {
-//       console.log(res);
+//     .then((response) => {
+//       console.log(response);
 //     })
 //     .catch((err) => {
-//       console.log(err.response.data.error)
+//       console.log(err)
 //     });
 // };
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <button type="button" onClick={onGetRequest}>
-//         GET
-//       </button>
-//       <button type="button" onClick={onPostRequest}>
-//         POST
-//       </button>
-//       <button type="button" onClick={onLogoutRequest}>
-//         logout
-//       </button>
-//     </div>
-//   );
-// }

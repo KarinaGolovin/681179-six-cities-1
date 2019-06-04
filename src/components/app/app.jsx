@@ -2,33 +2,35 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
-import Header from '../header/header.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import {getAutorizationStatus} from '../../store/actions';
-// import {} from '../../store/reducers';
+import {Header} from '../header/header.jsx';
+import {SignIn} from '../sign-in/sign-in.jsx';
+import {getAutorizationStatus, signIn} from '../../store/actions';
 
 export class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSignInVisible: false
+    };
+  }
   render() {
     return this._showScreen();
   }
 
   _showScreen() {
-    const {} = this.props;
-
-    if (isAuthorizationRequired) {
-      return (
-        <>
-          <Header />
-          <SignIn
-            onLogin={{validateLogIn}}
-          />
-        </>
-      );
-    }
+    const {isAuthorizationRequired, user, onSingIn} = this.props;
     return (
       <>
-       <Header />
-       <Main />
+        <Header
+          isAuthorizationRequired={isAuthorizationRequired}
+          onSignClick={() => {
+            this.setState({
+              isSignInVisible: true
+            });
+          }}
+          user={user}
+        />
+        {this.state.isSignInVisible && !user.id ? <SignIn onLogin={onSingIn} /> : <Main />}
      </>
     );
   }
@@ -37,24 +39,33 @@ export class App extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     isAuthorizationRequired: getAutorizationStatus(state),
+    user: {
+      id: state.user.id,
+      email: state.user.email,
+      name: state.user.name,
+      avatar: state.user.avatar_url,
+      isPro: state.user.is_pro
+    }
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  validateLogIn: () => {
-    dispatch(onLoginRequest());
-  }
-  // setNewCity: (city) => {
-  //   dispatch(changeCity(city));
-  // }
-});
+const mapDispatchToProps = {
+  onSingIn: signIn,
+};
 
 App.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+    isPro: PropTypes.bool
+  }),
   // from mapStateToProps
   isAuthorizationRequired: PropTypes.bool,
 
   // from mapDispatchToProps
-  validateLogIn: PropTypes.func,
+  onSingIn: PropTypes.func,
 };
 
 export default connect(

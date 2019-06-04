@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Header = (props) => {
+export const Header = ({user, onSignClick, isAuthorizationRequired}) => {
   return (
     <>
       <div style={{
@@ -22,9 +22,12 @@ export const Header = (props) => {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    {
+                      isAuthorizationRequired ? <>
+                        <div className="header__avatar-wrapper user__avatar-wrapper" />
+                        <LoginLink onClick={onSignClick} />
+                      </> : <UserInfo avatar={user.avatar} email={user.email} />
+                    }
                   </a>
                 </li>
               </ul>
@@ -36,4 +39,33 @@ export const Header = (props) => {
   );
 };
 
+Header.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  onSignClick: PropTypes.func,
+  isAuthorizationRequired: PropTypes.bool,
+};
 
+const UserInfo = ({avatar, email}) => {
+  return <>
+    <div className="header__avatar-wrapper user__avatar-wrapper">
+      <img src={avatar} />
+    </div>
+    <span className="header__user-name user__name">{email}</span>
+  </>;
+};
+
+UserInfo.propTypes = {
+  email: PropTypes.string,
+  avatar: PropTypes.string
+};
+
+const LoginLink = ({onClick}) => {
+  return <span className="header__login" onClick={onClick}>Sign in</span>;
+};
+
+LoginLink.propTypes = {
+  onClick: PropTypes.func
+};

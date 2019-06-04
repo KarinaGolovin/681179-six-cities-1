@@ -11,7 +11,10 @@ export const SignIn = (props) => {
         <form className="login__form form" action="#" method="post" onSubmit={(evt) => {
           evt.preventDefault();
           const data = new FormData(evt.target);
-          onLogin(data.get(`email`), data.get(`password`));
+          onLogin({
+            email: data.get(`email`),
+            password: data.get(`password`)
+          });
         }}>
           <div className="login__input-wrapper form__input-wrapper">
             <label className="visually-hidden">E-mail</label>
