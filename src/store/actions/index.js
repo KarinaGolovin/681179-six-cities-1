@@ -1,6 +1,7 @@
 // import mockOffers from '../../mocks/offers2';
 export const SET_CURRENT_CITY = `SET_CURRENT_CITY`;
 export const LOAD_OFFERS = `LOAD_OFFERS`;
+export const UPDATE_OFFER = `UPDATE_OFFER`;
 export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
 export const SET_USER_DATA = `SET_USER_DATA`;
 export const LOAD_FAVORITES = `LOAD_FAVORITES`;
@@ -45,6 +46,13 @@ export const setUser = (user) => {
   return {
     type: SET_USER_DATA,
     payload: user,
+  };
+};
+
+export const updateOffer = (offer) => {
+  return {
+    type: UPDATE_OFFER,
+    payload: offer,
   };
 };
 
@@ -122,8 +130,7 @@ export const signIn = ({email, password}) => {
 export const toggleFavorite = ({hotelId, status}) => {
   return (dispatch, getState, api) => {
     return api.post(`/favorite/${hotelId}/${status}`).then((response) => {
-      // eslint-disable-next-line no-console
-      console.log(response);
+      dispatch(updateOffer(response.data));
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log(err);

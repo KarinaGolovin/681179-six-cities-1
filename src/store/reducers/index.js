@@ -1,4 +1,12 @@
-import {SET_CURRENT_CITY, LOAD_OFFERS, REQUIRED_AUTHORIZATION, SET_USER_DATA, LOAD_FAVORITES, LOAD_COMMENTS} from '../actions';
+import {
+  SET_CURRENT_CITY,
+  LOAD_OFFERS,
+  REQUIRED_AUTHORIZATION,
+  SET_USER_DATA,
+  LOAD_FAVORITES,
+  LOAD_COMMENTS,
+  UPDATE_OFFER,
+} from '../actions';
 
 const initialState = {
   currentCity: null,
@@ -18,6 +26,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload || []
+      };
+    case UPDATE_OFFER:
+      return {
+        ...state,
+        offers: updateOffer(state.offers, action.payload)
       };
     case LOAD_FAVORITES:
       return {
@@ -43,6 +56,20 @@ const reducer = (state = initialState, action) => {
   }
 
   return state;
+};
+
+const updateOffer = (offersList, updatedOffer) => {
+  const offerIndex = offersList.findIndex((item) => item.id === updatedOffer.id);
+
+  if (offerIndex === -1) {
+    return offersList;
+  }
+
+  return [
+    ...offersList.slice(0, offerIndex),
+    updatedOffer,
+    ...offersList.slice(offerIndex + 1),
+  ];
 };
 
 export function getCurrentCity(state) {
