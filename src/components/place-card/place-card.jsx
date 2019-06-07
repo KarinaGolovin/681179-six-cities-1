@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Rating} from '../rating/rating.jsx';
 
 const PlaceCard = (props) => {
   const {
@@ -23,8 +24,6 @@ const PlaceCard = (props) => {
     },
     id
   } = props;
-
-  console.log(props);
 
   return (
     <article className={`place-card ${classes.container || ``}`} onMouseEnter={onPictureMouseEnter} onMouseLeave={onPictureMouseLeave} id={id}>
@@ -52,15 +51,10 @@ const PlaceCard = (props) => {
             <span className="visually-hidden">{isBookmarked ? `In bookmarks` : `To bookmarks`}</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{
-              width: `${rating / 5 * 100}%`
-            }}>
-            </span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={rating} classes={{
+          container: `place-card__rating`,
+          stars: `place-card__stars`
+        }} />
         <h2 className="place-card__name">
           <a href={link} onClick={onLinkClick}>{title}</a>
         </h2>
