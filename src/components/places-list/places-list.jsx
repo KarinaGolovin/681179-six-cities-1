@@ -9,6 +9,7 @@ class PlacesList extends PureComponent {
     this._handlePictureClick = this._handlePictureClick.bind(this);
     this._onPictureMouseEnter = this._onPictureMouseEnter.bind(this);
     this._onPictureMouseLeave = this._onPictureMouseLeave.bind(this);
+    this._handleBookmarkClick = this._handleBookmarkClick.bind(this);
   }
 
   render() {
@@ -26,9 +27,13 @@ class PlacesList extends PureComponent {
               link={it.link}
               rating={it.rating}
               isPremium={it.is_premium}
+              isBookmarked={it.is_favorite}
               onLinkClick={() => {}}
               onPictureClick={() => {
                 this._handlePictureClick(it);
+              }}
+              onBookmarkClick={() => {
+                this._handleBookmarkClick(it);
               }}
               onPictureMouseEnter={() => {
                 this._onPictureMouseEnter(it);
@@ -50,6 +55,13 @@ class PlacesList extends PureComponent {
     return card;
   }
 
+  _handleBookmarkClick(card) {
+    this.props.onBookmarkClick({
+      hotelId: card.id,
+      status: card.is_favorite ? 0 : 1
+    });
+  }
+
   _onPictureMouseEnter(card) {
     this.props.onActiveItemChange(card);
   }
@@ -62,6 +74,7 @@ class PlacesList extends PureComponent {
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object),
   onActiveItemChange: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

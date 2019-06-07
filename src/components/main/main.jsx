@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {changeCity} from '../../store/actions';
+import {changeCity, toggleFavorite} from '../../store/actions';
 import PlacesList from '../places-list/places-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
@@ -12,7 +12,7 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 const CitiesListWrapped = withActiveItem(CitiesList);
 
 export const Main = (props) => {
-  const {coordinatesByCity, currentCity, currentPlaces, setNewCity} = props;
+  const {coordinatesByCity, currentCity, currentPlaces, setNewCity, updateBookmark} = props;
 
   if (!currentCity) {
     return `loading...`;
@@ -59,6 +59,7 @@ export const Main = (props) => {
             </form>
             <PlacesListWrapped
               offers={currentPlaces}
+              onBookmarkClick={updateBookmark}
             />
           </section>
           <div className="cities__right-section">
@@ -83,18 +84,18 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setNewCity: (city) => {
-    dispatch(changeCity(city));
-  }
-});
+const mapDispatchToProps = {
+  setNewCity: changeCity,
+  updateBookmark: toggleFavorite
+};
 
 Main.propTypes = {
   mapZoom: PropTypes.number,
   coordinatesByCity: PropTypes.object,
   currentCity: PropTypes.string,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setNewCity: PropTypes.func.isRequired
+  setNewCity: PropTypes.func.isRequired,
+  updateBookmark: PropTypes.func.isRequired,
 };
 
 export default connect(

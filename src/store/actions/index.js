@@ -121,7 +121,7 @@ export const signIn = ({email, password}) => {
 
 export const toggleFavorite = ({hotelId, status}) => {
   return (dispatch, getState, api) => {
-    return api.post(`/favorite/:${hotelId}/:${status}`).then((response) => {
+    return api.post(`/favorite/${hotelId}/${status}`).then((response) => {
       // eslint-disable-next-line no-console
       console.log(response);
     }).catch((err) => {
