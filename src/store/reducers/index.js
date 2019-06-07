@@ -94,26 +94,8 @@ export function getCityOffers(city, offers) {
   });
 }
 
-// Или запрос с сервера???
 export function getFavoriteOffersByCities(state) {
-  let favoriteOffersList = [];
-
-  state.offers.filter((it) => {
-    let favoriteOffers = [];
-
-    if (it.is_favorite) {
-      favoriteOffers.push(it);
-    }
-    return favoriteOffers;
-  }).map((it) => {
-    // if (!favoriteOffersList[it.city.name]) {
-    //   favoriteOffersList.it.city.name = [it];
-    // } else {
-    favoriteOffersList[it.city.name].push(it);
-    // }
-  });
-
-  return favoriteOffersList;
+  return state.offers.filter((it) => it.is_favorite);
 }
 
 export default reducer;

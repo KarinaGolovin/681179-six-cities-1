@@ -5,14 +5,15 @@ import Main from '../main/main.jsx';
 import {Header} from '../header/header.jsx';
 import {SignIn} from '../sign-in/sign-in.jsx';
 import {Favorites} from '../favorites/favorites.jsx';
-import {getAutorizationStatus, signIn} from '../../store/actions';
+import {getAutorizationStatus, signIn, toggleFavorite} from '../../store/actions';
 import {getFavoriteOffersByCities} from '../../store/reducers';
 
 export class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isSignInVisible: false
+      isSignInVisible: false,
+      isFavoritesVisible: false
     };
   }
   render() {
@@ -20,7 +21,7 @@ export class App extends PureComponent {
   }
 
   _showScreen() {
-    const {isAuthorizationRequired, user, onSingIn, favoriteList} = this.props;
+    const {isAuthorizationRequired, user, onSingIn, favoriteList, updateBookmark} = this.props;
     return (
       <>
         <Header
@@ -30,23 +31,14 @@ export class App extends PureComponent {
               isSignInVisible: true
             });
           }}
-          // onFavoritesRedirect={() => {
-          //   if (!isAuthorizationRequired) {
-          //     return (
-          //       <>
-          //         <Header/>
-          //         <Favorites
-          //           favoriteList={favoriteList}
-          //           onCityClick={() => {}}
-          //           onLinkClick={() => {}}
-          //         />;
-          //       </>
-          //     );
-          //   }
-          //   return this._showScreen();
-          // }}
+          onFavoritesRedirect={() => {
+            this.setState({
+              isFavoritesVisible: !this.state.isFavoritesVisible && !isAuthorizationRequired
+            });
+          }}
           user={user}
         />
+        {this.state.isFavoritesVisible ? <Favorites favoriteList={favoriteList} onBookmarkClick={updateBookmark} /> : null}
         {this.state.isSignInVisible && !user.id ? <SignIn onLogin={onSingIn} /> : <Main />}
      </>
     );
@@ -63,13 +55,13 @@ const mapStateToProps = (state) => {
       avatar: state.user.avatar_url,
       isPro: state.user.is_pro
     },
-    // offers: state.offers,
     favoriteList: getFavoriteOffersByCities(state),
   };
 };
 
 const mapDispatchToProps = {
   onSingIn: signIn,
+  updateBookmark: toggleFavorite
 };
 
 App.propTypes = {
@@ -86,6 +78,7 @@ App.propTypes = {
 
   // from mapDispatchToProps
   onSingIn: PropTypes.func,
+  updateBookmark: PropTypes.func,
 };
 
 export default connect(

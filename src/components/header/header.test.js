@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Header} from './main.jsx';
+import {Header} from './header.jsx';
 
 const mock = {
   user: {
