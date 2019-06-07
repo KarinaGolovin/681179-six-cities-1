@@ -2,6 +2,11 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
+const cardClasses = {
+  container: `cities__place-card`,
+  imageWrapper: `place-card__image-wrapper`
+};
+
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
@@ -41,6 +46,7 @@ class PlacesList extends PureComponent {
               onPictureMouseLeave={() => {
                 this._onPictureMouseLeave(it);
               }}
+              classes = {cardClasses}
               id={it.id}
               key={it.id}
             />;

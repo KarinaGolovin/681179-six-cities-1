@@ -9,25 +9,37 @@ const PlaceCard = (props) => {
     previewImage,
     link,
     isBookmarked,
+    isPremium,
+    rating,
     onPictureClick,
     onPictureMouseEnter,
     onPictureMouseLeave,
     onLinkClick,
     onBookmarkClick,
+    classes = {
+      container: ``,
+      imageWrapper: ``,
+      cardInfo: ``
+    },
     id
   } = props;
 
+  console.log(props);
+
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onPictureMouseEnter} onMouseLeave={onPictureMouseLeave} id={id}>
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={`place-card ${classes.container || ``}`} onMouseEnter={onPictureMouseEnter} onMouseLeave={onPictureMouseLeave} id={id}>
+      {isPremium ? (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      ) : null}
+
+      <div className={`cities__image-wrapper ${classes.imageWrapper || ``}`}>
         <a href="#" onClick={onPictureClick}>
           <img className="place-card__image" width="260" height="200" alt="Place image" src={previewImage}/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`place-card__info ${classes.cardInfo || ``}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -37,13 +49,13 @@ const PlaceCard = (props) => {
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">{isBookmarked ? `In bookmarks` : `To bookmarks`}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
             <span style={{
-              width: `93%`
+              width: `${rating / 5 * 100}%`
             }}>
             </span>
             <span className="visually-hidden">Rating</span>
@@ -73,6 +85,7 @@ PlaceCard.propTypes = {
   onPictureMouseLeave: PropTypes.func,
   onBookmarkClick: PropTypes.func,
   id: PropTypes.number,
+  classes: PropTypes.object
 };
 
 export default PlaceCard;
