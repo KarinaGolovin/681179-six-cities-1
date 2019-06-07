@@ -2,7 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlaceCard = (props) => {
-  const {title, type, price, previewImage, link, onPictureClick, onPictureMouseEnter, onPictureMouseLeave, onLinkClick, id} = props;
+  const {
+    title,
+    type,
+    price,
+    previewImage,
+    link,
+    isBookmarked,
+    onPictureClick,
+    onPictureMouseEnter,
+    onPictureMouseLeave,
+    onLinkClick,
+    onBookmarkClick,
+    id
+  } = props;
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={onPictureMouseEnter} onMouseLeave={onPictureMouseLeave} id={id}>
@@ -20,7 +33,7 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button onClick={onBookmarkClick} className={`place-card__bookmark-button ${isBookmarked ? `place-card__bookmark-button--active` : ``} button`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -53,10 +66,12 @@ PlaceCard.propTypes = {
   link: PropTypes.string,
   rating: PropTypes.number,
   isPremium: PropTypes.bool,
+  isBookmarked: PropTypes.bool,
   onPictureClick: PropTypes.func,
   onLinkClick: PropTypes.func,
   onPictureMouseEnter: PropTypes.func,
   onPictureMouseLeave: PropTypes.func,
+  onBookmarkClick: PropTypes.func,
   id: PropTypes.number,
 };
 
