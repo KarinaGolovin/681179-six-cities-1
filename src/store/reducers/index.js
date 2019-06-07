@@ -1,4 +1,4 @@
-import {SET_CURRENT_CITY, LOAD_OFFERS, REQUIRED_AUTHORIZATION, SET_USER_DATA} from '../actions';
+import {SET_CURRENT_CITY, LOAD_OFFERS, REQUIRED_AUTHORIZATION, SET_USER_DATA, LOAD_FAVORITES, LOAD_COMMENTS} from '../actions';
 
 const initialState = {
   currentCity: null,
@@ -18,6 +18,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload || []
+      };
+    case LOAD_FAVORITES:
+      return {
+        ...state,
+        favorite: action.payload
+      };
+    case LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
       };
     case REQUIRED_AUTHORIZATION:
       return {
@@ -55,6 +65,28 @@ export function getCityOffers(city, offers) {
   return offers.filter((it) => {
     return it.city.name === city;
   });
+}
+
+// Или запрос с сервера???
+export function getFavoriteOffersByCities(state) {
+  let favoriteOffersList = [];
+
+  state.offers.filter((it) => {
+    let favoriteOffers = [];
+
+    if (it.is_favorite) {
+      favoriteOffers.push(it);
+    }
+    return favoriteOffers;
+  }).map((it) => {
+    // if (!favoriteOffersList[it.city.name]) {
+    //   favoriteOffersList.it.city.name = [it];
+    // } else {
+    favoriteOffersList[it.city.name].push(it);
+    // }
+  });
+
+  return favoriteOffersList;
 }
 
 export default reducer;

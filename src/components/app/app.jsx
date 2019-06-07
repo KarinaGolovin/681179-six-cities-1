@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import {Header} from '../header/header.jsx';
 import {SignIn} from '../sign-in/sign-in.jsx';
+import {Favorites} from '../favorites/favorites.jsx';
 import {getAutorizationStatus, signIn} from '../../store/actions';
+import {getFavoriteOffersByCities} from '../../store/reducers';
 
 export class App extends PureComponent {
   constructor(props) {
@@ -18,7 +20,7 @@ export class App extends PureComponent {
   }
 
   _showScreen() {
-    const {isAuthorizationRequired, user, onSingIn} = this.props;
+    const {isAuthorizationRequired, user, onSingIn, favoriteList} = this.props;
     return (
       <>
         <Header
@@ -28,6 +30,21 @@ export class App extends PureComponent {
               isSignInVisible: true
             });
           }}
+          // onFavoritesRedirect={() => {
+          //   if (!isAuthorizationRequired) {
+          //     return (
+          //       <>
+          //         <Header/>
+          //         <Favorites
+          //           favoriteList={favoriteList}
+          //           onCityClick={() => {}}
+          //           onLinkClick={() => {}}
+          //         />;
+          //       </>
+          //     );
+          //   }
+          //   return this._showScreen();
+          // }}
           user={user}
         />
         {this.state.isSignInVisible && !user.id ? <SignIn onLogin={onSingIn} /> : <Main />}
@@ -45,7 +62,9 @@ const mapStateToProps = (state) => {
       name: state.user.name,
       avatar: state.user.avatar_url,
       isPro: state.user.is_pro
-    }
+    },
+    // offers: state.offers,
+    favoriteList: getFavoriteOffersByCities(state),
   };
 };
 
@@ -63,6 +82,7 @@ App.propTypes = {
   }),
   // from mapStateToProps
   isAuthorizationRequired: PropTypes.bool,
+  favoriteList: PropTypes.array,
 
   // from mapDispatchToProps
   onSingIn: PropTypes.func,
