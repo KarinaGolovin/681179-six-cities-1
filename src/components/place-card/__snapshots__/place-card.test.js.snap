@@ -13,8 +13,8 @@ exports[`PlaceCard correctly renders 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="200"
-        width="260"
+        height={200}
+        width={260}
       />
     </a>
   </div>

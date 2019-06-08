@@ -1,47 +1,59 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
+import {connect} from 'react-redux';
+import {getFavoriteOfferList} from '../../store/actions';
 
-export const Favorites = ({favoriteList: list, onCityClick, onLinkClick, onBookmarkClick}) => {
-  return (
-    <main className="page__main page__main--favorites">
-      <div className="page__favorites-container container">
-        <section className={`favorites ${!list.length ? `favorites--empty` : ``}`}>
-          {
-            !list.length ? <>
-              <h1 className="visually-hidden">Favorites (empty)</h1>
-              <div className="favorites__status-wrapper">
-                <b className="favorites__status">Nothing yet saved.</b>
-                <p className="favorites__status-description">Save properties to narrow down search or plan yor future
+export class Favorites extends PureComponent {
+  componentDidMount() {
+    const {loadFavorites = () => {}} = this.props;
+
+    loadFavorites();
+  }
+  render() {
+    const {favoriteList: list, onCityClick, onLinkClick, onBookmarkClick} = this.props;
+
+    return (
+      <main className="page__main page__main--favorites">
+        <div className="page__favorites-container container">
+          <section className={`favorites ${!list.length ? `favorites--empty` : ``}`}>
+            {
+              !list.length ? <>
+                <h1 className="visually-hidden">Favorites (empty)</h1>
+                <div className="favorites__status-wrapper">
+                  <b className="favorites__status">Nothing yet saved.</b>
+                  <p className="favorites__status-description">Save properties to narrow down search or plan yor future
                   trips.</p>
-              </div>
-            </> : <>
-              <h1 className="favorites__title">Saved listing</h1>
-              <ul className="favorites__list">
-                {Object.entries(groupByCity(list)).map(([city, cards]) => {
-                  return <FavoriteLocation
-                    city={city}
-                    cards={cards}
-                    key={city}
-                    onLinkClick={onLinkClick}
-                    onCityClick={onCityClick}
-                    onBookmarkClick={onBookmarkClick}
-                  />;
-                })}
-              </ul>
-            </>
-          }
-        </section>
-      </div>
-    </main>
-  );
-};
+                </div>
+              </> : <>
+                  <h1 className="favorites__title">Saved listing</h1>
+                  <ul className="favorites__list">
+                    {Object.entries(groupByCity(list)).map(([city, cards]) => {
+                      return <FavoriteLocation
+                        city={city}
+                        cards={cards}
+                        key={city}
+                        onLinkClick={onLinkClick}
+                        onCityClick={onCityClick}
+                        onBookmarkClick={onBookmarkClick}
+                      />;
+                    })}
+                  </ul>
+                </>
+            }
+          </section>
+        </div>
+      </main>
+    );
+  }
+}
 
 Favorites.propTypes = {
   favoriteList: PropTypes.array,
   onCityClick: PropTypes.func,
   onLinkClick: PropTypes.func,
   onBookmarkClick: PropTypes.func,
+  loadFavorites: PropTypes.func
 };
 
 const cardClasses = {
@@ -86,6 +98,8 @@ const FavoriteLocation = ({city, cards, onCityClick, onLinkClick, onBookmarkClic
                 classes = {cardClasses}
                 id={it.id}
                 key={it.id}
+                imageWidth={150}
+                imageHeight={110}
               />
             );
           })}
@@ -100,7 +114,7 @@ FavoriteLocation.propTypes = {
   city: PropTypes.string,
   onCityClick: PropTypes.func,
   onLinkClick: PropTypes.func,
-  onBookmarkClick: PropTypes.func,
+  onBookmarkClick: PropTypes.func
 };
 
 const groupByCity = (offers) => {
@@ -112,3 +126,9 @@ const groupByCity = (offers) => {
     return byCity;
   }, {});
 };
+
+const mapDispatchToProps = {
+  loadFavorites: getFavoriteOfferList
+};
+
+export default connect(null, mapDispatchToProps)(Favorites);

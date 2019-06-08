@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
     case LOAD_FAVORITES:
       return {
         ...state,
-        favorite: action.payload
+        offers: updateFavoriteOffers(state.offers, action.payload)
       };
     case LOAD_COMMENTS:
       return {
@@ -49,6 +49,12 @@ const reducer = (state = initialState, action) => {
   }
 
   return state;
+};
+
+const updateFavoriteOffers = (offersList, favoriteOffers) => {
+  return !favoriteOffers.length ? offersList : favoriteOffers.reduce((list, it) => {
+    return updateOffer(list, it);
+  }, offersList);
 };
 
 const updateOffer = (offersList, updatedOffer) => {

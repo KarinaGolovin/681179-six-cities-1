@@ -22,6 +22,8 @@ const PlaceCard = (props) => {
       imageWrapper: ``,
       cardInfo: ``
     },
+    imageWidth = 260,
+    imageHeight = 200,
     id
   } = props;
 
@@ -35,7 +37,7 @@ const PlaceCard = (props) => {
 
       <div className={`place-card__image-wrapper ${classes.imageWrapper || ``}`}>
         <a href="#" onClick={onPictureClick}>
-          <img className="place-card__image" width="260" height="200" alt="Place image" src={previewImage}/>
+          <img className="place-card__image" width={imageWidth} height={imageHeight} alt="Place image" src={previewImage}/>
         </a>
       </div>
       <div className={`place-card__info ${classes.cardInfo || ``}`}>
@@ -79,7 +81,9 @@ PlaceCard.propTypes = {
   onPictureMouseLeave: PropTypes.func,
   onBookmarkClick: PropTypes.func,
   id: PropTypes.number,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
 };
 
 export default PlaceCard;
