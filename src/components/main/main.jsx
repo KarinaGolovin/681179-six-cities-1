@@ -93,7 +93,7 @@ Main.propTypes = {
   currentCity: PropTypes.string,
   coordinatesByCity: PropTypes.object,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
-  updateBookmark: PropTypes.func.isRequired,
+  updateBookmark: PropTypes.func,
 };
 
 export default connect(

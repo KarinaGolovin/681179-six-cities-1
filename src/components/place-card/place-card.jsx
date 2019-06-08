@@ -33,7 +33,7 @@ const PlaceCard = (props) => {
         </div>
       ) : null}
 
-      <div className={`cities__image-wrapper ${classes.imageWrapper || ``}`}>
+      <div className={`place-card__image-wrapper ${classes.imageWrapper || ``}`}>
         <a href="#" onClick={onPictureClick}>
           <img className="place-card__image" width="260" height="200" alt="Place image" src={previewImage}/>
         </a>

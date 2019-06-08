@@ -4,7 +4,7 @@ import PlaceCard from '../place-card/place-card.jsx';
 
 const cardClasses = {
   container: `cities__place-card`,
-  imageWrapper: `place-card__image-wrapper`
+  imageWrapper: `cities__image-wrapper`
 };
 
 class PlacesList extends PureComponent {
@@ -62,6 +62,10 @@ class PlacesList extends PureComponent {
   }
 
   _handleBookmarkClick(card) {
+    if (this.props.onBookmarkClick) {
+      return;
+    }
+
     this.props.onBookmarkClick({
       hotelId: card.id,
       status: card.is_favorite ? 0 : 1
@@ -80,7 +84,7 @@ class PlacesList extends PureComponent {
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object),
   onActiveItemChange: PropTypes.func.isRequired,
-  onBookmarkClick: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func,
 };
 
 export default PlacesList;

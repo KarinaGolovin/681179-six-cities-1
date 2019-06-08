@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import SignIn from './sign-in.jsx';
+import {SignIn} from './sign-in.jsx';
 
 configure({adapter: new Adapter()});
 
@@ -15,7 +15,7 @@ it(`Check if PreventDefault works correctly on SignIn submit`, () => {
   const formSendPrevention = jest.fn();
 
   component.find(`form`).simulate(`submit`, {
-    preventDefault: formSendPrevention,
+    preventDefault: formSendPrevention
   });
 
   expect(onLogin).toHaveBeenCalledTimes(1);

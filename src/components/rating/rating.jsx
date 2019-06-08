@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Rating = ({rating, classes = {}}) => {
+export const Rating = ({rating = 0, classes = {}}) => {
   return (
     <div className={`rating ${classes.container || ``}`}>
       <div className={`rating__stars ${classes.stars || ``}`}>

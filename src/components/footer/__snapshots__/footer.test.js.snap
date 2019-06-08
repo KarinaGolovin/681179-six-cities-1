@@ -7,6 +7,7 @@ exports[`Footer correctly renders 1`] = `
   <a
     className="footer__logo-link"
     href="/"
+    onClick={[Function]}
   >
     <img
       alt="6 cities logo"

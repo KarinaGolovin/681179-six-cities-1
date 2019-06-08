@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Main} from './main.jsx';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 const mock = [
   {
@@ -83,14 +84,15 @@ const mock = [
 
 it(`Main correctly renders`, () => {
   const component = renderer.create(
-      <Main
-        currentCity={`Test`}
-        currentPlaces={mock}
-        setNewCity={() => { }}
-        coordinatesByCity={{
-          Test: [0, 0]
-        }}
-      />
+      <Router>
+        <Main
+          currentCity={`Test`}
+          currentPlaces={mock}
+          coordinatesByCity={{
+            Test: [0, 0]
+          }}
+        />
+      </Router>
   ).toJSON();
 
   expect(component).toMatchSnapshot();

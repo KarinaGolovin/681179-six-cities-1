@@ -3,6 +3,8 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import App from './app.jsx';
 import {createStore} from 'redux';
+import {Router} from "react-router-dom";
+import history from '../../history';
 
 const mock = [
   {
@@ -85,7 +87,8 @@ const mock = [
 
 const initialState = {
   currentCity: null,
-  offers: mock
+  offers: mock,
+  user: {}
 };
 
 const reducer = (state = initialState) => {
@@ -95,8 +98,9 @@ const reducer = (state = initialState) => {
 it(`App correctly renders`, () => {
   const component = renderer.create(
       <Provider store={createStore(reducer)}>
-        <App
-        />
+        <Router history={history}>
+          <App />
+        </Router>
       </Provider>
   ).toJSON();
 

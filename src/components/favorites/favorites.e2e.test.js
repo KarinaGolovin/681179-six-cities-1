@@ -7,26 +7,23 @@ configure({adapter: new Adapter()});
 
 const mock = [
   {
-    Test1: [
-      {
-        title: `Title1`,
-        type: `Type1`,
-        price: 1,
-        previewImage: `Img1`,
-        link: `Link1`,
-        onLinkClick: (() => { }),
-      }
-    ],
-    Test2: [
-      {
-        title: `Title2`,
-        type: `Type2`,
-        price: 2,
-        previewImage: `Img2`,
-        link: `Link2`,
-        onLinkClick: (() => { }),
-      }
-    ]
+    title: `Test`,
+    type: `Test`,
+    price: 0,
+    previewImage: ``,
+    link: `#`,
+    rating: 0,
+    isPremium: true,
+    id: 1,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Test`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
   }
 ];
 
@@ -41,7 +38,7 @@ it(`Favorites City title link works correctly`, () => {
       />
   );
 
-  component.find(`.location__item-link`).simulate(`click`);
+  component.find(`.locations__item-link`).simulate(`click`);
 
   expect(onCityClick).toHaveBeenCalledTimes(1);
 });

@@ -16,7 +16,7 @@ it(`Expect correct API call to server`, () => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
       type: LOAD_OFFERS,
-      offers: [{test: `Test`}]
+      payload: [{test: `Test`}]
     });
   });
 });

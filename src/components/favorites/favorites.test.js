@@ -3,16 +3,25 @@ import renderer from 'react-test-renderer';
 import {Favorites} from './favorites.jsx';
 
 const mock = [
-  {Test: [
-    {
-      title: `Title`,
-      type: `Type`,
-      price: 1,
-      previewImage: `Img`,
-      link: `Link`,
-      onLinkClick: (() => {}),
-    }
-  ]}
+  {
+    title: `Test`,
+    type: `Test`,
+    price: 0,
+    previewImage: ``,
+    link: `#`,
+    rating: 0,
+    isPremium: true,
+    id: 1,
+    location: {
+      latitude: 0, longitude: 3,
+    },
+    city: {
+      name: `Test`,
+      location: {
+        latitude: 0, longitude: 3,
+      },
+    },
+  }
 ];
 
 it(`Favorites correctly renders`, () => {
