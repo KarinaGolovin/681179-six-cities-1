@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-export const Header = ({user, onFavoritesRedirect, isAuthorizationRequired}) => {
+export const Header = ({user, isAuthorizationRequired}) => {
 
   return (
     <>
@@ -23,19 +23,19 @@ export const Header = ({user, onFavoritesRedirect, isAuthorizationRequired}) => 
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
+              <Link to="/" className="header__logo-link header__logo-link--active">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link to={`${isAuthorizationRequired ? `/login` : `/`}`} className="header__nav-link header__nav-link--profile">
+                  <Link to={`${isAuthorizationRequired ? `/login` : `/favorites`}`} className="header__nav-link header__nav-link--profile">
                     {
                       isAuthorizationRequired || !user ? <>
                         <div className="header__avatar-wrapper user__avatar-wrapper" />
                         <span className="header__login">Sign in</span>
-                      </> : <UserInfo avatar={user.avatar} email={user.email} onClick={onFavoritesRedirect}/>
+                      </> : <UserInfo avatar={user.avatar} email={user.email} />
                     }
                   </Link>
                 </li>
@@ -53,24 +53,22 @@ Header.propTypes = {
     email: PropTypes.string,
     avatar: PropTypes.string,
   }),
-  onFavoritesRedirect: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
 };
 
-const UserInfo = ({avatar, email, onClick}) => {
+const UserInfo = ({avatar, email}) => {
   return (
     <>
       <div className="header__avatar-wrapper user__avatar-wrapper">
         <img src={avatar} />
       </div>
-      <span className="header__user-name user__name" onClick={onClick}>{email}</span>
+      <span className="header__user-name user__name">{email}</span>
     </>
   );
 };
 
 UserInfo.propTypes = {
   email: PropTypes.string,
-  avatar: PropTypes.string,
-  onClick: PropTypes.func,
+  avatar: PropTypes.string
 };
 

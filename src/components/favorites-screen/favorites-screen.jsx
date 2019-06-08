@@ -2,18 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Header} from '../header/header.jsx';
-import {SignIn} from '../sign-in/sign-in.jsx';
-import {getAuthorizationStatus, signIn} from '../../store/actions';
+import {getAuthorizationStatus, signIn, toggleFavorite} from '../../store/actions';
+import {Favorites} from '../favorites/favorites.jsx';
+import {getFavoriteOffersByCities} from '../../store/reducers';
 
-export function LoginScreen(props) {
-  const {isAuthorizationRequired, onSingIn, user} = props;
+export function FavoritesScreen(props) {
+  const {isAuthorizationRequired, favoriteList, updateBookmark, user} = props;
   return (
     <>
       <Header
         isAuthorizationRequired={isAuthorizationRequired}
         user={user}
       />
-      <SignIn onLogin={onSingIn}/>
+      <Favorites favoriteList={favoriteList} onBookmarkClick={updateBookmark} />
     </>
   );
 }
@@ -21,6 +22,7 @@ export function LoginScreen(props) {
 const mapStateToProps = (state) => {
   return {
     isAuthorizationRequired: getAuthorizationStatus(state),
+    favoriteList: getFavoriteOffersByCities(state),
     user: {
       id: state.user.id,
       email: state.user.email,
@@ -32,12 +34,15 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  onSingIn: signIn
+  onSingIn: signIn,
+  updateBookmark: toggleFavorite
 };
 
-LoginScreen.propTypes = {
+FavoritesScreen.propTypes = {
   isAuthorizationRequired: PropTypes.bool,
   onSingIn: PropTypes.func,
+  favoriteList: PropTypes.array,
+  updateBookmark: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.number,
     email: PropTypes.string,
@@ -50,5 +55,5 @@ LoginScreen.propTypes = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginScreen);
+)(FavoritesScreen);
 
