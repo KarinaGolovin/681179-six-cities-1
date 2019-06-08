@@ -1,33 +1,25 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import {getAuthorizationStatus} from '../../store/actions';
 import PropTypes from 'prop-types';
-import history from '../../history';
+import {Redirect} from 'react-router-dom';
 
-const withAuthRedirect = (Component) => {
-  class WithAuthRedirect extends PureComponent {
-    componentDidMount() {
-      if (!this.props.isAuthorizationRequired) {
-        this._redirectToHomePage();
-      }
+const withAuthRedirect = (Component, path = {}) => {
+  function WithAuthRedirect(props) {
+    if (props.isAuthorizationRequired === undefined) {
+      return null;
     }
 
-    componentDidUpdate(prevProps) {
-      const {isAuthorizationRequired} = this.props;
-
-      if (!isAuthorizationRequired && prevProps.isAuthorizationRequired !== isAuthorizationRequired) {
-        this._redirectToHomePage();
-      }
+    if (!props.isAuthorizationRequired && path.authorized) {
+      return <Redirect to={path.authorized} />;
     }
 
-    _redirectToHomePage() {
-      history.push(`/`);
+    if (props.isAuthorizationRequired && path.notAuthorised) {
+      return <Redirect to={path.notAuthorised} />;
     }
 
-    render() {
-      return <Component {...this.props} />;
-    }
+    return <Component {...props} />;
   }
 
   WithAuthRedirect.propTypes = {

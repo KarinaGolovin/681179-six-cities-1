@@ -5,13 +5,17 @@ import {toggleFavorite} from '../../store/actions';
 import {Favorites} from '../favorites/favorites.jsx';
 import {getFavoriteOffersByCities} from '../../store/reducers';
 import PageTemplate from '../page-template/page-template.jsx';
+import withAuthRedirect from '../../hocs/with-auth-redirect/with-auth-redirect';
 
+const FavoritesWithRedirect = withAuthRedirect(Favorites, {
+  notAuthorised: `/login`
+});
 
 export function FavoritesScreen(props) {
   const {favoriteList, updateBookmark} = props;
   return (
     <PageTemplate>
-      <Favorites favoriteList={favoriteList} onBookmarkClick={updateBookmark} />
+      <FavoritesWithRedirect favoriteList={favoriteList} onBookmarkClick={updateBookmark} />
     </PageTemplate>
   );
 }

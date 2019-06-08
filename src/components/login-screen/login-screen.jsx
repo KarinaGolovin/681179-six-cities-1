@@ -4,12 +4,17 @@ import {connect} from 'react-redux';
 import {SignIn} from '../sign-in/sign-in.jsx';
 import {signIn} from '../../store/actions';
 import PageTemplate from '../page-template/page-template.jsx';
+import withAuthRedirect from '../../hocs/with-auth-redirect/with-auth-redirect';
+
+const SignInWithRedirect = withAuthRedirect(SignIn, {
+  authorized: `/`
+});
 
 export function LoginScreen(props) {
   const {onSingIn} = props;
   return (
     <PageTemplate>
-      <SignIn onLogin={onSingIn}/>
+      <SignInWithRedirect onLogin={onSingIn}/>
     </PageTemplate>
   );
 }
