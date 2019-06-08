@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-export const Header = ({user, onSignClick, onFavoritesRedirect, isAuthorizationRequired}) => {
+export const Header = ({user, onFavoritesRedirect, isAuthorizationRequired}) => {
 
   return (
     <>
@@ -29,14 +30,14 @@ export const Header = ({user, onSignClick, onFavoritesRedirect, isAuthorizationR
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link to={`${isAuthorizationRequired ? `/login` : `/`}`} className="header__nav-link header__nav-link--profile">
                     {
                       isAuthorizationRequired || !user ? <>
                         <div className="header__avatar-wrapper user__avatar-wrapper" />
-                        <LoginLink onClick={onSignClick} />
+                        <span className="header__login">Sign in</span>
                       </> : <UserInfo avatar={user.avatar} email={user.email} onClick={onFavoritesRedirect}/>
                     }
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -52,7 +53,6 @@ Header.propTypes = {
     email: PropTypes.string,
     avatar: PropTypes.string,
   }),
-  onSignClick: PropTypes.func,
   onFavoritesRedirect: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
 };
@@ -74,10 +74,3 @@ UserInfo.propTypes = {
   onClick: PropTypes.func,
 };
 
-const LoginLink = ({onClick}) => {
-  return <span className="header__login" onClick={onClick}>Sign in</span>;
-};
-
-LoginLink.propTypes = {
-  onClick: PropTypes.func,
-};
