@@ -7,6 +7,7 @@ import {configureAPI} from './api';
 import rootReducer from './store/reducers';
 import {getOfferList, checkLogin} from './store/actions';
 import App from './components/app/app.jsx';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,11 @@ const init = () => {
 
   ReactDOM.render(
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={App} />
+          </Switch>
+        </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)
   );
