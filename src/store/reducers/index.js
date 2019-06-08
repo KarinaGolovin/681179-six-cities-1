@@ -11,7 +11,7 @@ const initialState = {
   currentCity: null,
   offers: [],
   user: {},
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
 };
 
 const reducer = (state = initialState, action) => {
