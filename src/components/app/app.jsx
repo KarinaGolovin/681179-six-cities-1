@@ -9,6 +9,7 @@ export default class App extends PureComponent {
     return (
       <Switch>
         <Route path="/" exact component={HomeScreen} />
+        <Route path="/city/:cityName" component={HomeScreen} />
         <Route path="/login" component={LoginScreen} />
         <Route path="/favorites" component={FavoritesScreen} />
       </Switch>

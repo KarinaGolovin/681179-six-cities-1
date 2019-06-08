@@ -1,5 +1,4 @@
 import {
-  SET_CURRENT_CITY,
   LOAD_OFFERS,
   REQUIRED_AUTHORIZATION,
   SET_USER_DATA,
@@ -17,11 +16,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CURRENT_CITY:
-      return {
-        ...state,
-        currentCity: action.payload
-      };
     case LOAD_OFFERS:
       return {
         ...state,
@@ -71,12 +65,12 @@ const updateOffer = (offersList, updatedOffer) => {
   ];
 };
 
-export function getCurrentCity(state) {
-  if (state.currentCity) {
-    return state.currentCity;
+export function getSelectedCity(cityName, state) {
+  if (!cityName) {
+    return state.offers.length ? state.offers[0].city.name : undefined;
   }
 
-  return state.offers.length ? state.offers[0].city.name : null;
+  return cityName;
 }
 
 export function getCoordinatesByCity(state) {
@@ -87,7 +81,7 @@ export function getCoordinatesByCity(state) {
   }, {});
 }
 
-export function getCityOffers(city, offers) {
+export function getCityOffers(city = ``, offers) {
   return offers.filter((it) => {
     return it.city.name === city;
   });

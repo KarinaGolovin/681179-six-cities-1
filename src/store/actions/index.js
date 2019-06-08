@@ -1,18 +1,11 @@
-// import mockOffers from '../../mocks/offers2';
-export const SET_CURRENT_CITY = `SET_CURRENT_CITY`;
+import history from '../../history';
+
 export const LOAD_OFFERS = `LOAD_OFFERS`;
 export const UPDATE_OFFER = `UPDATE_OFFER`;
 export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
 export const SET_USER_DATA = `SET_USER_DATA`;
 export const LOAD_FAVORITES = `LOAD_FAVORITES`;
 export const LOAD_COMMENTS = `LOAD_COMMENTS`;
-
-export const changeCity = (city) => {
-  return {
-    type: SET_CURRENT_CITY,
-    payload: city
-  };
-};
 
 export const loadOffers = (offers) => {
   return {
@@ -118,6 +111,7 @@ export const signIn = ({email, password}) => {
     return api.post(`/login`, {email, password}).then((response) => {
       dispatch(setUser(response.data));
       dispatch(requiredAutorization(false));
+      history.push(`/`);
     }).catch((err) => {
       dispatch(requiredAutorization(true));
       return err;

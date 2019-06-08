@@ -5,7 +5,7 @@ import PageTemplate from '../page-template/page-template.jsx';
 export default function HomeScreen(props) {
   return (
     <PageTemplate>
-      <Main/>
+      <Main selectedCityName={props.match.params.cityName}/>
     </PageTemplate>
   );
 }

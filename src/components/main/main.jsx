@@ -1,33 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {changeCity, toggleFavorite} from '../../store/actions';
+import {toggleFavorite} from '../../store/actions';
 import PlacesList from '../places-list/places-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
-import {getCityOffers, getCurrentCity, getCoordinatesByCity} from '../../store/reducers';
+import {getCityOffers, getCoordinatesByCity, getSelectedCity} from '../../store/reducers';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
 const PlacesListWrapped = withActiveItem(PlacesList);
-const CitiesListWrapped = withActiveItem(CitiesList);
 
 export const Main = (props) => {
-  const {coordinatesByCity, currentCity, currentPlaces, setNewCity, updateBookmark} = props;
-
-  if (!currentCity) {
-    return `loading...`;
-  }
+  const {coordinatesByCity, currentPlaces, currentCity, updateBookmark} = props;
 
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="cities tabs">
         <section className="locations container">
-          <CitiesListWrapped
+          <CitiesList
             cities={Object.keys(coordinatesByCity)}
-            onCityClick={(city) => {
-              setNewCity(city);
-            }}
+            activeItem={currentCity}
           />
         </section>
       </div>
@@ -63,10 +56,12 @@ export const Main = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <Map
-              cityCoords={coordinatesByCity[currentCity]}
-              placesList={currentPlaces}
-            />
+            {coordinatesByCity[currentCity] ? (
+              <Map
+                cityCoords={coordinatesByCity[currentCity]}
+                placesList={currentPlaces}
+              />
+            ) : null}
           </div>
         </div>
       </div>
@@ -74,8 +69,8 @@ export const Main = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const currentCity = getCurrentCity(state);
+const mapStateToProps = (state, {selectedCityName}) => {
+  const currentCity = getSelectedCity(selectedCityName, state);
 
   return {
     currentCity,
@@ -85,16 +80,14 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setNewCity: changeCity,
   updateBookmark: toggleFavorite
 };
 
 Main.propTypes = {
   mapZoom: PropTypes.number,
-  coordinatesByCity: PropTypes.object,
   currentCity: PropTypes.string,
+  coordinatesByCity: PropTypes.object,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setNewCity: PropTypes.func.isRequired,
   updateBookmark: PropTypes.func.isRequired,
 };
 

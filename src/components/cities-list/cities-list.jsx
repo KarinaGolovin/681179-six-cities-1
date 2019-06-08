@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {Link} from 'react-router-dom';
 
 const CitiesList = (props) => {
-  const {cities, onCityClick, onActiveItemChange, activeItem} = props;
+  const {cities, activeItem} = props;
   return (
     <ul className="locations__list tabs__list">
-      {cities.slice(0, 6).map((it, i) => {
+      {cities.slice(0, 6).map((cityName) => {
         return (
-          <li className="locations__item" key={it + i}>
-            <a className={`locations__item-link tabs__item ${activeItem === it ? `tabs__item--active` : ``}`} href="#" onClick={() => {
-              onActiveItemChange(it);
-              onCityClick(it);
-            }}>
-              <span>{it}</span>
-            </a>
+          <li className="locations__item" key={cityName}>
+            <Link to={`/city/${cityName}`} className={`locations__item-link tabs__item ${activeItem === cityName ? `tabs__item--active` : ``}`}>
+              <span>{cityName}</span>
+            </Link>
           </li>
         );
       })}
@@ -24,9 +21,7 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   activeItem: PropTypes.string,
-  cities: PropTypes.array.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onActiveItemChange: PropTypes.func.isRequired,
+  cities: PropTypes.array.isRequired
 };
 
 export default CitiesList;
