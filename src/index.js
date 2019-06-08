@@ -7,9 +7,7 @@ import {configureAPI} from './api';
 import rootReducer from './store/reducers';
 import {getOfferList, checkLogin} from './store/actions';
 import App from './components/app/app.jsx';
-import {Router, Switch, Route} from "react-router-dom";
-import LoginScreen from './components/login-screen/login-screen.jsx';
-import FavoritesScreen from './components/favorites-screen/favorites-screen.jsx';
+import {Router} from "react-router-dom";
 import history from './history';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,11 +24,7 @@ const init = () => {
   ReactDOM.render(
       <Provider store={store}>
         <Router history={history}>
-          <Switch>
-            <Route path="/" exact component={App} />
-            <Route path="/login" component={LoginScreen} />
-            <Route path="/favorites" component={FavoritesScreen} />
-          </Switch>
+          <App />
         </Router>
       </Provider>,
       document.querySelector(`#root`)
