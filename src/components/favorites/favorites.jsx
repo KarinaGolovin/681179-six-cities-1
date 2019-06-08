@@ -4,32 +4,36 @@ import PlaceCard from '../place-card/place-card.jsx';
 
 export const Favorites = ({favoriteList: list, onCityClick, onLinkClick, onBookmarkClick}) => {
   return (
-    <section className={`favorites ${!list.length ? `favorites--empty` : ``}`}>
-      {
-        !list.length ? <>
-          <h1 className="visually-hidden">Favorites (empty)</h1>
-          <div className="favorites__status-wrapper">
-            <b className="favorites__status">Nothing yet saved.</b>
-            <p className="favorites__status-description">Save properties to narrow down search or plan yor future
-              trips.</p>
-          </div>
-        </> : <>
-          <h1 className="favorites__title">Saved listing</h1>
-          <ul className="favorites__list">
-            {Object.entries(groupByCity(list)).map(([city, cards]) => {
-              return <FavoriteLocation
-                city={city}
-                cards={cards}
-                key={city}
-                onLinkClick={onLinkClick}
-                onCityClick={onCityClick}
-                onBookmarkClick={onBookmarkClick}
-              />;
-            })}
-          </ul>
-        </>
-      }
-    </section>
+    <main className="page__main page__main--favorites">
+      <div className="page__favorites-container container">
+        <section className={`favorites ${!list.length ? `favorites--empty` : ``}`}>
+          {
+            !list.length ? <>
+              <h1 className="visually-hidden">Favorites (empty)</h1>
+              <div className="favorites__status-wrapper">
+                <b className="favorites__status">Nothing yet saved.</b>
+                <p className="favorites__status-description">Save properties to narrow down search or plan yor future
+                  trips.</p>
+              </div>
+            </> : <>
+              <h1 className="favorites__title">Saved listing</h1>
+              <ul className="favorites__list">
+                {Object.entries(groupByCity(list)).map(([city, cards]) => {
+                  return <FavoriteLocation
+                    city={city}
+                    cards={cards}
+                    key={city}
+                    onLinkClick={onLinkClick}
+                    onCityClick={onCityClick}
+                    onBookmarkClick={onBookmarkClick}
+                  />;
+                })}
+              </ul>
+            </>
+          }
+        </section>
+      </div>
+    </main>
   );
 };
 
@@ -37,7 +41,7 @@ Favorites.propTypes = {
   favoriteList: PropTypes.array,
   onCityClick: PropTypes.func,
   onLinkClick: PropTypes.func,
-  updateBookmark: PropTypes.func,
+  onBookmarkClick: PropTypes.func,
 };
 
 const cardClasses = {
