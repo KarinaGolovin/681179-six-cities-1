@@ -97,4 +97,8 @@ export function getFavoriteOffersByCities(state) {
   return state.offers.filter((it) => it.is_favorite);
 }
 
+export const getAuthorizationStatus = (state) => {
+  return state.isAuthorizationRequired;
+};
+
 export default reducer;

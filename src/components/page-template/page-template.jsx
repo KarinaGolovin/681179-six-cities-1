@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Header} from '../header/header.jsx';
-import {getAuthorizationStatus} from '../../store/actions';
+import {getAuthorizationStatus} from '../../store/reducers';
 import {Footer} from '../footer/footer.jsx';
 
 export class PageTemplate extends PureComponent {
