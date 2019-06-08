@@ -57,7 +57,7 @@ export const updateOffer = (offer) => {
 };
 
 // move to reducer???
-export const getAutorizationStatus = (state) => {
+export const getAuthorizationStatus = (state) => {
   return state.isAuthorizationRequired;
 };
 
@@ -105,12 +105,10 @@ export const getComments = (hotelId) => {
 export const checkLogin = (() => {
   return (dispatch, getState, api) => {
     return api.get(`/login`).then((response) => {
-      // eslint-disable-next-line no-console
-      console.log(response);
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-      return err;
+      dispatch(setUser(response.data));
+      dispatch(requiredAutorization(false));
+    }).catch(() => {
+      dispatch(requiredAutorization(true));
     });
   };
 });
@@ -119,9 +117,9 @@ export const signIn = ({email, password}) => {
   return (dispatch, getState, api) => {
     return api.post(`/login`, {email, password}).then((response) => {
       dispatch(setUser(response.data));
+      dispatch(requiredAutorization(false));
     }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      dispatch(requiredAutorization(true));
       return err;
     });
   };

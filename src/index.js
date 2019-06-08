@@ -5,7 +5,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {configureAPI} from './api';
 import rootReducer from './store/reducers';
-import {getOfferList} from './store/actions';
+import {getOfferList, checkLogin} from './store/actions';
 import App from './components/app/app.jsx';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -17,6 +17,7 @@ const init = () => {
   ));
 
   store.dispatch(getOfferList());
+  store.dispatch(checkLogin());
 
   ReactDOM.render(
       <Provider store={store}>

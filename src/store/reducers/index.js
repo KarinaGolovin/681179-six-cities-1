@@ -12,7 +12,7 @@ const initialState = {
   currentCity: null,
   offers: [],
   user: {},
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,7 +50,6 @@ const reducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        isAuthorizationRequired: false,
         user: action.payload,
       };
   }

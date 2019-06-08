@@ -5,7 +5,7 @@ import Main from '../main/main.jsx';
 import {Header} from '../header/header.jsx';
 import {SignIn} from '../sign-in/sign-in.jsx';
 import {Favorites} from '../favorites/favorites.jsx';
-import {getAutorizationStatus, signIn, toggleFavorite} from '../../store/actions';
+import {getAuthorizationStatus, signIn, toggleFavorite} from '../../store/actions';
 import {getFavoriteOffersByCities} from '../../store/reducers';
 
 export class App extends PureComponent {
@@ -47,7 +47,7 @@ export class App extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthorizationRequired: getAutorizationStatus(state),
+    isAuthorizationRequired: getAuthorizationStatus(state),
     user: {
       id: state.user.id,
       email: state.user.email,
