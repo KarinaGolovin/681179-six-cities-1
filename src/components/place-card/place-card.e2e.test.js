@@ -35,6 +35,21 @@ it(`PlaceCard picture click works`, () => {
   expect(onPictureClick).toHaveBeenCalledTimes(1);
 });
 
+it(`PlaceCard bookmark click works`, () => {
+  const onBookmarkClick = jest.fn();
+  const component = shallow(
+      <PlaceCard
+        title={`Some text`}
+        previewImage={`http://placehold.it/134x134`}
+        onBookmarkClick={onBookmarkClick}
+      />,
+  );
+
+  component.find(`.place-card__bookmark-button`).simulate(`click`);
+
+  expect(onBookmarkClick).toHaveBeenCalledTimes(1);
+});
+
 it(`PlaceCard mouseenter on picture correctly works`, () => {
   const onPictureMouseEnter = jest.fn();
   const component = shallow(

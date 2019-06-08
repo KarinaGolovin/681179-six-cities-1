@@ -9,7 +9,7 @@ exports[`CitiesList correctly renders 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/city/Test"
       onClick={[Function]}
     >
       <span>
@@ -22,7 +22,7 @@ exports[`CitiesList correctly renders 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/city/Test Test"
       onClick={[Function]}
     >
       <span>

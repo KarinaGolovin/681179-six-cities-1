@@ -2,6 +2,11 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
+const cardClasses = {
+  container: `cities__place-card`,
+  imageWrapper: `cities__image-wrapper`
+};
+
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
@@ -9,6 +14,7 @@ class PlacesList extends PureComponent {
     this._handlePictureClick = this._handlePictureClick.bind(this);
     this._onPictureMouseEnter = this._onPictureMouseEnter.bind(this);
     this._onPictureMouseLeave = this._onPictureMouseLeave.bind(this);
+    this._handleBookmarkClick = this._handleBookmarkClick.bind(this);
   }
 
   render() {
@@ -26,9 +32,13 @@ class PlacesList extends PureComponent {
               link={it.link}
               rating={it.rating}
               isPremium={it.is_premium}
+              isBookmarked={it.is_favorite}
               onLinkClick={() => {}}
               onPictureClick={() => {
                 this._handlePictureClick(it);
+              }}
+              onBookmarkClick={() => {
+                this._handleBookmarkClick(it);
               }}
               onPictureMouseEnter={() => {
                 this._onPictureMouseEnter(it);
@@ -36,6 +46,7 @@ class PlacesList extends PureComponent {
               onPictureMouseLeave={() => {
                 this._onPictureMouseLeave(it);
               }}
+              classes = {cardClasses}
               id={it.id}
               key={it.id}
             />;
@@ -50,6 +61,17 @@ class PlacesList extends PureComponent {
     return card;
   }
 
+  _handleBookmarkClick(card) {
+    if (this.props.onBookmarkClick) {
+      return;
+    }
+
+    this.props.onBookmarkClick({
+      hotelId: card.id,
+      status: card.is_favorite ? 0 : 1
+    });
+  }
+
   _onPictureMouseEnter(card) {
     this.props.onActiveItemChange(card);
   }
@@ -62,6 +84,7 @@ class PlacesList extends PureComponent {
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object),
   onActiveItemChange: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func,
 };
 
 export default PlacesList;

@@ -53,6 +53,7 @@ it(`PlaceCard correctly renders`, () => {
       <PlacesListWrapped
         offers={mock}
         onActiveItemChange={() => {}}
+        onBookmarkClick={() => {}}
       />
   ).toJSON();
 

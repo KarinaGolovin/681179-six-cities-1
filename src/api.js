@@ -7,12 +7,5 @@ export const configureAPI = () => {
     withCredentials: true,
   });
 
-  const onSuccess = (response) => response;
-  const onFail = (err) => {
-    return err;
-  };
-
-  api.interceptors.response.use(onSuccess, onFail);
-
   return api;
 };

@@ -2,17 +2,10 @@
 
 exports[`PlaceCard correctly renders 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="place-card "
 >
   <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
-  <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="place-card__image-wrapper "
   >
     <a
       href="#"
@@ -20,13 +13,13 @@ exports[`PlaceCard correctly renders 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="200"
-        width="260"
+        height={200}
+        width={260}
       />
     </a>
   </div>
   <div
-    className="place-card__info"
+    className="place-card__info "
   >
     <div
       className="place-card__price-wrapper"
@@ -46,7 +39,7 @@ exports[`PlaceCard correctly renders 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button  button"
         type="button"
       >
         <svg
@@ -66,15 +59,15 @@ exports[`PlaceCard correctly renders 1`] = `
       </button>
     </div>
     <div
-      className="place-card__rating rating"
+      className="rating place-card__rating"
     >
       <div
-        className="place-card__stars rating__stars"
+        className="rating__stars place-card__stars"
       >
         <span
           style={
             Object {
-              "width": "93%",
+              "width": "0%",
             }
           }
         />
