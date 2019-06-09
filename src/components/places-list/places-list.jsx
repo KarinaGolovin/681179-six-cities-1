@@ -62,7 +62,7 @@ class PlacesList extends PureComponent {
   }
 
   _handleBookmarkClick(card) {
-    if (this.props.onBookmarkClick) {
+    if (!this.props.onBookmarkClick) {
       return;
     }
 
