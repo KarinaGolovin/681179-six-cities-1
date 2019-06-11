@@ -82,8 +82,9 @@ export const checkLogin = (() => {
     return api.get(`/login`).then((response) => {
       dispatch(setUser(response.data));
       dispatch(requiredAutorization(false));
-    }).catch(() => {
-      dispatch(requiredAutorization(true));
+    }).catch((err) => {
+      handleNetworkError(err, dispatch);
+      // dispatch(requiredAutorization(true));
     });
   };
 });
@@ -94,8 +95,9 @@ export const signIn = ({email, password}) => {
       dispatch(setUser(response.data));
       dispatch(requiredAutorization(false));
     }).catch((err) => {
-      dispatch(requiredAutorization(true));
-      return err;
+      handleNetworkError(err, dispatch);
+      // dispatch(requiredAutorization(true));
+      // return err;
     });
   };
 };
@@ -124,5 +126,7 @@ export const postComments = ({hotelId}) => {
 const handleNetworkError = (err, dispatch) => {
   if (err.response && err.response.status === 403) {
     dispatch(requiredAutorization(true));
+  } else if (err.response && err.response.status === 400) {
+    console.log(err);
   }
 };
