@@ -7,11 +7,13 @@ import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
 import {getCityOffers, getCoordinatesByCity, getSelectedCity} from '../../store/reducers';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import {withOffersSorting} from '../../hocs/with-offer-sorting/with-offer-sorting';
+import {compose} from 'recompose';
 
 const PlacesListWrapped = withActiveItem(PlacesList);
 
 export const Main = (props) => {
-  const {coordinatesByCity, currentPlaces, currentCity, updateBookmark} = props;
+  const {coordinatesByCity, currentPlaces, currentCity, updateBookmark, onSortTypeChange} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -46,7 +48,9 @@ export const Main = (props) => {
                     <li className="places__option" tabIndex="0">Price: high to low</li>
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul> */}
-                  <select className="places__sorting-type" id="places-sorting">
+                  <select className="places__sorting-type" id="places-sorting" onChange={(evt) => {
+                    onSortTypeChange(evt.target.value);
+                  }}>
                     <option className="places__option" value="popular" defaultValue="">Popular</option>
                     <option className="places__option" value="to-high">Price: low to high</option>
                     <option className="places__option" value="to-low">Price: high to low</option>
@@ -94,9 +98,13 @@ Main.propTypes = {
   coordinatesByCity: PropTypes.object,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateBookmark: PropTypes.func,
+  onSortTypeChange: PropTypes.func.isRequired,
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    withOffersSorting
 )(Main);

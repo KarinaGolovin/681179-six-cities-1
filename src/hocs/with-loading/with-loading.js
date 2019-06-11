@@ -10,11 +10,12 @@ const withLoading = (Component) => {
 
     return (<p>Be Hold, fetching data may take some time</p>);
   }
-  return WithLoading;
-};
 
-withLoading.propTypes = {
-  isLoading: PropTypes.bool
+  WithLoading.propTypes = {
+    isLoading: PropTypes.bool
+  };
+
+  return WithLoading;
 };
 
 
