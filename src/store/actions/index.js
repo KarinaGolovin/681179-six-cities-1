@@ -1,3 +1,5 @@
+import history from '../../history';
+
 export const LOAD_OFFERS = `LOAD_OFFERS`;
 export const UPDATE_OFFER = `UPDATE_OFFER`;
 export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
@@ -52,7 +54,7 @@ export const getOfferList = () => {
     return api.get(`/hotels`).then((response) => {
       dispatch(loadOffers(response.data));
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch});
     });
   };
 };
@@ -62,7 +64,7 @@ export const getFavoriteOfferList = () => {
     return api.get(`/favorite`).then((response) => {
       dispatch(loadFavorites(response.data));
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch});
     });
   };
 };
@@ -72,7 +74,7 @@ export const getComments = (hotelId) => {
     return api.get(`/comments/:${hotelId}`).then((response) => {
       dispatch(loadComments(response.data));
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch});
     });
   };
 };
@@ -83,7 +85,7 @@ export const checkLogin = (() => {
       dispatch(setUser(response.data));
       dispatch(requiredAutorization(false));
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch});
       // dispatch(requiredAutorization(true));
     });
   };
@@ -95,7 +97,7 @@ export const signIn = ({email, password}) => {
       dispatch(setUser(response.data));
       dispatch(requiredAutorization(false));
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch});
       // dispatch(requiredAutorization(true));
       // return err;
     });
@@ -107,7 +109,7 @@ export const toggleFavorite = ({hotelId, status}) => {
     return api.post(`/favorite/${hotelId}/${status}`).then((response) => {
       dispatch(updateOffer(response.data));
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch, shouldRediectToLoginScreen: true});
     });
   };
 };
@@ -118,15 +120,19 @@ export const postComments = ({hotelId}) => {
       // eslint-disable-next-line no-console
       console.log(response);
     }).catch((err) => {
-      handleNetworkError(err, dispatch);
+      handleNetworkError({err, dispatch, shouldRediectToLoginScreen: true});
     });
   };
 };
 
-const handleNetworkError = (err, dispatch) => {
+const handleNetworkError = ({err, dispatch, shouldRediectToLoginScreen = false}) => {
   if (err.response && err.response.status === 403) {
     dispatch(requiredAutorization(true));
+    if (shouldRediectToLoginScreen) {
+      history.push(`/login`);
+    }
   } else if (err.response && err.response.status === 400) {
+    // eslint-disable-next-line no-console
     console.log(err);
   }
 };
