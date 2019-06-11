@@ -102,7 +102,7 @@ export const OfferPage = (offer, comments, nearbyPlaces, submitRating) => {
                         <div className="reviews__rating rating">
                           <div className="reviews__stars rating__stars">
                             <span style={{
-                              width: it.rating / 100 * 5,
+                              width: it.rating * 100 / 5,
                             }}/>
                             <span className="visually-hidden">Rating</span>
                           </div>
