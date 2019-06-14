@@ -11,15 +11,17 @@ export const Rating = ({rating = 0, classes = {}}) => {
         </span>
         <span className="visually-hidden">Rating</span>
       </div>
+      {(classes.value ? <span className={`rating__value ${classes.value}`}>{rating}</span> : null)}
     </div>
   );
 };
 
 const ratingInPercents = (rating, max = 5) => {
-  return rating / max * 100;
+  return Math.floor(rating) / max * 100;
 };
 
 Rating.propTypes = {
   rating: PropTypes.number,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  value: PropTypes.bool
 };

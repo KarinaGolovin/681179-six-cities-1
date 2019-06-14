@@ -1,8 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
+import {ReviewForm} from '../reviews-form/review-form.jsx';
+import {Rating} from '../rating/rating.jsx';
+import {postComments} from '../../store/actions';
 
-export const OfferPage = (offer, comments, nearbyPlaces, submitRating) => {
+export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -26,14 +30,23 @@ export const OfferPage = (offer, comments, nearbyPlaces, submitRating) => {
               <h1 className="property__name">
                 {offer.title}
               </h1>
-              <button className="property__bookmark-button button" type="button" onClick={() => {}}>
+              {/* вынести  bookmark */}
+              <button className="property__bookmark-button button" type="button" onClick={}>
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"/>
                 </svg>
                 <span className="visually-hidden">To bookmarks</span>
               </button>
             </div>
-            <div className="property__rating rating">
+            <Rating
+              rating={offer.rating}
+              classes={{
+                container: `property__rating`,
+                stars: `property__stars`,
+                value: `property__rating-value`
+              }}
+          />
+            {/* <div className="property__rating rating">
               <div className="property__stars rating__stars">
                 <span style={{
                   width: `96 %`,
@@ -41,7 +54,8 @@ export const OfferPage = (offer, comments, nearbyPlaces, submitRating) => {
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="property__rating-value rating__value">{offer.rating}</span>
-            </div>
+            </div> */}
+            {/* Проверка окончаний */}
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
                 {offer.type}
@@ -99,71 +113,32 @@ export const OfferPage = (offer, comments, nearbyPlaces, submitRating) => {
                         <span className="reviews__user-name">{it.user.name}</span>
                       </div>
                       <div className="reviews__info">
-                        <div className="reviews__rating rating">
+                        <Rating
+                          rating={it.rating}
+                          classes={{
+                            container: `reviews__rating`,
+                            stars: `reviews__stars`
+                          }}
+                        />
+                        {/* <div className="reviews__rating rating">
                           <div className="reviews__stars rating__stars">
                             <span style={{
                               width: it.rating * 100 / 5,
                             }}/>
                             <span className="visually-hidden">Rating</span>
                           </div>
-                        </div>
+                        </div> */}
                         <p className="reviews__text">{it.comment}</p>
-                        <time className="reviews__time" dateTime={it.date}>{it.date}</time>
+                        <time className="reviews__time" dateTime={it.date}>{formatDate(it.date, short)}</time>
                         {/* <time className="reviews__time" datetime="2019-04-24">April 2019</time> */}
                       </div>
                     </li>
                   );
                 })}
               </ul>
-              <form className="reviews__form form" action="#" method="post" onSubmit={submitRating}>
-                <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                <div className="reviews__rating-form form__rating">
-                  <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-                  <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-                  <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-                  <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-                  <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-                  <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-                </div>
-                <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"/>
-                <div className="reviews__button-wrapper">
-                  <p className="reviews__help">
-                    To submit review please make sure to set
-                    <span className="reviews__star">rating</span>
-                    and describe your stay with at least
-                    <b className="reviews__text-amount">50 characters</b>.
-                  </p>
-                  <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-                </div>
-              </form>
+              <ReviewForm
+                onSubmitRating={submitRating}
+              />
             </section>
           </div>
         </div>
@@ -182,3 +157,31 @@ export const OfferPage = (offer, comments, nearbyPlaces, submitRating) => {
     </main>
   );
 };
+
+const formatDate = (dateString, format) => {
+  const date = new Date(dateString);
+  const options = {
+    short: {
+      month: 'long',
+      year: 'numeric'
+    },
+  };
+
+  return date.toLocaleDateString('en_US', options[format]);
+};
+
+const mapStateToProps = () => {
+};
+
+const mapDispatchToProps = {
+  submitRating: postComments
+};
+
+Offer.propTypes = {
+
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Offer);

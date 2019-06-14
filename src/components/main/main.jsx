@@ -69,6 +69,7 @@ export const Main = (props) => {
               <Map
                 cityCoords={coordinatesByCity[currentCity]}
                 placesList={currentPlaces}
+                activePin
               />
             ) : null}
           </div>

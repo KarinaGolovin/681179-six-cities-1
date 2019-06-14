@@ -29,12 +29,13 @@ class PlacesList extends PureComponent {
               type={it.type}
               price={it.price}
               previewImage={it.preview_image}
-              link={it.link}
+              // link={it.link}
               rating={it.rating}
               isPremium={it.is_premium}
               isBookmarked={it.is_favorite}
-              onLinkClick={() => {}}
+              // onLinkClick={() => {}}
               onPictureClick={() => {
+                // console.log(it.id);
                 this._handlePictureClick(it);
               }}
               onBookmarkClick={() => {

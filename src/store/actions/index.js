@@ -119,8 +119,10 @@ export const postComments = ({hotelId}) => {
     return api.post(`/comments/:${hotelId}`).then((response) => {
       // eslint-disable-next-line no-console
       console.log(response);
+      // форма очищается
     }).catch((err) => {
       handleNetworkError({err, dispatch, shouldRediectToLoginScreen: true});
+      // на ошибку кнопка submit Form разблокируется, форма очищается, отрисовать ошибку
     });
   };
 };
