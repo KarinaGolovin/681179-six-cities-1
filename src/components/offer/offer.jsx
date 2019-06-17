@@ -11,7 +11,7 @@ const cardClasses = {
   imageWrapper: `near-places__image-wrapper`
 };
 
-export const Offer = ({offer, nearbyPlaces, updateBookmark}) => {
+export const Offer = ({offer, nearbyPlaces, updateBookmark, sendComment}) => {
   if (!offer) {
     return `Loading...`;
   }
@@ -143,6 +143,14 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark}) => {
           </div>
         </section>
       </div>
+      {/*<button className="reviews__submit form__submit button" type="submit" onClick={(evt) => {*/}
+      {/*  evt.preventDefault();*/}
+      {/*  sendComment({*/}
+      {/*    offerId: offer.id,*/}
+      {/*    rating: 4,*/}
+      {/*    comment: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,`*/}
+      {/*  });*/}
+      {/*}}>Submit</button>*/}
     </main>
   );
 };
@@ -158,7 +166,8 @@ const mapStateToProps = (state, {offerId}) => {
 };
 
 const mapDispatchToProps = {
-  updateBookmark: toggleFavorite
+  updateBookmark: toggleFavorite,
+  sendComment: postComments,
 };
 
 Offer.propTypes = {

@@ -1,12 +1,11 @@
 import history from '../../history';
-import {off} from 'leaflet/src/dom/DomEvent';
 
 export const LOAD_OFFERS = `LOAD_OFFERS`;
 export const UPDATE_OFFER = `UPDATE_OFFER`;
 export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
 export const SET_USER_DATA = `SET_USER_DATA`;
 export const LOAD_FAVORITES = `LOAD_FAVORITES`;
-export const LOAD_COMMENTS = `LOAD_COMMENTS`;
+export const RECEIVED_COMMENTS = `RECEIVED_COMMENTS`;
 
 export const loadOffers = (offers) => {
   return {
@@ -22,10 +21,12 @@ export const loadFavorites = (favorites) => {
   };
 };
 
-export const loadComments = (comments) => {
+export const updateComments = (offerId, comments) => {
   return {
-    type: LOAD_COMMENTS,
-    payload: comments
+    type: RECEIVED_COMMENTS,
+    payload: {
+      [offerId]: comments
+    }
   };
 };
 
@@ -73,9 +74,7 @@ export const getFavoriteOfferList = () => {
 export const fetchComments = (offerId) => {
   return (dispatch, getState, api) => {
     return api.get(`/comments/${offerId}`).then((response) => {
-      dispatch(loadComments({
-        [offerId]: response.data
-      }));
+      dispatch(updateComments(offerId, response.data));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
     });
@@ -117,11 +116,12 @@ export const toggleFavorite = ({hotelId, status}) => {
   };
 };
 
-export const postComments = ({hotelId}) => {
+export const postComments = ({offerId, rating, comment}) => {
   return (dispatch, getState, api) => {
-    return api.post(`/comments/${hotelId}`).then((response) => {
+    return api.post(`/comments/${offerId}`, {rating, comment}).then((response) => {
       // eslint-disable-next-line no-console
       console.log(response);
+      dispatch(updateComments(offerId, response.data));
       // форма очищается
     }).catch((err) => {
       handleNetworkError({err, dispatch, shouldRediectToLoginScreen: true});

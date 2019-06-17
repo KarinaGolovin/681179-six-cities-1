@@ -3,7 +3,7 @@ import {
   REQUIRED_AUTHORIZATION,
   SET_USER_DATA,
   LOAD_FAVORITES,
-  LOAD_COMMENTS,
+  RECEIVED_COMMENTS,
   UPDATE_OFFER,
 } from '../actions';
 
@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: updateFavoriteOffers(state.offers, action.payload)
       };
-    case LOAD_COMMENTS:
+    case RECEIVED_COMMENTS:
       return {
         ...state,
         comments: {
