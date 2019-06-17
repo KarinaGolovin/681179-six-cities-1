@@ -34,7 +34,6 @@ it(`Favorites City title link works correctly`, () => {
       <Favorites
         onCityClick={onCityClick}
         favoriteList={mock}
-        onLinkClick={() => {}}
       />
   );
 
@@ -43,17 +42,3 @@ it(`Favorites City title link works correctly`, () => {
   expect(onCityClick).toHaveBeenCalledTimes(1);
 });
 
-it(`Favorites Card title link works correctly`, () => {
-  const onLinkClick = jest.fn();
-  const component = mount(
-      <Favorites
-        onLinkClick={onLinkClick}
-        favoriteList={mock}
-        onCityClick={() => { }}
-      />
-  );
-
-  component.find(`.place-card__name a`).simulate(`click`);
-
-  expect(onLinkClick).toHaveBeenCalledTimes(1);
-});

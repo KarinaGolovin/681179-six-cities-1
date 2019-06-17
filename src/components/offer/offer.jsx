@@ -1,12 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
-import {ReviewForm} from '../reviews-form/review-form.jsx';
 import {Rating} from '../rating/rating.jsx';
-import {postComments} from '../../store/actions';
+import {postComments, toggleFavorite} from '../../store/actions';
+import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
+import Reviews from '../reviews/reviews.jsx';
 
-export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
+const cardClasses = {
+  container: `near-places__card`,
+  imageWrapper: `near-places__image-wrapper`
+};
+
+export const Offer = ({offer, nearbyPlaces, updateBookmark}) => {
+  if (!offer) {
+    return `Loading...`;
+  }
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -15,7 +23,7 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
             {offer.images.map((image) => {
               return (
                 <div className="property__image-wrapper" key={image}>
-                  <img className="property__image" src={image} alt="Photo studio" />
+                  <img className="property__image" src={image} alt="Photo studio"/>
                 </div>
               );
             })}
@@ -30,13 +38,16 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
               <h1 className="property__name">
                 {offer.title}
               </h1>
-              {/* вынести  bookmark */}
-              <button className="property__bookmark-button button" type="button" onClick={}>
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"/>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <BookmarkIcon
+                isBookmarked={offer.is_favorite}
+                onBookmarkClick={() => {
+                  updateBookmark({
+                    hotelId: offer.id,
+                    status: offer.is_favorite ? 0 : 1
+                  });
+                }}
+                bookmarkClass={`property`}
+              />
             </div>
             <Rating
               rating={offer.rating}
@@ -45,17 +56,8 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
                 stars: `property__stars`,
                 value: `property__rating-value`
               }}
-          />
-            {/* <div className="property__rating rating">
-              <div className="property__stars rating__stars">
-                <span style={{
-                  width: `96 %`,
-                }} />
-                <span className="visually-hidden">Rating</span>
-              </div>
-              <span className="property__rating-value rating__value">{offer.rating}</span>
-            </div> */}
-            {/* Проверка окончаний */}
+            />
+            {/* TODO check ending */}
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
                 {offer.type}
@@ -74,10 +76,10 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
             <div className="property__inside">
               <h2 className="property__inside-title">What&apos;s inside</h2>
               <ul className="property__inside-list">
-                {offer.goods.map((it) => {
+                {offer.goods.map((featureName) => {
                   return (
-                    <li className="property__inside-item" key={it}>
-                      {it}
+                    <li className="property__inside-item" key={featureName}>
+                      {featureName}
                     </li>
                   );
                 })}
@@ -87,7 +89,7 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src={offer.host.avatar_url} width="74" height="74" alt="Host avatar" />
+                  <img className="property__avatar user__avatar" src={`/${offer.host.avatar_url}`} width="74" height="74" alt="Host avatar"/>
                 </div>
                 <span className="property__user-name">
                   {offer.host.name}
@@ -100,46 +102,7 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
                 </p>
               </div>
             </div>
-            <section className="property__reviews reviews">
-              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-              <ul className="reviews__list">
-                {comments.map((it) => {
-                  return (
-                    <li className="reviews__item" key={it}>
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src={it.user.avatar_url} width="54" height="54" alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">{it.user.name}</span>
-                      </div>
-                      <div className="reviews__info">
-                        <Rating
-                          rating={it.rating}
-                          classes={{
-                            container: `reviews__rating`,
-                            stars: `reviews__stars`
-                          }}
-                        />
-                        {/* <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{
-                              width: it.rating * 100 / 5,
-                            }}/>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div> */}
-                        <p className="reviews__text">{it.comment}</p>
-                        <time className="reviews__time" dateTime={it.date}>{formatDate(it.date, short)}</time>
-                        {/* <time className="reviews__time" datetime="2019-04-24">April 2019</time> */}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-              <ReviewForm
-                onSubmitRating={submitRating}
-              />
-            </section>
+            <Reviews offerId={offer.id} />
           </div>
         </div>
         <section className="property__map map"/>
@@ -149,7 +112,33 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             {nearbyPlaces.map((it) => {
-              return <PlaceCard key={it} />;
+              return <PlaceCard
+                title={it.title}
+                type={it.type}
+                price={it.price}
+                previewImage={it.preview_image}
+                link={it.link}
+                rating={it.rating}
+                isPremium={it.is_premium}
+                isBookmarked={it.is_favorite}
+                onPictureClick={() => {
+                }}
+                onBookmarkClick={() => {
+                  updateBookmark({
+                    hotelId: it.id,
+                    status: it.is_favorite ? 0 : 1
+                  });
+                }}
+                onPictureMouseEnter={() => {
+                }}
+                onPictureMouseLeave={() => {
+                }}
+                classes={cardClasses}
+                id={it.id}
+                key={it.id}
+                imageWidth={260}
+                imageHeight={200}
+              />;
             })}
           </div>
         </section>
@@ -158,23 +147,18 @@ export const Offer = ({offer, comments, nearbyPlaces, submitRating}) => {
   );
 };
 
-const formatDate = (dateString, format) => {
-  const date = new Date(dateString);
-  const options = {
-    short: {
-      month: 'long',
-      year: 'numeric'
-    },
+const mapStateToProps = (state, {offerId}) => {
+  const offer = state.offers.find((it) => it.id === offerId);
+
+  return {
+    offer,
+    // TODO get random offers
+    nearbyPlaces: state.offers.slice(0, 3)
   };
-
-  return date.toLocaleDateString('en_US', options[format]);
-};
-
-const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = {
-  submitRating: postComments
+  updateBookmark: toggleFavorite
 };
 
 Offer.propTypes = {

@@ -11,6 +11,7 @@ const initialState = {
   currentCity: null,
   offers: [],
   user: {},
+  comments: {},
   isAuthorizationRequired: undefined,
 };
 
@@ -34,7 +35,10 @@ const reducer = (state = initialState, action) => {
     case LOAD_COMMENTS:
       return {
         ...state,
-        comments: action.payload
+        comments: {
+          ...state.comments,
+          ...action.payload
+        }
       };
     case REQUIRED_AUTHORIZATION:
       return {

@@ -11,7 +11,7 @@ export class Favorites extends PureComponent {
     loadFavorites();
   }
   render() {
-    const {favoriteList: list, onCityClick, onLinkClick, onBookmarkClick} = this.props;
+    const {favoriteList: list, onCityClick, onBookmarkClick} = this.props;
 
     return (
       <main className="page__main page__main--favorites">
@@ -33,7 +33,6 @@ export class Favorites extends PureComponent {
                         city={city}
                         cards={cards}
                         key={city}
-                        onLinkClick={onLinkClick}
                         onCityClick={onCityClick}
                         onBookmarkClick={onBookmarkClick}
                       />;
@@ -51,7 +50,6 @@ export class Favorites extends PureComponent {
 Favorites.propTypes = {
   favoriteList: PropTypes.array,
   onCityClick: PropTypes.func,
-  onLinkClick: PropTypes.func,
   onBookmarkClick: PropTypes.func,
   loadFavorites: PropTypes.func
 };
@@ -62,7 +60,7 @@ const cardClasses = {
   cardInfo: `favorites__card-info`
 };
 
-const FavoriteLocation = ({city, cards, onCityClick, onLinkClick, onBookmarkClick}) => {
+const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
   return (
     <>
       <li className="favorites__locations-items">
@@ -81,11 +79,9 @@ const FavoriteLocation = ({city, cards, onCityClick, onLinkClick, onBookmarkClic
                 type={it.type}
                 price={it.price}
                 previewImage={it.preview_image}
-                link={it.link}
                 rating={it.rating}
                 isPremium={it.is_premium}
                 isBookmarked={it.is_favorite}
-                onLinkClick={onLinkClick}
                 onPictureClick={() => {}}
                 onBookmarkClick={() => {
                   onBookmarkClick({
@@ -113,7 +109,6 @@ FavoriteLocation.propTypes = {
   cards: PropTypes.array,
   city: PropTypes.string,
   onCityClick: PropTypes.func,
-  onLinkClick: PropTypes.func,
   onBookmarkClick: PropTypes.func
 };
 

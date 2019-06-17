@@ -11,7 +11,10 @@ export default function ReviewForm(props) {
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => {
       evt.preventDefault();
-      props.onSubmitRating(evt);
+      props.onSubmitRating({
+        rating: evt.input.value,
+        comment: evt.textarea.value,
+      });
     }}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -53,9 +56,10 @@ export default function ReviewForm(props) {
           To submit review please make sure to set
           <span className="reviews__star">rating</span>
           and describe your stay with at least
+          {' '}
           <b className="reviews__text-amount">{formParams.minLength} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled="disabled">Submit</button>
       </div>
     </form>
   );

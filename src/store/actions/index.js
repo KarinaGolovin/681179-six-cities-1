@@ -1,4 +1,5 @@
 import history from '../../history';
+import {off} from 'leaflet/src/dom/DomEvent';
 
 export const LOAD_OFFERS = `LOAD_OFFERS`;
 export const UPDATE_OFFER = `UPDATE_OFFER`;
@@ -69,10 +70,12 @@ export const getFavoriteOfferList = () => {
   };
 };
 
-export const getComments = (hotelId) => {
+export const fetchComments = (offerId) => {
   return (dispatch, getState, api) => {
-    return api.get(`/comments/:${hotelId}`).then((response) => {
-      dispatch(loadComments(response.data));
+    return api.get(`/comments/${offerId}`).then((response) => {
+      dispatch(loadComments({
+        [offerId]: response.data
+      }));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
     });
@@ -116,7 +119,7 @@ export const toggleFavorite = ({hotelId, status}) => {
 
 export const postComments = ({hotelId}) => {
   return (dispatch, getState, api) => {
-    return api.post(`/comments/:${hotelId}`).then((response) => {
+    return api.post(`/comments/${hotelId}`).then((response) => {
       // eslint-disable-next-line no-console
       console.log(response);
       // форма очищается

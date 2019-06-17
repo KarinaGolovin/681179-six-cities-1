@@ -5,21 +5,6 @@ import PlaceCard from './place-card.jsx';
 
 configure({adapter: new Adapter()});
 
-it(`PlaceCard title link works correctly`, () => {
-  const onLinkClick = jest.fn();
-  const component = shallow(
-      <PlaceCard
-        title={`Some text`}
-        previewImage={`http://placehold.it/134x134`}
-        onLinkClick={onLinkClick}
-      />
-  );
-
-  component.find(`.place-card__name a`).simulate(`click`);
-
-  expect(onLinkClick).toHaveBeenCalledTimes(1);
-});
-
 it(`PlaceCard picture click works`, () => {
   const onPictureClick = jest.fn();
   const component = shallow(

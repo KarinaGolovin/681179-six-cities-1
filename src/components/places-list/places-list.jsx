@@ -33,7 +33,6 @@ class PlacesList extends PureComponent {
               rating={it.rating}
               isPremium={it.is_premium}
               isBookmarked={it.is_favorite}
-              // onLinkClick={() => {}}
               onPictureClick={() => {
                 // console.log(it.id);
                 this._handlePictureClick(it);

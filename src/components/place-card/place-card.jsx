@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {Rating} from '../rating/rating.jsx';
+import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
 
 const PlaceCard = (props) => {
   const {
@@ -9,20 +10,20 @@ const PlaceCard = (props) => {
     type,
     price,
     previewImage,
-    // link,
     isBookmarked,
     isPremium,
     rating,
     onPictureClick,
     onPictureMouseEnter,
     onPictureMouseLeave,
-    // onLinkClick,
     onBookmarkClick,
     classes = {
       container: ``,
       imageWrapper: ``,
-      cardInfo: ``
+      cardInfo: ``,
+      bookmark: ``,
     },
+    bookmarkSize,
     imageWidth = 260,
     imageHeight = 200,
     id
@@ -47,13 +48,12 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {/* вынести  bookmark */}
-          <button onClick={onBookmarkClick} className={`place-card__bookmark-button ${isBookmarked ? `place-card__bookmark-button--active` : ``} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">{isBookmarked ? `In bookmarks` : `To bookmarks`}</span>
-          </button>
+          <BookmarkIcon
+            isBookmarked={isBookmarked}
+            onBookmarkClick={onBookmarkClick}
+            bookmarkClass={classes.bookmark}
+            sizeKey={bookmarkSize}
+          />
         </div>
         <Rating
           rating={rating}
@@ -62,8 +62,9 @@ const PlaceCard = (props) => {
             stars: `place-card__stars`
           }} />
         <h2 className="place-card__name">
-          {/* <a href={link} onClick={onLinkClick}>{title}</a> */}
-          <Link to={`/offer/${id}`}>
+          <Link to={`/offer/${id}`} onClick={() => {
+            return {id};
+          }}>
             {title}
           </Link>
         </h2>
@@ -78,12 +79,10 @@ PlaceCard.propTypes = {
   type: PropTypes.string,
   price: PropTypes.number,
   previewImage: PropTypes.string,
-  // link: PropTypes.string,
   rating: PropTypes.number,
   isPremium: PropTypes.bool,
   isBookmarked: PropTypes.bool,
   onPictureClick: PropTypes.func,
-  // onLinkClick: PropTypes.func,
   onPictureMouseEnter: PropTypes.func,
   onPictureMouseLeave: PropTypes.func,
   onBookmarkClick: PropTypes.func,
@@ -91,6 +90,7 @@ PlaceCard.propTypes = {
   classes: PropTypes.object,
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
+  bookmarkSize: PropTypes.oneOf([`big`, `small`])
 };
 
 export default PlaceCard;
