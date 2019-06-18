@@ -5,7 +5,6 @@ import PageTemplate from '../page-template/page-template.jsx';
 
 export default function OfferScreen(props) {
   const offerId = Number(props.match.params.offerId);
-
   return (
     <PageTemplate>
       <Offer offerId={offerId} />

@@ -64,6 +64,6 @@ it(`ReviewForm on submit with data works correctly`, () => {
   expect(onSubmitClick).toHaveBeenCalledTimes(1);
   expect(onSubmitClick).toHaveBeenCalledWith({
     rating: 5,
-    comment: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
+    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
   });
 });

@@ -1,5 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
+
+const FormReviewParams = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 300,
+};
+
+const formValidators = {
+  review: (value) => value.length >= FormReviewParams.MIN_LENGTH && value.length <= FormReviewParams.MAX_LENGTH,
+  rating: (value) => value > 0
+};
 
 export class ReviewForm extends Component {
   constructor(props) {
@@ -7,124 +17,93 @@ export class ReviewForm extends Component {
 
     this.state = {
       rating: null,
-      comment: null,
-      valid: false
+      review: ``,
+      isValid: false
     };
 
-    this.handleInputStarChange = this.handleInputStarChange.bind(this);
-    this.handleCommentChange = this.handleCommentChange.bind(this);
-    this.handleValidity = this.handleValidity.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleFormChange = this._handleFormChange.bind(this);
   }
 
-  componentDidMount() {
-
+  componentDidUpdate() {
+    this._validateForm();
   }
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this.handleValidity();
+
+  _validateForm() {
+    const isValid = Object.keys(formValidators).every((name) => {
+      if (!formValidators[name]) {
+        return true;
+      }
+
+      return formValidators[name](this.state[name]);
+    });
+
+    if (this.state.isValid !== isValid) {
+      this.setState({
+        isValid
+      });
     }
   }
-  componentWillUnmount() {
 
-  }
-
-  handleInputStarChange({target: {value}}) {
-    this.setState({
-      ...this.state,
-      rating: value
-    });
-    console.log(value);
-  }
-
-  handleCommentChange({target: {value}}) {
-    this.setState({
-      ...this.state,
-      comment: value,
-    });
-    console.log(value);
-  }
-
-  handleValidity() {
-    console.log(this.state.valid);
-
-    // if (this.state.rating && (this.state.comment.length >= 50 && this.state.comment.length < 300)) {
-    //   this.setState({
-    //     ...this.state,
-    //     valid: true,
-    //   });
-    // }
-  }
-
-  handleFormSubmit() {
+  _handleFormSubmit() {
     this.props.onSubmitRating({
       offerId: this.props.offerId,
       rating: this.state.rating,
-      comment: this.state.comment,
+      review: this.state.review,
     });
 
+    this._resetForm();
+  }
+
+  _handleFormChange(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    });
+  }
+
+  _resetForm() {
     this.setState({
       rating: ``,
-      comment: ``,
-      valid: false
+      review: ``,
+      isValid: false
     });
   }
 
   render() {
-    const formParams = {
-      minLength: 50,
-      maxLength: 300,
-    };
-
     return (
-      <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => {
+      <form className="reviews__form form" action="#" method="post" onChange={this._handleFormChange} onSubmit={(evt) => {
         evt.preventDefault();
-        this.handleFormSubmit();
+        this._handleFormSubmit();
       }}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          <input onChange={this.handleInputStarChange} className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-          <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-            <svg className="form__star-image" width="37" height="33">
-              <use xlinkHref="#icon-star"/>
-            </svg>
-          </label>
-          <input onChange={this.handleInputStarChange} className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-          <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-            <svg className="form__star-image" width="37" height="33">
-              <use xlinkHref="#icon-star"/>
-            </svg>
-          </label>
-          <input onChange={this.handleInputStarChange} className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-          <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-            <svg className="form__star-image" width="37" height="33">
-              <use xlinkHref="#icon-star"/>
-            </svg>
-          </label>
-          <input onChange={this.handleInputStarChange} className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-          <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-            <svg className="form__star-image" width="37" height="33">
-              <use xlinkHref="#icon-star"/>
-            </svg>
-          </label>
-          <input onChange={this.handleInputStarChange} className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-          <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-            <svg className="form__star-image" width="37" height="33">
-              <use xlinkHref="#icon-star"/>
-            </svg>
-          </label>
+          {
+            [`perfect`, `good`, `not bad`, `badly`, `terribly`].map((title, index, arr) => {
+              const star = arr.length - index;
+              return (
+                <Fragment key={star}>
+                  <input className="form__rating-input visually-hidden" name="rating" value={star} id={`${star}-stars`} type="radio" />
+                  <label htmlFor={`${star}-stars`} className="reviews__rating-label form__rating-label" title={title}>
+                    <svg className="form__star-image" width="37" height="33">
+                      <use xlinkHref="#icon-star"/>
+                    </svg>
+                  </label>
+                </Fragment>
+              );
+            })
+          }
         </div>
-        <textarea onChange={this.handleCommentChange} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" minLength={formParams.minLength} maxLength={formParams.maxLength} required/>
+        <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" minLength={FormReviewParams.MIN_LENGTH} maxLength={FormReviewParams.MAX_LENGTH} required/>
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set
             <span className="reviews__star">rating</span>
             and describe your stay with at least
-            {' '}
-            <b className="reviews__text-amount">{formParams.minLength} characters</b>.
+            {` `}
+            <b className="reviews__text-amount">{FormReviewParams.MIN_LENGTH} characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled={!this.state.valid ? `disabled` : null}>Submit</button>
+          <button className="reviews__submit form__submit button" type="submit" disabled={!this.state.isValid}>Submit</button>
         </div>
       </form>
     );

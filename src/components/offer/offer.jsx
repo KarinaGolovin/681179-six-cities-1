@@ -14,7 +14,7 @@ const cardClasses = {
   imageWrapper: `near-places__image-wrapper`
 };
 
-export const Offer = ({offer, nearbyPlaces, updateBookmark, coordinatesByCity}) => {
+export const Offer = ({offer, nearbyPlaces, updateBookmark}) => {
   if (!offer) {
     return `Loading...`;
   }
@@ -109,7 +109,6 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, coordinatesByCity}) 
             <Reviews offerId={offer.id} />
           </div>
         </div>
-        {/*<section className="property__map map"/>*/}
         <Map
           mapClass={`property__map`}
           cityCoords={[offer.city.location.latitude, offer.city.location.longitude]}
@@ -127,7 +126,7 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, coordinatesByCity}) 
                 type={it.type}
                 price={it.price}
                 previewImage={it.preview_image}
-                link={it.link}
+                // link={it.link}
                 rating={it.rating}
                 isPremium={it.is_premium}
                 isBookmarked={it.is_favorite}
@@ -180,7 +179,6 @@ const mapDispatchToProps = {
 };
 
 Offer.propTypes = {
-  // coordinatesByCity: PropTypes.object,
   updateBookmark: PropTypes.func,
   offer: PropTypes.object,
   nearbyPlaces: PropTypes.array,

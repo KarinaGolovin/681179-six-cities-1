@@ -7,7 +7,7 @@ const mock = {
   comments: {
     id: 2,
     ration: 2,
-    comment: ``,
+    review: ``,
     date: ``,
     user: {
       id: 3,

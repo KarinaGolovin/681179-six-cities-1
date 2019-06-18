@@ -7,6 +7,7 @@ import {fetchComments, postComments} from '../../store/actions';
 import {getAuthorizationStatus} from '../../store/reducers';
 import {formatDate} from '../../utils';
 
+// TODO
 // .sort(function (a, b) {
 //   return new Date(b.date) - new Date(a.date);
 // }).slice(0, 10)s
@@ -44,7 +45,7 @@ export class Reviews extends Component {
                   stars: `reviews__stars`,
                 }}
               />
-              <p className="reviews__text">{it.comment}</p>
+              <p className="reviews__text">{it.review}</p>
               <time className="reviews__time" dateTime={it.date}>{formatDate(it.date)}</time>
             </div>
           </li>
@@ -63,7 +64,7 @@ Reviews.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     ration: PropTypes.number,
-    comment: PropTypes.string,
+    review: PropTypes.string,
     date: PropTypes.string,
     user: PropTypes.shape({
       id: PropTypes.number,

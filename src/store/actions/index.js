@@ -116,9 +116,9 @@ export const toggleFavorite = ({hotelId, status}) => {
   };
 };
 
-export const postComments = ({offerId, rating, comment}) => {
+export const postComments = ({offerId, rating, review}) => {
   return (dispatch, getState, api) => {
-    return api.post(`/comments/${offerId}`, {rating, comment}).then((response) => {
+    return api.post(`/comments/${offerId}`, {rating, comment: review}).then((response) => {
       // eslint-disable-next-line no-console
       console.log(response);
       dispatch(updateComments(offerId, response.data));
