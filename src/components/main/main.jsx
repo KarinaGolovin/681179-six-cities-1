@@ -67,6 +67,7 @@ export const Main = (props) => {
           <div className="cities__right-section">
             {coordinatesByCity[currentCity] ? (
               <Map
+                mapClass={`cities__map`}
                 cityCoords={coordinatesByCity[currentCity]}
                 placesList={currentPlaces}
                 activePin

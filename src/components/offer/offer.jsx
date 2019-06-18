@@ -1,18 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import PlaceCard from '../place-card/place-card.jsx';
 import {Rating} from '../rating/rating.jsx';
-import {postComments, toggleFavorite} from '../../store/actions';
+import {toggleFavorite} from '../../store/actions';
 import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
 import Reviews from '../reviews/reviews.jsx';
-import {utils} from '../../utils';
+import Map from '../map/map.jsx';
+import {getCityOffers} from '../../store/reducers';
 
 const cardClasses = {
   container: `near-places__card`,
   imageWrapper: `near-places__image-wrapper`
 };
 
-export const Offer = ({offer, nearbyPlaces, updateBookmark, sendComment}) => {
+export const Offer = ({offer, nearbyPlaces, updateBookmark, coordinatesByCity}) => {
   if (!offer) {
     return `Loading...`;
   }
@@ -107,7 +109,13 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, sendComment}) => {
             <Reviews offerId={offer.id} />
           </div>
         </div>
-        <section className="property__map map"/>
+        {/*<section className="property__map map"/>*/}
+        <Map
+          mapClass={`property__map`}
+          cityCoords={[offer.city.location.latitude, offer.city.location.longitude]}
+          placesList={nearbyPlaces}
+          activePin
+        />
       </section>
       <div className="container">
         <section className="near-places places">
@@ -145,34 +153,37 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, sendComment}) => {
           </div>
         </section>
       </div>
-      {/*<button className="reviews__submit form__submit button" type="submit" onClick={(evt) => {*/}
-      {/*  evt.preventDefault();*/}
-      {/*  sendComment({*/}
-      {/*    offerId: offer.id,*/}
-      {/*    rating: 4,*/}
-      {/*    comment: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,`*/}
-      {/*  });*/}
-      {/*}}>Submit</button>*/}
     </main>
   );
 };
+
+const getCityFromOffer = (offer) => {
+  if (!offer) {
+    return null;
+  }
+
+  return offer.city.name;
+}
 
 const mapStateToProps = (state, {offerId}) => {
   const offer = state.offers.find((it) => it.id === offerId);
 
   return {
     offer,
-    // TODO get random offers
-    nearbyPlaces: state.offers.slice(0, 3)
+    // TODO add offer pin on map
+    nearbyPlaces: getCityOffers(getCityFromOffer(offer), state.offers).slice(0, 3),
   };
 };
 
 const mapDispatchToProps = {
   updateBookmark: toggleFavorite,
-  // sendComment: postComments,
 };
 
 Offer.propTypes = {
+  // coordinatesByCity: PropTypes.object,
+  updateBookmark: PropTypes.func,
+  offer: PropTypes.object,
+  nearbyPlaces: PropTypes.array,
 
 };
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Rating} from '../rating/rating.jsx';
-import ReviewForm from '../review-form/review-form.jsx';
+import {ReviewForm} from '../review-form/review-form.jsx';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchComments, postComments} from '../../store/actions';
