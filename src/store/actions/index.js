@@ -30,7 +30,7 @@ export const updateComments = (offerId, comments) => {
   };
 };
 
-export const requiredAutorization = (status) => {
+export const requiredAuthorization = (status) => {
   return {
     type: REQUIRED_AUTHORIZATION,
     payload: status,
@@ -85,10 +85,10 @@ export const checkLogin = (() => {
   return (dispatch, getState, api) => {
     return api.get(`/login`).then((response) => {
       dispatch(setUser(response.data));
-      dispatch(requiredAutorization(false));
+      dispatch(requiredAuthorization(false));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
-      // dispatch(requiredAutorization(true));
+      // dispatch(requiredAuthorization(true));
     });
   };
 });
@@ -97,10 +97,10 @@ export const signIn = ({email, password}) => {
   return (dispatch, getState, api) => {
     return api.post(`/login`, {email, password}).then((response) => {
       dispatch(setUser(response.data));
-      dispatch(requiredAutorization(false));
+      dispatch(requiredAuthorization(false));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
-      // dispatch(requiredAutorization(true));
+      // dispatch(requiredAuthorization(true));
       // return err;
     });
   };
@@ -111,7 +111,7 @@ export const toggleFavorite = ({hotelId, status}) => {
     return api.post(`/favorite/${hotelId}/${status}`).then((response) => {
       dispatch(updateOffer(response.data));
     }).catch((err) => {
-      handleNetworkError({err, dispatch, shouldRediectToLoginScreen: true});
+      handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
     });
   };
 };
@@ -124,16 +124,16 @@ export const postComments = ({offerId, rating, comment}) => {
       dispatch(updateComments(offerId, response.data));
       // форма очищается
     }).catch((err) => {
-      handleNetworkError({err, dispatch, shouldRediectToLoginScreen: true});
+      handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
       // на ошибку кнопка submit Form разблокируется, форма очищается, отрисовать ошибку
     });
   };
 };
 
-const handleNetworkError = ({err, dispatch, shouldRediectToLoginScreen = false}) => {
+const handleNetworkError = ({err, dispatch, shouldRedirectToLoginScreen = false}) => {
   if (err.response && err.response.status === 403) {
-    dispatch(requiredAutorization(true));
-    if (shouldRediectToLoginScreen) {
+    dispatch(requiredAuthorization(true));
+    if (shouldRedirectToLoginScreen) {
       history.push(`/login`);
     }
   } else if (err.response && err.response.status === 400) {

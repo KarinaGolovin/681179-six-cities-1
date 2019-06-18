@@ -3,22 +3,13 @@ import {Rating} from '../rating/rating.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchComments} from '../../store/actions';
+import {fetchComments, postComments} from '../../store/actions';
+import {getAuthorizationStatus} from '../../store/reducers';
+import {formatDate} from '../../utils';
 
 // .sort(function (a, b) {
 //   return new Date(b.date) - new Date(a.date);
-// }).slice(0, 10)
-
-// TODO move to utility
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const options = {
-    month: `long`,
-    year: `numeric`,
-  };
-
-  return date.toLocaleDateString(`en-GB`, options);
-};
+// }).slice(0, 10)s
 
 export class Reviews extends Component {
   componentDidMount() {
@@ -31,7 +22,7 @@ export class Reviews extends Component {
   }
 
   render() {
-    const {comments = []} = this.props;
+    const {comments = [], isAuthorizationRequired, sendComment} = this.props;
 
     return <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
@@ -59,9 +50,10 @@ export class Reviews extends Component {
           </li>
         ))}
       </ul>
-      <ReviewForm
-        onSubmitRating={this.props.onSubmitRating}
-      />
+      {!isAuthorizationRequired ? <ReviewForm
+        offerId={this.props.offerId}
+        onSubmitRating={sendComment}
+      /> : null}
     </section>;
   }
 }
@@ -82,11 +74,14 @@ Reviews.propTypes = {
   })),
   onSubmitRating: PropTypes.func,
   loadComments: PropTypes.func,
+  isAuthorizationRequired: PropTypes.bool,
+  sendComment: PropTypes.func,
 };
 
 
 const mapStateToProps = (state, {offerId}) => {
   return {
+    isAuthorizationRequired: getAuthorizationStatus(state),
     offerId,
     comments: state.comments[offerId]
   };
@@ -94,7 +89,8 @@ const mapStateToProps = (state, {offerId}) => {
 
 
 const mapDispatchToProps = {
-  loadComments: fetchComments
+  loadComments: fetchComments,
+  sendComment: postComments,
 };
 
 export default connect(

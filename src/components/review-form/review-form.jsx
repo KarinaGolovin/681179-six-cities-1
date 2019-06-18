@@ -12,6 +12,7 @@ export default function ReviewForm(props) {
     <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => {
       evt.preventDefault();
       props.onSubmitRating({
+        offerId: props.offerId,
         rating: evt.input.value,
         comment: evt.textarea.value,
       });
@@ -66,5 +67,6 @@ export default function ReviewForm(props) {
 }
 
 ReviewForm.propTypes = {
+  offerId: PropTypes.number,
   onSubmitRating: PropTypes.func,
 };

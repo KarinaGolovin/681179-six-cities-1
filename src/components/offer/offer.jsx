@@ -5,6 +5,7 @@ import {Rating} from '../rating/rating.jsx';
 import {postComments, toggleFavorite} from '../../store/actions';
 import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
 import Reviews from '../reviews/reviews.jsx';
+import {utils} from '../../utils';
 
 const cardClasses = {
   container: `near-places__card`,
@@ -47,6 +48,7 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, sendComment}) => {
                   });
                 }}
                 bookmarkClass={`property`}
+                sizeKey={`big`}
               />
             </div>
             <Rating
@@ -167,7 +169,7 @@ const mapStateToProps = (state, {offerId}) => {
 
 const mapDispatchToProps = {
   updateBookmark: toggleFavorite,
-  sendComment: postComments,
+  // sendComment: postComments,
 };
 
 Offer.propTypes = {
