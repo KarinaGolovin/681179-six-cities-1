@@ -2,11 +2,6 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
-const cardClasses = {
-  container: `cities__place-card`,
-  imageWrapper: `cities__image-wrapper`
-};
-
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
@@ -18,10 +13,10 @@ class PlacesList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, cardProps, classes} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`places__list ${classes.container || ``}`}>
         {
           offers.map((it) => {
             return <PlaceCard
@@ -29,12 +24,10 @@ class PlacesList extends PureComponent {
               type={it.type}
               price={it.price}
               previewImage={it.preview_image}
-              // link={it.link}
               rating={it.rating}
               isPremium={it.is_premium}
               isBookmarked={it.is_favorite}
               onPictureClick={() => {
-                // console.log(it.id);
                 this._handlePictureClick(it);
               }}
               onBookmarkClick={() => {
@@ -46,9 +39,9 @@ class PlacesList extends PureComponent {
               onPictureMouseLeave={() => {
                 this._onPictureMouseLeave(it);
               }}
-              classes = {cardClasses}
               id={it.id}
               key={it.id}
+              {...cardProps}
             />;
           })
         }
@@ -85,6 +78,10 @@ PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object),
   onActiveItemChange: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func,
+  cardProps: PropTypes.object,
+  classes: PropTypes.shape({
+    container: PropTypes.string
+  })
 };
 
 export default PlacesList;

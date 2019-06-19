@@ -13,7 +13,6 @@ const PlaceCard = (props) => {
     isBookmarked,
     isPremium,
     rating,
-    onPictureClick,
     onPictureMouseEnter,
     onPictureMouseLeave,
     onBookmarkClick,
@@ -30,8 +29,14 @@ const PlaceCard = (props) => {
   } = props;
 
   return (
-    // TODO orange pin on mouseenter
-    <article className={`place-card ${classes.container || ``}`} onMouseEnter={onPictureMouseEnter} onMouseLeave={onPictureMouseLeave} id={id}>
+    <article
+      className={`place-card ${classes.container || ``}`}
+      onFocus={onPictureMouseEnter}
+      onBlur={onPictureMouseLeave}
+      onMouseEnter={onPictureMouseEnter}
+      onMouseLeave={onPictureMouseLeave}
+      id={id}
+    >
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -40,7 +45,7 @@ const PlaceCard = (props) => {
 
       <div className={`place-card__image-wrapper ${classes.imageWrapper || ``}`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" width={imageWidth} height={imageHeight} alt="Place image" src={previewImage}/>
+          <img className="place-card__image" width={imageWidth} height={imageHeight} alt="Place image" src={previewImage} />
         </Link>
       </div>
       <div className={`place-card__info ${classes.cardInfo || ``}`}>

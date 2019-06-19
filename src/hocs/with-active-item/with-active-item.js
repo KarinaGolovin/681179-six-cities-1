@@ -17,7 +17,6 @@ const withActiveItem = (Component) => {
         {...this.props}
         activeItem={this.state.activeItem}
         onActiveItemChange={this._handleActiveItem}
-        setActiveOnLoad={this._handleActiveItem}
       />;
     }
 

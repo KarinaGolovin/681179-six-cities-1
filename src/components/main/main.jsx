@@ -10,10 +10,19 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import {withOffersSorting} from '../../hocs/with-offer-sorting/with-offer-sorting';
 import {compose} from 'recompose';
 
-const PlacesListWrapped = withActiveItem(PlacesList);
+const placesListClasses = {
+  container: `cities__places-list tabs__content`
+};
+// :/
+const placeCardProps = {
+  classes: {
+    container: `cities__place-card`,
+    imageWrapper: `cities__image-wrapper`
+  }
+};
 
 export const Main = (props) => {
-  const {coordinatesByCity, currentPlaces, currentCity, updateBookmark, onSortTypeChange} = props;
+  const {coordinatesByCity, currentPlaces, currentCity, updateBookmark, onSortTypeChange, onActiveItemChange, activeItem} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -59,9 +68,12 @@ export const Main = (props) => {
                 </form>
               </>
             ) : null}
-            <PlacesListWrapped
+            <PlacesList
+              classes={placesListClasses}
+              cardProps={placeCardProps}
               offers={currentPlaces}
               onBookmarkClick={updateBookmark}
+              onActiveItemChange={onActiveItemChange}
             />
           </section>
           <div className="cities__right-section">
@@ -70,7 +82,7 @@ export const Main = (props) => {
                 mapClass={`cities__map`}
                 cityCoords={coordinatesByCity[currentCity]}
                 placesList={currentPlaces}
-                activePin
+                activePlaceId={activeItem ? activeItem.id : null}
               />
             ) : null}
           </div>
@@ -101,6 +113,8 @@ Main.propTypes = {
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateBookmark: PropTypes.func,
   onSortTypeChange: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func,
+  activeItem: PropTypes.object
 };
 
 export default compose(
@@ -108,5 +122,6 @@ export default compose(
         mapStateToProps,
         mapDispatchToProps
     ),
-    withOffersSorting
+    withOffersSorting,
+    withActiveItem
 )(Main);

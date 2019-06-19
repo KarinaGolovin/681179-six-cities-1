@@ -11,6 +11,7 @@ class Map extends PureComponent {
     this._mapInstance = null;
     this._mapIcon = null;
     this._markers = [];
+    this._currentActiveMarker = null;
   }
 
   render() {
@@ -34,12 +35,19 @@ class Map extends PureComponent {
     });
 
     this._mapIcon = L.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconUrl: `/img/pin.svg`,
+      iconSize: [27, 39]
+    });
+
+    this._mapIconActive = L.icon({
+      iconUrl: `/img/pin-active.svg`,
+      iconSize: [27, 39]
     });
 
     this._mapInstance.setView(this.props.cityCoords, this.mapZoom);
     this._addMarkers(this.props.placesList);
+
+    this._updateActiveMarker();
   }
 
   componentDidUpdate(prevProps) {
@@ -53,6 +61,24 @@ class Map extends PureComponent {
       this._removeMarkers(pinDiff.remove);
       this._addMarkers(pinDiff.add);
     }
+
+    if (this.props.activePlaceId !== prevProps.activePlaceId) {
+      this._updateActiveMarker();
+    }
+  }
+
+  _updateActiveMarker() {
+    const activeMarker = this._markers.find(({id}) => id === this.props.activePlaceId);
+
+    if (this._currentActiveMarker) {
+      this._currentActiveMarker.marker.setIcon(this._mapIcon);
+      this._currentActiveMarker = null;
+    }
+
+    if (!this._currentActiveMarker && activeMarker) {
+      activeMarker.marker.setIcon(this._mapIconActive);
+      this._currentActiveMarker = activeMarker;
+    }
   }
 
   _addMarkers(placesList) {
@@ -63,7 +89,7 @@ class Map extends PureComponent {
           .marker({
             lat: place.location.latitude,
             lng: place.location.longitude
-          }, {mapIcon: this._mapIcon})
+          }, {icon: this._mapIcon})
           .addTo(this._mapInstance)
       };
     });
@@ -131,6 +157,7 @@ Map.propTypes = {
     id: PropTypes.number.isRequired,
     coordinates: PropTypes.array,
   })).isRequired,
+  activePlaceId: PropTypes.number
 };
 
 export default Map;
