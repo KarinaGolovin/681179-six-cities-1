@@ -12,4 +12,17 @@ export const formatDate = (dateString) => {
   return date.toLocaleDateString(`en-GB`, options);
 };
 
-// TODO word ending check
+export const shuffleArray = (array) => {
+  const newArray = array.slice();
+  for (let i = newArray.length - 1; i > 0; i--) {
+    let number = Math.floor(Math.random() * (i + 1));
+    let firstNumber = newArray[number];
+    newArray[number] = newArray[i];
+    newArray[i] = firstNumber;
+  }
+  return newArray;
+};
+
+// TODO pluralization
+
+// TODO toCamelCase

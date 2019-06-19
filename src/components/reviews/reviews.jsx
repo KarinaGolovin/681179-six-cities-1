@@ -7,11 +7,6 @@ import {fetchComments, postComments} from '../../store/actions';
 import {getAuthorizationStatus} from '../../store/reducers';
 import {formatDate} from '../../utils';
 
-// TODO
-// .sort(function (a, b) {
-//   return new Date(b.date) - new Date(a.date);
-// }).slice(0, 10)s
-
 export class Reviews extends Component {
   componentDidMount() {
     this.props.loadComments(this.props.offerId);
@@ -45,7 +40,7 @@ export class Reviews extends Component {
                   stars: `reviews__stars`,
                 }}
               />
-              <p className="reviews__text">{it.review}</p>
+              <p className="reviews__text">{it.comment}</p>
               <time className="reviews__time" dateTime={it.date}>{formatDate(it.date)}</time>
             </div>
           </li>
@@ -58,6 +53,16 @@ export class Reviews extends Component {
     </section>;
   }
 }
+
+const getSortedByDate = (reviewList) => {
+  if (!reviewList || !reviewList.length) {
+    return;
+  }
+
+  return reviewList.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  }).slice(0, 10);
+};
 
 Reviews.propTypes = {
   offerId: PropTypes.number,
@@ -84,7 +89,7 @@ const mapStateToProps = (state, {offerId}) => {
   return {
     isAuthorizationRequired: getAuthorizationStatus(state),
     offerId,
-    comments: state.comments[offerId]
+    comments: getSortedByDate(state.comments[offerId]),
   };
 };
 

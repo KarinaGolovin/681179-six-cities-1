@@ -45,14 +45,14 @@ export class ReviewForm extends Component {
     }
   }
 
-  _handleFormSubmit() {
+  _handleFormSubmit(evt) {
     this.props.onSubmitRating({
       offerId: this.props.offerId,
       rating: this.state.rating,
       review: this.state.review,
     });
 
-    this._resetForm();
+    this._resetForm(evt);
   }
 
   _handleFormChange(evt) {
@@ -62,6 +62,7 @@ export class ReviewForm extends Component {
   }
 
   _resetForm() {
+    this.myFormRef.reset();
     this.setState({
       rating: ``,
       review: ``,
@@ -71,9 +72,9 @@ export class ReviewForm extends Component {
 
   render() {
     return (
-      <form className="reviews__form form" action="#" method="post" onChange={this._handleFormChange} onSubmit={(evt) => {
+      <form className="reviews__form form" action="#" method="post" ref={(el) => this.myFormRef = el} onChange={this._handleFormChange} onSubmit={(evt) => {
         evt.preventDefault();
-        this._handleFormSubmit();
+        this._handleFormSubmit(evt);
       }}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>

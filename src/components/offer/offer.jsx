@@ -8,6 +8,7 @@ import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
 import Reviews from '../reviews/reviews.jsx';
 import Map from '../map/map.jsx';
 import {getCityOffers} from '../../store/reducers';
+import {shuffleArray} from '../../utils';
 
 const cardClasses = {
   container: `near-places__card`,
@@ -120,13 +121,12 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark}) => {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {nearbyPlaces.map((it) => {
+            {(nearbyPlaces).map((it) => {
               return <PlaceCard
                 title={it.title}
                 type={it.type}
                 price={it.price}
                 previewImage={it.preview_image}
-                // link={it.link}
                 rating={it.rating}
                 isPremium={it.is_premium}
                 isBookmarked={it.is_favorite}
@@ -169,8 +169,8 @@ const mapStateToProps = (state, {offerId}) => {
 
   return {
     offer,
-    // TODO add offer pin on map
-    nearbyPlaces: getCityOffers(getCityFromOffer(offer), state.offers).slice(0, 3),
+    // TODO add offer pin on map, orange
+    nearbyPlaces: shuffleArray(getCityOffers(getCityFromOffer(offer), state.offers)).slice(0, 3),
   };
 };
 
