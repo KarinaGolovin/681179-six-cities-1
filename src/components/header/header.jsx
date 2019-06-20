@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {PAGE_URL} from '../../api';
+import {UserInfoBlock} from '../user-info-block/user-info-block.jsx';
 
 export const Header = ({user, isAuthorizationRequired}) => {
 
@@ -34,9 +36,8 @@ export const Header = ({user, isAuthorizationRequired}) => {
                     {
                       isAuthorizationRequired || !user ? <>
                         <div className="header__avatar-wrapper user__avatar-wrapper" />
-                        {/*TODO deal with avatar static/avatar/7.jpg 404 (Not Found)*/}
                         <span className="header__login">Sign in</span>
-                      </> : <UserInfo avatar={user.avatar} email={user.email} />
+                      </> : <UserInfoBlock avatar={user.avatar ? `${PAGE_URL}${user.avatar}` : null} email={user.email} />
                     }
                   </Link>
                 </li>
@@ -57,19 +58,4 @@ Header.propTypes = {
   isAuthorizationRequired: PropTypes.bool,
 };
 
-const UserInfo = ({avatar, email}) => {
-  return (
-    <>
-      <div className="header__avatar-wrapper user__avatar-wrapper">
-        <img src={avatar} />
-      </div>
-      <span className="header__user-name user__name">{email}</span>
-    </>
-  );
-};
-
-UserInfo.propTypes = {
-  email: PropTypes.string,
-  avatar: PropTypes.string
-};
 

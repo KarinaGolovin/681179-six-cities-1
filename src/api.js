@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+export const PAGE_URL = `https://es31-server.appspot.com/six-cities`;
+const TIMEOUT = 5000;
+
 export const configureAPI = () => {
   const api = axios.create({
-    baseURL: `https://es31-server.appspot.com/six-cities`,
-    timeout: 5000,
+    baseURL: PAGE_URL,
+    timeout: TIMEOUT,
     withCredentials: true,
   });
 
