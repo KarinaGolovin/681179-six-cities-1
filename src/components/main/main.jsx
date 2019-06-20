@@ -8,7 +8,7 @@ import Map from '../map/map.jsx';
 import {getCityOffers, getCoordinatesByCity, getSelectedCity} from '../../store/reducers';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import {withOffersSorting} from '../../hocs/with-offer-sorting/with-offer-sorting';
-import {SelectForm} from '../select-form/select-form.jsx';
+import SelectForm from '../select-form/select-form.jsx';
 import {compose} from 'recompose';
 
 const placesListClasses = {
@@ -22,9 +22,17 @@ const placeCardProps = {
   }
 };
 
-export const Main = (props) => {
-  const {coordinatesByCity, currentPlaces, currentCity, updateBookmark, onSortTypeChange, onActiveItemChange, activeItem} = props;
-
+export const Main = ({
+  coordinatesByCity,
+  currentPlaces,
+  currentCity,
+  updateBookmark,
+  sortingOptions,
+  sortingType,
+  onSortTypeChange,
+  onActiveItemChange,
+  activeItem
+}) => {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -44,6 +52,8 @@ export const Main = (props) => {
               <>
                 <b className="places__found">{currentPlaces.length} places to stay in {currentCity}</b>
                 <SelectForm
+                  defaultValue={sortingType}
+                  options={sortingOptions}
                   onSortTypeChange={onSortTypeChange}
                 />
               </>
@@ -94,7 +104,12 @@ Main.propTypes = {
   updateBookmark: PropTypes.func,
   onSortTypeChange: PropTypes.func.isRequired,
   onActiveItemChange: PropTypes.func,
-  activeItem: PropTypes.object
+  activeItem: PropTypes.object,
+  sortingType: PropTypes.string,
+  sortingOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+  }))
 };
 
 export default compose(

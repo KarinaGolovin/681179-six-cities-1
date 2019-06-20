@@ -1,48 +1,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {compose, withState, withHandlers} from 'recompose';
 
-export const SelectForm = (props) => {
-  const activeItem = `Top rated first`;
-  const isOpened = true;
+export const SelectForm = ({
+  value,
+  open,
+  options,
+  toggleOpen,
+  handleSelectChange
+}) => {
+  const selectedOption = options.find((it) => it.value === value);
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       {` `}
-      <span className="places__sorting-type" tabIndex="0">
-                    Popular
+      <span className="places__sorting-type" tabIndex="0" onClick={toggleOpen}>
+        {selectedOption ? selectedOption.label : ``}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpened ? `places__options--opened` : ``}`}>
-        {[`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`].map((option, i) => {
+      <ul className={`places__options places__options--custom ${open ? `places__options--opened` : ``}`}>
+        {options.map((option) => {
           return (
             <li
-              key={`select-${i}`}
-              className={`places__option ${activeItem === option ? `places__option--active` : `` }`}
+              key={option.value}
+              className={`places__option ${value === option ? `places__option--active` : `` }`}
               tabIndex= {0}
-              onClick={() => {}}>
-              {option}
+              value={option.value}
+              onClick={() => {
+                handleSelectChange(option.value);
+              }}>
+              {option.label}
             </li>
           );
         })}
       </ul>
-      {/*<select className="places__sorting-type" id="places-sorting" onChange={(evt) => {*/}
-      {/*  props.onSortTypeChange(evt.target.value);*/}
-      {/*}}>*/}
-      {/*  <option className="places__option" value="popular" defaultValue="">Popular</option>*/}
-      {/*  <option className="places__option" value="to-high">Price: low to high</option>*/}
-      {/*  <option className="places__option" value="to-low">Price: high to low</option>*/}
-      {/*  <option className="places__option" value="top-rated">Top rated first</option>*/}
-      {/*</select>*/}
+      <select className="places__sorting-type visually-hidden" id="places-sorting" onChange={(evt) => {
+        handleSelectChange(evt.target.value);
+      }} value={value}>
+        {options.map((it) => (
+          <option className="places__option" value={it.value} key={it.value}>{it.label}</option>
+        ))}
+      </select>
     </form>
   );
-}
-
-SelectForm.propTypes = {
-  onSortTypeChange: PropTypes.func,
-  // selectOptions: PropTypes.arrayOf(PropTypes.object),
 };
 
+SelectForm.propTypes = {
+  onSortTypeChange: PropTypes.func.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  open: PropTypes.bool,
+  defaultValue: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+  }))
+};
+
+
+export default compose(
+    withState(`open`, `setOpen`, false),
+    withState(`value`, `setValue`, (props) => props.defaultValue),
+    withHandlers({
+      toggleOpen: (props) => () => props.setOpen(!props.open),
+      handleSelectChange: (props) => (selectedValue) => {
+        props.setValue(selectedValue);
+        props.onSortTypeChange(selectedValue);
+        props.setOpen(false);
+      }
+    })
+)(SelectForm);
 
