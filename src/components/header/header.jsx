@@ -34,6 +34,7 @@ export const Header = ({user, isAuthorizationRequired}) => {
                     {
                       isAuthorizationRequired || !user ? <>
                         <div className="header__avatar-wrapper user__avatar-wrapper" />
+                        {/*TODO deal with avatar static/avatar/7.jpg 404 (Not Found)*/}
                         <span className="header__login">Sign in</span>
                       </> : <UserInfo avatar={user.avatar} email={user.email} />
                     }
