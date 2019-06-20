@@ -25,6 +25,7 @@ class Map extends PureComponent {
       center: this.props.cityCoords,
       zoom: this.mapZoom,
       zoomControl: false,
+      scrollWheelZoom: false,
       marker: true,
       layers: [
         L

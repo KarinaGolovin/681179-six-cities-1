@@ -43,7 +43,7 @@ const PlaceCard = (props) => {
         </div>
       ) : null}
 
-      <div className={`place-card__image-wrapper ${classes.imageWrapper || ``}`}>
+      <div className={`place-card__image-wrapper ${classes.imageWrapper || ``}`} >
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" width={imageWidth} height={imageHeight} alt="Place image" src={previewImage} />
         </Link>

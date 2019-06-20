@@ -121,8 +121,8 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
         <Map
           mapClass={`property__map`}
           cityCoords={[offer.city.location.latitude, offer.city.location.longitude]}
-          placesList={nearbyPlaces}
-          activePlaceId={activeItem ? activeItem.id : null}
+          placesList={[offer, ...nearbyPlaces]}
+          activePlaceId={activeItem ? activeItem.id : offer.id}
         />
       </section>
       <div className="container">
@@ -164,7 +164,7 @@ const mapStateToProps = (state, {offerId}) => {
   const offer = state.offers.find((it) => it.id === offerId);
   const nearbyPlacesIds = getRandomNearbyPlacesIds({
     currentOffer: offer,
-    allOffers: state.offers
+    allOffers: state.offers.filter((it) => it.id !== offerId),
   });
 
   return {

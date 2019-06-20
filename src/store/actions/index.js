@@ -139,5 +139,8 @@ const handleNetworkError = ({err, dispatch, shouldRedirectToLoginScreen = false}
   } else if (err.response && err.response.status === 400) {
     // eslint-disable-next-line no-console
     console.log(err);
+  } else if (err.response && err.response.status === 500) {
+    // eslint-disable-next-line no-console
+    console.log(err);
   }
 };

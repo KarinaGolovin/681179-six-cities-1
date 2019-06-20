@@ -17,7 +17,7 @@ export const Rating = ({rating = 0, classes = {}}) => {
 };
 
 const ratingInPercents = (rating, max = 5) => {
-  return Math.floor(rating) / max * 100;
+  return Math.round(rating) / max * 100;
 };
 
 Rating.propTypes = {
