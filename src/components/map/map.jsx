@@ -5,7 +5,7 @@ import L from 'leaflet';
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.mapZoom = 12;
+    this.mapZoom = 13;
     this._mapRef = React.createRef();
 
     this._mapInstance = null;
@@ -25,7 +25,6 @@ class Map extends PureComponent {
       center: this.props.cityCoords,
       zoom: this.mapZoom,
       zoomControl: false,
-      scrollWheelZoom: false,
       marker: true,
       layers: [
         L
@@ -49,6 +48,10 @@ class Map extends PureComponent {
     this._addMarkers(this.props.placesList);
 
     this._updateActiveMarker();
+
+    this._mapInstance.scrollWheelZoom.disable();
+    this._mapInstance.on(`click`, () => this._mapInstance.scrollWheelZoom.enable());
+    this._mapInstance.on(`mouseout`, () => this._mapInstance.scrollWheelZoom.disable());
   }
 
   componentDidUpdate(prevProps) {
