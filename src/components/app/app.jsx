@@ -9,6 +9,7 @@ import {withRootClassNames} from '../../hocs/with-body-class-name/with-body-clas
 // I know it's a bit weird but... markup rely on root classNames
 // I tried to add extra wrapper divs but guess what map css breaks in this case
 const HomeScreenWithRootClassname = withRootClassNames(HomeScreen, [`page--gray`, `page--main`]);
+const LoginScreenWithRootClassname = withRootClassNames(LoginScreen, [`page--gray`, `page--main`]);
 
 export default class App extends PureComponent {
   render() {
@@ -16,7 +17,7 @@ export default class App extends PureComponent {
       <Switch>
         <Route path="/" exact component={HomeScreenWithRootClassname} />
         <Route path="/city/:cityName" component={HomeScreenWithRootClassname} />
-        <Route path="/login" component={LoginScreen} />
+        <Route path="/login" component={LoginScreenWithRootClassname} />
         <Route path="/favorites" component={FavoritesScreen} />
         <Route path="/offer/:offerId" component={OfferScreen} />
       </Switch>

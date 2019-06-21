@@ -23,6 +23,13 @@ export const shuffleArray = (array) => {
   return newArray;
 };
 
+export const capitalizeFirstLetter = (string) => {
+  if (!string.length) {
+    return null;
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+};
+
 // TODO pluralization
 
 // TODO toCamelCase

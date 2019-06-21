@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 const FormReviewParams = {
@@ -11,7 +11,7 @@ const formValidators = {
   rating: (value) => value > 0
 };
 
-export class ReviewForm extends Component {
+export class ReviewForm extends PureComponent {
   constructor(props) {
     super(props);
 

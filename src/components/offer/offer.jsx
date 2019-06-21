@@ -11,6 +11,11 @@ import {shuffleArray} from '../../utils';
 import {compose} from 'recompose';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import PlacesList from '../places-list/places-list.jsx';
+import {GalleryBlock} from '../gallery-block/gallery-block.jsx';
+import {OfferOptions} from '../offer-options/offer-options.jsx';
+import {OfferFeatures} from '../offer-features/offer-features.jsx';
+import {OfferPrice} from '../offer-price/offer-price.jsx';
+import {OfferHostBlock} from '../offer-host-block/offer-host-block.jsx';
 
 const placesListClasses = {
   container: `near-places__list`
@@ -32,17 +37,9 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            {offer.images.map((image) => {
-              return (
-                <div className="property__image-wrapper" key={image}>
-                  <img className="property__image" src={image} alt="Photo studio"/>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <GalleryBlock
+          images={offer.images}
+        />
         <div className="property__container container">
           <div className="property__wrapper">
             {(offer.is_premium) ? <div className="property__mark"><span>Premium</span></div> : null}
@@ -71,50 +68,23 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
               }}
             />
             {/* TODO check ending */}
-            <ul className="property__features">
-              <li className="property__feature property__feature--entire">
-                {offer.type}
-              </li>
-              <li className="property__feature property__feature--bedrooms">
-                {offer.bedrooms} Bedrooms
-              </li>
-              <li className="property__feature property__feature--adults">
-                Max {offer.max_adults} adults
-              </li>
-            </ul>
-            <div className="property__price">
-              <b className="property__price-value">&euro;{offer.price}</b>
-              <span className="property__price-text">&nbsp;night</span>
-            </div>
-            <div className="property__inside">
-              <h2 className="property__inside-title">What&apos;s inside</h2>
-              <ul className="property__inside-list">
-                {offer.goods.map((featureName) => {
-                  return (
-                    <li className="property__inside-item" key={featureName}>
-                      {featureName}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div className="property__host">
-              <h2 className="property__host-title">Meet the host</h2>
-              <div className="property__host-user user">
-                <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src={`/${offer.host.avatar_url}`} width="74" height="74" alt="Host avatar"/>
-                </div>
-                <span className="property__user-name">
-                  {offer.host.name}
-                </span>
-                {(offer.host.is_pro) ? <span className="property__user-status">Pro</span> : null}
-              </div>
-              <div className="property__description">
-                <p className="property__text">
-                  {offer.description}
-                </p>
-              </div>
-            </div>
+            <OfferOptions
+              offerType={offer.type}
+              offerBedrooms={offer.bedrooms}
+              offerCapacity={offer.max_adults}
+            />
+            <OfferPrice
+              price={offer.price}
+            />
+            <OfferFeatures
+              featureList={offer.goods}
+            />
+            <OfferHostBlock
+              userName={offer.host.name}
+              userAvatar={offer.host.avatar_url}
+              userStatus={offer.host.is_pro}
+              offerDescription={offer.description}
+            />
             <Reviews offerId={offer.id} />
           </div>
         </div>
