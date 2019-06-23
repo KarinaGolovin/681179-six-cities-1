@@ -44,6 +44,8 @@ exports[`Favorites correctly renders 1`] = `
             <article
               className="place-card favorites__card"
               id={1}
+              onBlur={[Function]}
+              onFocus={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -51,7 +53,7 @@ exports[`Favorites correctly renders 1`] = `
                 className="place-card__image-wrapper favorites__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/offer/1"
                   onClick={[Function]}
                 >
                   <img
@@ -90,8 +92,8 @@ exports[`Favorites correctly renders 1`] = `
                   >
                     <svg
                       className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
+                      height={19}
+                      width={18}
                     >
                       <use
                         xlinkHref="#icon-bookmark"
@@ -128,7 +130,8 @@ exports[`Favorites correctly renders 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
+                    onClick={[Function]}
                   >
                     Test
                   </a>

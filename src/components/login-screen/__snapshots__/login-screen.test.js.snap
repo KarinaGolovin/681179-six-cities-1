@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginScreen correctly renders 1`] = `
+<Memo(ConnectFunction)>
+  <Memo(ConnectFunction)
+    onLogin={[Function]}
+  />
+</Memo(ConnectFunction)>
+`;

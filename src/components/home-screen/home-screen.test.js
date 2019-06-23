@@ -1,11 +1,13 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import HomeScreen from './home-screen.jsx';
+import ShallowRenderer from 'react-test-renderer/shallow';
+
+const renderer = new ShallowRenderer();
 
 it(`HomeScreen correctly renders`, () => {
-  const component = renderer.create(
+  const component = renderer.render(
       <HomeScreen selectedCityName={`Test`}/>
-  ).toJSON();
+  );
 
   expect(component).toMatchSnapshot();
 });

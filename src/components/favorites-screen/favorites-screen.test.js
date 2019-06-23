@@ -1,6 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import FavoritesScreen from './favorites-screen.jsx';
+import {FavoritesScreen} from './favorites-screen.jsx';
+import ShallowRenderer from 'react-test-renderer/shallow';
+
+const renderer = new ShallowRenderer();
 
 const mock = [
   {
@@ -26,12 +28,12 @@ const mock = [
 ];
 
 it(`FavoritesScreen correctly renders`, () => {
-  const component = renderer.create(
+  const component = renderer.render(
       <FavoritesScreen
         favoriteList={mock}
         updateBookmark={() => {}}
       />
-  ).toJSON();
+  );
 
   expect(component).toMatchSnapshot();
 });

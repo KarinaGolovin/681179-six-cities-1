@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen correctly renders 1`] = `
+<Memo(ConnectFunction)>
+  <Memo(ConnectFunction) />
+</Memo(ConnectFunction)>
+`;

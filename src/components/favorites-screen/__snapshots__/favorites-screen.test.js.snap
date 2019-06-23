@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavoritesScreen correctly renders 1`] = `
+<Memo(ConnectFunction)>
+  <Memo(ConnectFunction)
+    favoriteList={
+      Array [
+        Object {
+          "id": 1,
+          "isPremium": true,
+          "link": "#",
+          "previewImage": "",
+          "price": 0,
+          "rating": 0,
+          "title": "Test",
+          "type": "Test",
+        },
+        Object {
+          "id": 2,
+          "isPremium": true,
+          "link": "#",
+          "previewImage": "",
+          "price": 0,
+          "rating": 0,
+          "title": "Test",
+          "type": "Test",
+        },
+      ]
+    }
+    onBookmarkClick={[Function]}
+  />
+</Memo(ConnectFunction)>
+`;

@@ -1,12 +1,14 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import ShallowRenderer from 'react-test-renderer/shallow';
 import {LoginScreen} from './login-screen.jsx';
 
+const renderer = new ShallowRenderer();
+
 it(`LoginScreen correctly renders`, () => {
-  const component = renderer.create(
+  const component = renderer.render(
       <LoginScreen
         onSingIn={() => {}}/>
-  ).toJSON();
+  );
 
   expect(component).toMatchSnapshot();
 });
