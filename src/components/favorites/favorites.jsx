@@ -91,7 +91,7 @@ const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
                 }}
                 onPictureMouseEnter={() => {}}
                 onPictureMouseLeave={() => {}}
-                classes = {cardClasses}
+                classes={cardClasses}
                 id={it.id}
                 key={it.id}
                 imageWidth={150}

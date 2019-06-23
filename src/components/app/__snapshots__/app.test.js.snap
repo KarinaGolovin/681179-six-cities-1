@@ -397,5 +397,16 @@ Array [
       />
     </a>
   </footer>,
+  <div
+    className="error-message "
+  >
+    <div
+      className="error-message__content"
+    >
+      <p
+        className="error-message__text"
+      />
+    </div>
+  </div>,
 ]
 `;

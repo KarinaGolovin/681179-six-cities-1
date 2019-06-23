@@ -16,7 +16,7 @@ ErrorMessage.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    message: state.error.message
+    message: state.error ? state.error.message : null
   };
 };
 

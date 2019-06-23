@@ -1,8 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import {PageTemplate} from './page-template.jsx';
 import {Router} from 'react-router-dom';
 import history from '../../history';
+import ShallowRenderer from 'react-test-renderer/shallow';
+
+const renderer = new ShallowRenderer();
 
 const mockUser = {
   id: 1,
@@ -13,14 +15,14 @@ const mockUser = {
 };
 
 it(`PageTemplate correctly renders`, () => {
-  const component = renderer.create(
+  const component = renderer.render(
       <Router history={history}>
         <PageTemplate
           isAuthorizationRequired={false}
           user={mockUser}
         />
       </Router>
-  ).toJSON();
+  );
 
   expect(component).toMatchSnapshot();
 });

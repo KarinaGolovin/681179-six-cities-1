@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Favorites correctly renders 1`] = `
+exports[`ErrorMessage correctly renders 1`] = `
 <div
   className="error-message error-message--active"
 >

@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFoundScreen from './not-found-secreen.jsx';
+import NotFoundScreen from './not-found-screen.jsx';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 const renderer = new ShallowRenderer();
