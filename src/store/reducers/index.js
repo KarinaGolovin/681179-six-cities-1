@@ -5,6 +5,8 @@ import {
   LOAD_FAVORITES,
   RECEIVED_COMMENTS,
   UPDATE_OFFER,
+  NETWORK_ERROR,
+  NETWORK_ERROR_RESET
 } from '../actions';
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   user: {},
   comments: {},
   isAuthorizationRequired: undefined,
+  error: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +53,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    case NETWORK_ERROR: {
+      return {
+        ...state,
+        error: action.payload
+      };
+    }
+    case NETWORK_ERROR_RESET: {
+      return {
+        ...state,
+        error: {
+          ...initialState.error
+        }
+      };
+    }
   }
 
   return state;

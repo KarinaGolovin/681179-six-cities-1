@@ -1,4 +1,4 @@
-import history from '../../history';
+const ERROR_RESET_TIMEOUT = 6000;
 
 export const LOAD_OFFERS = `LOAD_OFFERS`;
 export const UPDATE_OFFER = `UPDATE_OFFER`;
@@ -6,6 +6,8 @@ export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
 export const SET_USER_DATA = `SET_USER_DATA`;
 export const LOAD_FAVORITES = `LOAD_FAVORITES`;
 export const RECEIVED_COMMENTS = `RECEIVED_COMMENTS`;
+export const NETWORK_ERROR = `NETWORK_ERROR`;
+export const NETWORK_ERROR_RESET = `NETWORK_ERROR_RESET`;
 
 export const loadOffers = (offers) => {
   return {
@@ -51,6 +53,28 @@ export const updateOffer = (offer) => {
   };
 };
 
+export const networkError = ({message, displayTimeout = ERROR_RESET_TIMEOUT}) => {
+  let errorClearTimeout = null;
+  return (dispatch) => {
+    dispatch({
+      type: NETWORK_ERROR,
+      payload: {
+        message
+      },
+    });
+
+    if (errorClearTimeout) {
+      clearTimeout(errorClearTimeout);
+    }
+
+    errorClearTimeout = setTimeout(() => {
+      dispatch({
+        type: NETWORK_ERROR_RESET
+      });
+    }, displayTimeout);
+  };
+};
+
 export const getOfferList = () => {
   return (dispatch, getState, api) => {
     return api.get(`/hotels`).then((response) => {
@@ -88,7 +112,6 @@ export const checkLogin = (() => {
       dispatch(requiredAuthorization(false));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
-      // dispatch(requiredAuthorization(true));
     });
   };
 });
@@ -100,8 +123,6 @@ export const signIn = ({email, password}) => {
       dispatch(requiredAuthorization(false));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
-      // dispatch(requiredAuthorization(true));
-      // return err;
     });
   };
 };
@@ -119,28 +140,24 @@ export const toggleFavorite = ({hotelId, status}) => {
 export const postComments = ({offerId, rating, review}) => {
   return (dispatch, getState, api) => {
     return api.post(`/comments/${offerId}`, {rating, comment: review}).then((response) => {
-      // eslint-disable-next-line no-console
-      console.log(response);
       dispatch(updateComments(offerId, response.data));
-      // форма очищается
     }).catch((err) => {
       handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
-      // на ошибку кнопка submit Form разблокируется, форма очищается, отрисовать ошибку
     });
   };
 };
 
 const handleNetworkError = ({err, dispatch, shouldRedirectToLoginScreen = false}) => {
-  if (err.response && err.response.status === 403) {
+  const response = err.response || null;
+
+  if (response && response.status === 403) {
     dispatch(requiredAuthorization(true));
     if (shouldRedirectToLoginScreen) {
       history.push(`/login`);
     }
-  } else if (err.response && err.response.status === 400) {
-    // eslint-disable-next-line no-console
-    console.log(err);
-  } else if (err.response && err.response.status === 500) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+  } else if (response && [400, 500].includes(response.status)) {
+    const errorMessage = response.data && response.data.error ? response.data.error : `Request failed`;
+
+    dispatch(networkError({message: errorMessage, status: response.status}));
   }
 };

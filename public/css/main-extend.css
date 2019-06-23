@@ -6,3 +6,31 @@
   stroke: #4481c3;
   fill: #4481c3;
 }
+
+.error-message {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  box-sizing: border-box;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.error-message__content {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translate(100%, 0);
+  border-left: 4px solid #F77B1F;
+  padding: 10px;
+  max-width: 30vw;
+  min-height: 80px;
+  background: #fff;
+}
+
+.error-message--active .error-message__content {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(0, 0);
+  transition: opacity .5s, transform .5s;
+}

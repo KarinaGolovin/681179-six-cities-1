@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Header} from '../header/header.jsx';
 import {getAuthorizationStatus} from '../../store/reducers';
 import {Footer} from '../footer/footer.jsx';
+import ErrorMessage from '../error-message/error-message.jsx';
 
 export class PageTemplate extends PureComponent {
   render() {
@@ -16,6 +17,7 @@ export class PageTemplate extends PureComponent {
         />
         {children}
         <Footer />
+        <ErrorMessage />
       </>
     );
   }
