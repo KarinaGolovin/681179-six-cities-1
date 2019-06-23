@@ -6,9 +6,9 @@ import {signIn} from '../../store/actions';
 import PageTemplate from '../page-template/page-template.jsx';
 import withAuthRedirect from '../../hocs/with-auth-redirect/with-auth-redirect';
 
-const SignInWithRedirect = withAuthRedirect(SignIn, {
+const SignInWithRedirect = withAuthRedirect({
   authorized: `/`
-});
+})(SignIn);
 
 export function LoginScreen(props) {
   const {onSingIn} = props;

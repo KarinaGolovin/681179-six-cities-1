@@ -5,7 +5,7 @@ import {getAuthorizationStatus} from '../../store/reducers';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 
-const withAuthRedirect = (Component, path = {}) => {
+export const withAuthRedirect = (path = {}) => (Component) => {
   function WithAuthRedirect(props) {
     if (props.isAuthorizationRequired === undefined) {
       return null;

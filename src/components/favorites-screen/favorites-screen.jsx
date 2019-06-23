@@ -7,9 +7,9 @@ import {getFavoriteOffersByCities} from '../../store/reducers';
 import PageTemplate from '../page-template/page-template.jsx';
 import withAuthRedirect from '../../hocs/with-auth-redirect/with-auth-redirect';
 
-const FavoritesWithRedirect = withAuthRedirect(Favorites, {
+const FavoritesWithRedirect = withAuthRedirect({
   notAuthorised: `/login`
-});
+})(Favorites);
 
 export function FavoritesScreen(props) {
   const {favoriteList, updateBookmark} = props;
