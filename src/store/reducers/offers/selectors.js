@@ -1,6 +1,15 @@
 import {createSelector} from "reselect";
+import {shuffleArray} from '../../../utils';
 
-export const getOffers = (state) => state.offers;
+const MAX_NEARBY_OFFERS_TO_DISPLAY = 3;
+
+export const getOffers = (state) => {
+  return state.offers;
+};
+
+export const filterOffersByCity = (offers, city) => {
+  return offers.filter((it) => it.city.name === city);
+};
 
 export const getSelectedCity = createSelector(
     [getOffers, (_state, cityName) => cityName],
@@ -16,8 +25,7 @@ export const getCoordinatesByCity = createSelector(
     [getOffers],
     (state) => {
       return state.reduce((result, it) => {
-        const cityCoordinates = [it.city.location.latitude, it.city.location.longitude];
-        result[it.city.name] = cityCoordinates;
+        result[it.city.name] = [it.city.location.latitude, it.city.location.longitude];
         return result;
       }, {});
     }
@@ -25,14 +33,47 @@ export const getCoordinatesByCity = createSelector(
 
 export const getCityOffers = createSelector(
     [getOffers, (_state, cityName) => cityName],
-    (state, city) => {
-      return state.filter((it) => it.city.name === city);
-    }
+    filterOffersByCity
 );
 
 export const getFavoriteOffersByCities = createSelector(
     [getOffers],
     (state) => {
-      return state.offers.filter((it) => it.is_favorite);
+      return state.filter((it) => it.is_favorite);
     }
 );
+
+export const getOfferById = createSelector(
+    [
+      getOffers,
+      (_state, offerId) => offerId],
+    (state, offerId) => {
+      return state.find((it) => it.id === offerId);
+    }
+);
+
+export const getNearbyPlaces = (() => {
+  // do not want to reload all nearby places on bookmark status change
+  const cache = {};
+
+  return createSelector(
+      [
+        getOffers,
+        getOfferById,
+      ],
+      (state, currentOffer) => {
+        if (!currentOffer) {
+          return [];
+        }
+
+        const cityOffers = filterOffersByCity(state, currentOffer.city.name);
+        const filteredOffers = cityOffers.filter(({id}) => id !== currentOffer.id);
+
+        if (!cache[currentOffer.id]) {
+          cache[currentOffer.id] = shuffleArray(filteredOffers).slice(0, MAX_NEARBY_OFFERS_TO_DISPLAY).map((it) => it.id);
+        }
+
+        return cityOffers.filter((it) => cache[currentOffer.id].includes(it.id));
+      },
+  );
+})();

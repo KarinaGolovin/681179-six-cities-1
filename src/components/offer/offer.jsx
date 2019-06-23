@@ -6,8 +6,6 @@ import {toggleFavorite} from '../../store/actions';
 import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
 import Reviews from '../reviews/reviews.jsx';
 import Map from '../map/map.jsx';
-import {getCityOffers} from '../../store/reducers/offers/selectors';
-import {shuffleArray} from '../../utils';
 import {compose, withProps} from 'recompose';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import PlacesList from '../places-list/places-list.jsx';
@@ -16,6 +14,7 @@ import {OfferOptions} from '../offer-options/offer-options.jsx';
 import {OfferFeatures} from '../offer-features/offer-features.jsx';
 import {OfferPrice} from '../offer-price/offer-price.jsx';
 import {OfferHostBlock} from '../offer-host-block/offer-host-block.jsx';
+import {getNearbyPlaces, getOfferById} from '../../store/reducers/offers/selectors';
 
 const PlacesListWrapped = withProps({
   classes: {
@@ -110,35 +109,10 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
   );
 };
 
-const getRandomNearbyPlacesIds = (() => {
-  const cache = {};
-
-  return ({allOffers, currentOffer}) => {
-    if (!currentOffer) {
-      return [];
-    }
-
-    if (!cache[currentOffer.id]) {
-      const cityOffers = getCityOffers(allOffers, currentOffer.city.name);
-      const filteredOffers = cityOffers.filter(({id}) => id !== currentOffer.id);
-
-      cache[currentOffer.id] = shuffleArray(filteredOffers).slice(0, 3).map((it) => it.id);
-    }
-
-    return cache[currentOffer.id];
-  };
-})();
-
 const mapStateToProps = (state, {offerId}) => {
-  const offer = state.offers.find((it) => it.id === offerId);
-  const nearbyPlacesIds = getRandomNearbyPlacesIds({
-    currentOffer: offer,
-    allOffers: state.offers.filter((it) => it.id !== offerId),
-  });
-
   return {
-    offer,
-    nearbyPlaces: state.offers.filter(({id}) => nearbyPlacesIds.includes(id)),
+    offer: getOfferById(state, offerId),
+    nearbyPlaces: getNearbyPlaces(state, offerId),
   };
 };
 
