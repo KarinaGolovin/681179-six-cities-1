@@ -10,6 +10,7 @@ export const LOAD_FAVORITES = `LOAD_FAVORITES`;
 export const RECEIVED_COMMENTS = `RECEIVED_COMMENTS`;
 export const NETWORK_ERROR = `NETWORK_ERROR`;
 export const NETWORK_ERROR_RESET = `NETWORK_ERROR_RESET`;
+export const SET_POST_COMMENT_PROGRESS = `SET_POST_COMMENT_PROGRESS`;
 
 export const loadOffers = (offers) => {
   return {
@@ -31,6 +32,13 @@ export const updateComments = (offerId, comments) => {
     payload: {
       [offerId]: snakeCaseToCamelCase(comments)
     }
+  };
+};
+
+export const setCommentsPostInProgress = (status) => {
+  return {
+    type: SET_POST_COMMENT_PROGRESS,
+    payload: status
   };
 };
 
@@ -149,9 +157,12 @@ export const toggleFavorite = ({hotelId, status}) => {
 
 export const postComments = ({offerId, rating, review}) => {
   return (dispatch, getState, api) => {
+    dispatch(setCommentsPostInProgress(true));
     return api.post(`/comments/${offerId}`, {rating, comment: review}).then((response) => {
+      dispatch(setCommentsPostInProgress(false));
       dispatch(updateComments(offerId, response.data));
     }).catch((err) => {
+      dispatch(setCommentsPostInProgress(false));
       handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
     });
   };

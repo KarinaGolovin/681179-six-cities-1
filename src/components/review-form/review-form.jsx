@@ -19,7 +19,8 @@ export const ReviewForm = ({
   rules = {
     minLength: MIN_LENGTH,
     maxLength: MAX_LENGTH,
-  }
+  },
+  isDisabled = false
 }) => {
   return (
     <form className="reviews__form form" action="#" method="post"
@@ -62,7 +63,7 @@ export const ReviewForm = ({
           {` `}
           <b className="reviews__text-amount">{rules.minLength} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!isValid}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabled || !isValid}>Submit</button>
       </div>
     </form>
   );
@@ -123,4 +124,5 @@ ReviewForm.propTypes = {
     minLength: PropTypes.number,
     maxLength: PropTypes.number,
   }),
+  isDisabled: PropTypes.bool
 };

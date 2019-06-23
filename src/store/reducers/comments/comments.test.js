@@ -1,4 +1,4 @@
-import {updateComments, postComments, fetchComments, RECEIVED_COMMENTS} from '../../actions';
+import {updateComments, postComments, fetchComments, setCommentsPostInProgress, RECEIVED_COMMENTS} from '../../actions';
 import reducer from './comments';
 import {configureAPI} from '../../../api';
 import MockAdapter from 'axios-mock-adapter';
@@ -31,7 +31,7 @@ it(`Expect correct post comments API call to server`, () => {
   }]);
 
   return postComments({offerId: 1, rating: 5, review: `Test`})(dispatch, jest.fn(), api).then(() => {
-    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenCalledWith({
       type: RECEIVED_COMMENTS,
       payload: {'1': [{test: `Test`}]}
@@ -47,6 +47,32 @@ it(`Expect that comments list will be updated correctly`, () => {
 
   const expectedState = {
     '1': [{id: 1}, {id: 2}]
+  };
+
+  expect(reducer(initialState, message)).toEqual(expectedState);
+});
+
+it(`Expect that post in progress state will be updated correctly 1`, () => {
+  const initialState = {
+    isPostInProgress: false
+  };
+  const message = setCommentsPostInProgress(true);
+
+  const expectedState = {
+    isPostInProgress: true
+  };
+
+  expect(reducer(initialState, message)).toEqual(expectedState);
+});
+
+it(`Expect that post in progress state will be updated correctly 2`, () => {
+  const initialState = {
+    isPostInProgress: true
+  };
+  const message = setCommentsPostInProgress(false);
+
+  const expectedState = {
+    isPostInProgress: false
   };
 
   expect(reducer(initialState, message)).toEqual(expectedState);

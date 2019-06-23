@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {fetchComments, postComments} from '../../store/actions';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 import {formatDate} from '../../utils';
+import {getCommentPostInProgress} from '../../store/reducers/comments/selectors';
 
 export class Reviews extends Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ export class Reviews extends Component {
   }
 
   render() {
-    const {comments = [], isAuthorizationRequired, sendComment} = this.props;
+    const {comments = [], isAuthorizationRequired, isPostInProgress, sendComment} = this.props;
 
     return <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
@@ -49,6 +50,7 @@ export class Reviews extends Component {
       {!isAuthorizationRequired ? <ReviewForm
         offerId={this.props.offerId}
         onSubmitRating={sendComment}
+        isDisabled={isPostInProgress}
       /> : null}
     </section>;
   }
@@ -83,12 +85,14 @@ Reviews.propTypes = {
   onSubmitRating: PropTypes.func,
   loadComments: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
+  isPostInProgress: PropTypes.bool,
   sendComment: PropTypes.func,
 };
 
 
 const mapStateToProps = (state, {offerId}) => {
   return {
+    isPostInProgress: getCommentPostInProgress(state),
     isAuthorizationRequired: getAuthorizationStatus(state),
     offerId,
     comments: getSortedByDate(state.comments[offerId]),
