@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundScreen correctly renders 1`] = `
+<Memo(ConnectFunction)>
+  <h1>
+    Page Not Found
+  </h1>
+</Memo(ConnectFunction)>
+`;

@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import HomeScreen from '../home-screen/home-screen.jsx';
 import LoginScreen from '../login-screen/login-screen.jsx';
 import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
+import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import OfferScreen from '../offer-screen/offer-screen.jsx';
 import {withRootClassNames} from '../../hocs/with-body-class-name/with-body-class-name';
 
@@ -20,6 +21,7 @@ export default class App extends PureComponent {
         <Route path="/login" component={LoginScreenWithRootClassname} />
         <Route path="/favorites" component={FavoritesScreen} />
         <Route path="/offer/:offerId" component={(props) => <OfferScreen offerId={Number(props.match.params.offerId)}/>} />
+        <Route component={NotFoundScreen} />
       </Switch>
     );
   }
