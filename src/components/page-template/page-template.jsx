@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Header} from '../header/header.jsx';
-import {getAuthorizationStatus} from '../../store/reducers/user/user';
+import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 import {Footer} from '../footer/footer.jsx';
 import ErrorMessage from '../error-message/error-message.jsx';
 

@@ -53,24 +53,32 @@ export const updateOffer = (offer) => {
   };
 };
 
+export const showNetworkErrorMessage = (message) => {
+  return {
+    type: NETWORK_ERROR,
+    payload: {
+      message
+    },
+  };
+};
+
+export const resetNetworkErrorMessage = () => {
+  return {
+    type: NETWORK_ERROR_RESET
+  };
+};
+
 export const networkError = ({message, displayTimeout = ERROR_RESET_TIMEOUT}) => {
   let errorClearTimeout = null;
   return (dispatch) => {
-    dispatch({
-      type: NETWORK_ERROR,
-      payload: {
-        message
-      },
-    });
+    dispatch(showNetworkErrorMessage(message));
 
     if (errorClearTimeout) {
       clearTimeout(errorClearTimeout);
     }
 
     errorClearTimeout = setTimeout(() => {
-      dispatch({
-        type: NETWORK_ERROR_RESET
-      });
+      dispatch(resetNetworkErrorMessage());
     }, displayTimeout);
   };
 };

@@ -17,6 +17,3 @@ export default (state = initialState, action) => {
   return state;
 };
 
-export const getAuthorizationStatus = (state) => {
-  return state.user.isAuthorizationRequired;
-};
