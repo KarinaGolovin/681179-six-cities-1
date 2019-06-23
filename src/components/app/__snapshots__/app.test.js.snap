@@ -274,6 +274,13 @@ Array [
               onMouseLeave={[Function]}
             >
               <div
+                className="place-card__mark"
+              >
+                <span>
+                  Premium
+                </span>
+              </div>
+              <div
                 className="place-card__image-wrapper cities__image-wrapper"
               >
                 <a
@@ -284,6 +291,7 @@ Array [
                     alt="Place image"
                     className="place-card__image"
                     height={200}
+                    src=""
                     width={260}
                   />
                 </a>

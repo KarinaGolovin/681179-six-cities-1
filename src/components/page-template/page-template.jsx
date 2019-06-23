@@ -39,8 +39,8 @@ const mapStateToProps = (state) => {
       id: state.user.id,
       email: state.user.email,
       name: state.user.name,
-      avatar: state.user.avatar_url,
-      isPro: state.user.is_pro,
+      avatar: state.user.avatarUrl,
+      isPro: state.user.isPro,
       isAuthorizationRequired: getAuthorizationStatus(state),
     }
   };

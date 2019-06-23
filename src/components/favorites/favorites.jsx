@@ -83,14 +83,14 @@ const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
                 title={it.title}
                 type={it.type}
                 price={it.price}
-                previewImage={it.preview_image}
+                previewImage={it.previewImage}
                 rating={it.rating}
-                isPremium={it.is_premium}
-                isBookmarked={it.is_favorite}
+                isPremium={it.isPremium}
+                isBookmarked={it.isFavorite}
                 onBookmarkClick={() => {
                   onBookmarkClick({
                     hotelId: it.id,
-                    status: it.is_favorite ? 0 : 1
+                    status: it.isFavorite ? 0 : 1
                   });
                 }}
                 id={it.id}

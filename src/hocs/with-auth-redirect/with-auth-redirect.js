@@ -1,7 +1,7 @@
 import React from 'react';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
-import {getAuthorizationStatus} from '../../store/reducers/user/user';
+import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 

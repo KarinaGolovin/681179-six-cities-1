@@ -39,7 +39,7 @@ export const getCityOffers = createSelector(
 export const getFavoriteOffersByCities = createSelector(
     [getOffers],
     (state) => {
-      return state.filter((it) => it.is_favorite);
+      return state.filter((it) => it.isFavorite);
     }
 );
 

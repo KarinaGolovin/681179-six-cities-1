@@ -22,10 +22,10 @@ class PlacesList extends PureComponent {
               title={it.title}
               type={it.type}
               price={it.price}
-              previewImage={it.preview_image}
+              previewImage={it.previewImage}
               rating={it.rating}
-              isPremium={it.is_premium}
-              isBookmarked={it.is_favorite}
+              isPremium={it.isPremium}
+              isBookmarked={it.isFavorite}
               onBookmarkClick={() => {
                 this._handleBookmarkClick(it);
               }}
@@ -52,7 +52,7 @@ class PlacesList extends PureComponent {
 
     this.props.onBookmarkClick({
       hotelId: card.id,
-      status: card.is_favorite ? 0 : 1
+      status: card.isFavorite ? 0 : 1
     });
   }
 

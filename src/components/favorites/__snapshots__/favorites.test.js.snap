@@ -50,6 +50,13 @@ exports[`Favorites correctly renders 1`] = `
               onMouseLeave={[Function]}
             >
               <div
+                className="place-card__mark"
+              >
+                <span>
+                  Premium
+                </span>
+              </div>
+              <div
                 className="place-card__image-wrapper favorites__image-wrapper"
               >
                 <a
@@ -60,6 +67,7 @@ exports[`Favorites correctly renders 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height={110}
+                    src=""
                     width={150}
                   />
                 </a>

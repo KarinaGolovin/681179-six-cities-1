@@ -103,6 +103,13 @@ exports[`Main correctly renders 1`] = `
             onMouseLeave={[Function]}
           >
             <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
@@ -113,6 +120,7 @@ exports[`Main correctly renders 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height={200}
+                  src=""
                   width={260}
                 />
               </a>
@@ -205,6 +213,13 @@ exports[`Main correctly renders 1`] = `
             onMouseLeave={[Function]}
           >
             <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
@@ -215,6 +230,7 @@ exports[`Main correctly renders 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height={200}
+                  src=""
                   width={260}
                 />
               </a>
@@ -307,6 +323,13 @@ exports[`Main correctly renders 1`] = `
             onMouseLeave={[Function]}
           >
             <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
@@ -317,6 +340,7 @@ exports[`Main correctly renders 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height={200}
+                  src=""
                   width={260}
                 />
               </a>
@@ -409,6 +433,13 @@ exports[`Main correctly renders 1`] = `
             onMouseLeave={[Function]}
           >
             <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
@@ -419,6 +450,7 @@ exports[`Main correctly renders 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height={200}
+                  src=""
                   width={260}
                 />
               </a>

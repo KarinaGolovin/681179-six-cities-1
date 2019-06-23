@@ -33,6 +33,34 @@ export const capitalizeFirstLetter = (string) => {
 export const ratingInPercents = (rating, max = 5) => {
   return Math.round(rating) / max * 100;
 };
-// TODO pluralization
 
-// TODO toCamelCase
+export const snakeCaseToCamelCase = (obj) => {
+  const toCamel = (s) => {
+    return s.replace(/([-_][a-z])/ig, ($1) => {
+      return $1.toUpperCase()
+      .replace(`-`, ``)
+      .replace(`_`, ``);
+    });
+  };
+
+  const transformObjectKeys = (val, handler = (v) => v) => {
+    if (!val || typeof val !== `object`) {
+      return val;
+    }
+
+    if (Array.isArray(val)) {
+      return val.map((v) => transformObjectKeys(v, handler));
+    }
+
+    const newObj = {};
+    Object.keys(val).forEach((key) => {
+      newObj[handler(key)] = transformObjectKeys(val[key], handler);
+    });
+
+    return newObj;
+  };
+
+  return transformObjectKeys(obj, (key) => toCamel(key));
+};
+
+// TODO pluralization

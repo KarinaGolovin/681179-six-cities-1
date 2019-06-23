@@ -1,3 +1,5 @@
+import {snakeCaseToCamelCase} from '../../utils';
+
 const ERROR_RESET_TIMEOUT = 6000;
 
 export const LOAD_OFFERS = `LOAD_OFFERS`;
@@ -12,14 +14,14 @@ export const NETWORK_ERROR_RESET = `NETWORK_ERROR_RESET`;
 export const loadOffers = (offers) => {
   return {
     type: LOAD_OFFERS,
-    payload: offers
+    payload: snakeCaseToCamelCase(offers)
   };
 };
 
 export const loadFavorites = (favorites) => {
   return {
     type: LOAD_FAVORITES,
-    payload: favorites
+    payload: snakeCaseToCamelCase(favorites)
   };
 };
 
@@ -27,7 +29,7 @@ export const updateComments = (offerId, comments) => {
   return {
     type: RECEIVED_COMMENTS,
     payload: {
-      [offerId]: comments
+      [offerId]: snakeCaseToCamelCase(comments)
     }
   };
 };
@@ -42,14 +44,14 @@ export const requiredAuthorization = (status) => {
 export const setUser = (user) => {
   return {
     type: SET_USER_DATA,
-    payload: user,
+    payload: snakeCaseToCamelCase(user),
   };
 };
 
 export const updateOffer = (offer) => {
   return {
     type: UPDATE_OFFER,
-    payload: offer,
+    payload: snakeCaseToCamelCase(offer),
   };
 };
 

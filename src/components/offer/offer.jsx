@@ -42,17 +42,17 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
         />
         <div className="property__container container">
           <div className="property__wrapper">
-            {(offer.is_premium) ? <div className="property__mark"><span>Premium</span></div> : null}
+            {(offer.isPremium) ? <div className="property__mark"><span>Premium</span></div> : null}
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 {offer.title}
               </h1>
               <BookmarkIcon
-                isBookmarked={offer.is_favorite}
+                isBookmarked={offer.isFavorite}
                 onBookmarkClick={() => {
                   updateBookmark({
                     hotelId: offer.id,
-                    status: offer.is_favorite ? 0 : 1
+                    status: offer.isFavorite ? 0 : 1
                   });
                 }}
                 bookmarkClass={`property`}
@@ -71,7 +71,7 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
             <OfferOptions
               offerType={offer.type}
               offerBedrooms={offer.bedrooms}
-              offerCapacity={offer.max_adults}
+              offerCapacity={offer.maxAdults}
             />
             <OfferPrice
               price={offer.price}
@@ -81,8 +81,8 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
             />
             <OfferHostBlock
               userName={offer.host.name}
-              userAvatar={offer.host.avatar_url}
-              userStatus={offer.host.is_pro}
+              userAvatar={offer.host.avatarUrl}
+              userStatus={offer.host.isPro}
               offerDescription={offer.description}
             />
             <Reviews offerId={offer.id} />
