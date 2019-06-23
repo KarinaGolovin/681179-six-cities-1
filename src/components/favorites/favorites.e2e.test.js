@@ -7,7 +7,7 @@ import {Router} from 'react-router-dom';
 
 configure({adapter: new Adapter()});
 
-const mock = [
+const mockList = [
   {
     title: `Test`,
     type: `Test`,
@@ -36,7 +36,8 @@ it(`Favorites City title link works correctly`, () => {
       <Router history={history}>
         <Favorites
           onCityClick={onCityClick}
-          favoriteList={mock}
+          favoriteList={mockList}
+          favoritesByCity={[[`Test`, mockList]]}
         />
       </Router>
   );

@@ -30,6 +30,9 @@ export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };
 
+export const ratingInPercents = (rating, max = 5) => {
+  return Math.round(rating) / max * 100;
+};
 // TODO pluralization
 
 // TODO toCamelCase

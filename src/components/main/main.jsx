@@ -81,20 +81,6 @@ export const Main = ({
   );
 };
 
-const mapStateToProps = (state, {selectedCityName}) => {
-  const currentCity = getSelectedCity(selectedCityName, state);
-
-  return {
-    currentCity,
-    currentPlaces: getCityOffers(currentCity, state.offers),
-    coordinatesByCity: getCoordinatesByCity(state),
-  };
-};
-
-const mapDispatchToProps = {
-  updateBookmark: toggleFavorite
-};
-
 Main.propTypes = {
   mapZoom: PropTypes.number,
   currentCity: PropTypes.string,
@@ -109,6 +95,20 @@ Main.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string,
   }))
+};
+
+const mapStateToProps = (state, {selectedCityName}) => {
+  const currentCity = getSelectedCity(selectedCityName, state);
+
+  return {
+    currentCity,
+    currentPlaces: getCityOffers(currentCity, state.offers),
+    coordinatesByCity: getCoordinatesByCity(state),
+  };
+};
+
+const mapDispatchToProps = {
+  updateBookmark: toggleFavorite
 };
 
 export default compose(

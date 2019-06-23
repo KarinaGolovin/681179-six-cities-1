@@ -7,8 +7,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import OfferScreen from '../offer-screen/offer-screen.jsx';
 import {withRootClassNames} from '../../hocs/with-body-class-name/with-body-class-name';
 
-// I know it's a bit weird but... markup rely on root classNames
-// I tried to add extra wrapper divs but guess what map css breaks in this case
+// CSS rely on root classNames, adding extra wrapper breaks map styles as well
 const HomeScreenWithRootClassname = withRootClassNames(HomeScreen, [`page--gray`, `page--main`]);
 const LoginScreenWithRootClassname = withRootClassNames(LoginScreen, [`page--gray`, `page--main`]);
 

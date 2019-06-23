@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ratingInPercents} from '../../utils';
 
 export const Rating = ({rating = 0, classes = {}}) => {
   return (
@@ -16,12 +17,11 @@ export const Rating = ({rating = 0, classes = {}}) => {
   );
 };
 
-const ratingInPercents = (rating, max = 5) => {
-  return Math.round(rating) / max * 100;
-};
-
 Rating.propTypes = {
-  rating: PropTypes.number,
-  classes: PropTypes.object,
+  rating: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
+  classes: PropTypes.shape({
+    stars: PropTypes.string,
+    container: PropTypes.string
+  }),
   value: PropTypes.bool
 };

@@ -4,7 +4,7 @@ import {Favorites} from './favorites.jsx';
 import history from '../../history';
 import {Router} from 'react-router-dom';
 
-const mock = [
+const mockList = [
   {
     title: `Test`,
     type: `Test`,
@@ -31,7 +31,8 @@ it(`Favorites correctly renders`, () => {
       <Router history={history}>
         <Favorites
           onCityClick={() => {}}
-          favoriteList={mock}
+          favoriteList={mockList}
+          favoritesByCity={[[`Test`, mockList]]}
         />
       </Router>
   ).toJSON();

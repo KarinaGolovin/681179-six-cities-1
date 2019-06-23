@@ -20,7 +20,7 @@ export class Favorites extends PureComponent {
     loadFavorites();
   }
   render() {
-    const {favoriteList: list, onCityClick, onBookmarkClick} = this.props;
+    const {favoriteList: list, favoritesByCity = [], onCityClick, onBookmarkClick} = this.props;
 
     return (
       <main className="page__main page__main--favorites">
@@ -37,7 +37,7 @@ export class Favorites extends PureComponent {
               </> : <>
                   <h1 className="favorites__title">Saved listing</h1>
                   <ul className="favorites__list">
-                    {Object.entries(groupByCity(list)).map(([city, cards]) => {
+                    {favoritesByCity.map(([city, cards]) => {
                       return <FavoriteLocation
                         city={city}
                         cards={cards}
@@ -58,6 +58,7 @@ export class Favorites extends PureComponent {
 
 Favorites.propTypes = {
   favoriteList: PropTypes.array,
+  favoritesByCity: PropTypes.array,
   onCityClick: PropTypes.func,
   onBookmarkClick: PropTypes.func,
   loadFavorites: PropTypes.func
@@ -121,8 +122,14 @@ const groupByCity = (offers) => {
   }, {});
 };
 
+const mapStateToProps = (state, {favoriteList}) => {
+  return {
+    favoritesByCity: Object.entries(groupByCity(favoriteList))
+  };
+};
+
 const mapDispatchToProps = {
   loadFavorites: getFavoriteOfferList
 };
 
-export default connect(null, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
