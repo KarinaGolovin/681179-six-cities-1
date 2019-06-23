@@ -18,7 +18,14 @@ export const Rating = ({rating = 0, classes = {}}) => {
 };
 
 Rating.propTypes = {
-  rating: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
+  rating: (props, propName, componentName) => {
+    const MIN = 0;
+    const MAX = 5;
+    if (props[propName] < MIN || props[propName] > MAX) {
+      return new Error(`Invalid property value ${propName} in component ${componentName}. Must be in interval from ${MIN} to ${MAX}`);
+    }
+    return null;
+  },
   classes: PropTypes.shape({
     stars: PropTypes.string,
     container: PropTypes.string

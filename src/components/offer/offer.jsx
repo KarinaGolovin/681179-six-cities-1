@@ -6,7 +6,7 @@ import {toggleFavorite} from '../../store/actions';
 import {BookmarkIcon} from '../bookmark-icon/bookmark-icon.jsx';
 import Reviews from '../reviews/reviews.jsx';
 import Map from '../map/map.jsx';
-import {getCityOffers} from '../../store/reducers';
+import {getCityOffers} from '../../store/reducers/offers/selectors';
 import {shuffleArray} from '../../utils';
 import {compose, withProps} from 'recompose';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
@@ -33,7 +33,7 @@ const PlacesListWrapped = withProps({
 
 export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, activeItem}) => {
   if (!offer) {
-    return `Loading...`;
+    return <div className={`container`}>Loading...</div>;
   }
   return (
     <main className="page__main page__main--property">
@@ -119,7 +119,7 @@ const getRandomNearbyPlacesIds = (() => {
     }
 
     if (!cache[currentOffer.id]) {
-      const cityOffers = getCityOffers(currentOffer.city.name, allOffers);
+      const cityOffers = getCityOffers(allOffers, currentOffer.city.name);
       const filteredOffers = cityOffers.filter(({id}) => id !== currentOffer.id);
 
       cache[currentOffer.id] = shuffleArray(filteredOffers).slice(0, 3).map((it) => it.id);

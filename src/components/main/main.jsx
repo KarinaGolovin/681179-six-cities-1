@@ -5,7 +5,7 @@ import {toggleFavorite} from '../../store/actions';
 import PlacesList from '../places-list/places-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
-import {getCityOffers, getCoordinatesByCity, getSelectedCity} from '../../store/reducers';
+import {getCityOffers, getCoordinatesByCity, getSelectedCity} from '../../store/reducers/offers/selectors';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import {withOffersSorting} from '../../hocs/with-offer-sorting/with-offer-sorting';
 import SelectForm from '../select-form/select-form.jsx';
@@ -98,11 +98,11 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state, {selectedCityName}) => {
-  const currentCity = getSelectedCity(selectedCityName, state);
+  const currentCity = getSelectedCity(state, selectedCityName);
 
   return {
     currentCity,
-    currentPlaces: getCityOffers(currentCity, state.offers),
+    currentPlaces: getCityOffers(state, currentCity),
     coordinatesByCity: getCoordinatesByCity(state),
   };
 };

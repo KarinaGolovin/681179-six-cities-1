@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {PAGE_URL} from '../../api';
 import {UserInfoBlock} from '../user-info-block/user-info-block.jsx';
 
-export const Header = ({user, isAuthorizationRequired}) => {
+export const Header = ({user}) => {
 
   return (
     <>
@@ -32,9 +32,9 @@ export const Header = ({user, isAuthorizationRequired}) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link to={`${isAuthorizationRequired ? `/login` : `/favorites`}`} className="header__nav-link header__nav-link--profile">
+                  <Link to={`${user.isAuthorizationRequired ? `/login` : `/favorites`}`} className="header__nav-link header__nav-link--profile">
                     {
-                      isAuthorizationRequired || !user ? <>
+                      user.isAuthorizationRequired ? <>
                         <div className="header__avatar-wrapper user__avatar-wrapper" />
                         <span className="header__login">Sign in</span>
                       </> : <UserInfoBlock avatar={user.avatar ? `${PAGE_URL}${user.avatar}` : null} email={user.email} />
@@ -54,8 +54,8 @@ Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string,
     avatar: PropTypes.string,
-  }),
-  isAuthorizationRequired: PropTypes.bool,
+    isAuthorizationRequired: PropTypes.bool,
+  })
 };
 
 

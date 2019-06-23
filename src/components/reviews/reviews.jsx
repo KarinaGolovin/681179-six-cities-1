@@ -4,7 +4,7 @@ import ReviewForm from '../review-form/review-form.jsx';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchComments, postComments} from '../../store/actions';
-import {getAuthorizationStatus} from '../../store/reducers';
+import {getAuthorizationStatus} from '../../store/reducers/user/user';
 import {formatDate} from '../../utils';
 
 export class Reviews extends Component {
