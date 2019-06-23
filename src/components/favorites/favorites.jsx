@@ -3,6 +3,15 @@ import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 import {connect} from 'react-redux';
 import {getFavoriteOfferList} from '../../store/actions';
+import {withProps} from 'recompose';
+
+const PlaceCardWrapped = withProps({
+  classes: {
+    container: `favorites__card`,
+    imageWrapper: `favorites__image-wrapper`,
+    cardInfo: `favorites__card-info`
+  }
+})(PlaceCard);
 
 export class Favorites extends PureComponent {
   componentDidMount() {
@@ -54,12 +63,6 @@ Favorites.propTypes = {
   loadFavorites: PropTypes.func
 };
 
-const cardClasses = {
-  container: `favorites__card`,
-  imageWrapper: `favorites__image-wrapper`,
-  cardInfo: `favorites__card-info`
-};
-
 const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
   return (
     <>
@@ -74,7 +77,7 @@ const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
         <div className="favorites__places">
           {cards.map((it) => {
             return (
-              <PlaceCard
+              <PlaceCardWrapped
                 title={it.title}
                 type={it.type}
                 price={it.price}
@@ -82,16 +85,12 @@ const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
                 rating={it.rating}
                 isPremium={it.is_premium}
                 isBookmarked={it.is_favorite}
-                onPictureClick={() => {}}
                 onBookmarkClick={() => {
                   onBookmarkClick({
                     hotelId: it.id,
                     status: it.is_favorite ? 0 : 1
                   });
                 }}
-                onPictureMouseEnter={() => {}}
-                onPictureMouseLeave={() => {}}
-                classes={cardClasses}
                 id={it.id}
                 key={it.id}
                 imageWidth={150}

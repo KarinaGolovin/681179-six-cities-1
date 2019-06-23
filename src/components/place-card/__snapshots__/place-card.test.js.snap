@@ -3,6 +3,10 @@
 exports[`PlaceCard correctly renders 1`] = `
 <article
   className="place-card "
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="place-card__image-wrapper "

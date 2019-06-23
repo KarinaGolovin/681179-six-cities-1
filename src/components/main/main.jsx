@@ -9,18 +9,19 @@ import {getCityOffers, getCoordinatesByCity, getSelectedCity} from '../../store/
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import {withOffersSorting} from '../../hocs/with-offer-sorting/with-offer-sorting';
 import SelectForm from '../select-form/select-form.jsx';
-import {compose} from 'recompose';
+import {compose, withProps} from 'recompose';
 
-const placesListClasses = {
-  container: `cities__places-list tabs__content`
-};
-// :/
-const placeCardProps = {
+const PlacesListWrapped = withProps({
   classes: {
-    container: `cities__place-card`,
-    imageWrapper: `cities__image-wrapper`
+    container: `cities__places-list tabs__content`,
+  },
+  cardProps: {
+    classes: {
+      container: `cities__place-card`,
+      imageWrapper: `cities__image-wrapper`
+    }
   }
-};
+})(PlacesList);
 
 export const Main = ({
   coordinatesByCity,
@@ -58,9 +59,7 @@ export const Main = ({
                 />
               </>
             ) : null}
-            <PlacesList
-              classes={placesListClasses}
-              cardProps={placeCardProps}
+            <PlacesListWrapped
               offers={currentPlaces}
               onBookmarkClick={updateBookmark}
               onActiveItemChange={onActiveItemChange}

@@ -8,7 +8,7 @@ import Reviews from '../reviews/reviews.jsx';
 import Map from '../map/map.jsx';
 import {getCityOffers} from '../../store/reducers';
 import {shuffleArray} from '../../utils';
-import {compose} from 'recompose';
+import {compose, withProps} from 'recompose';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import PlacesList from '../places-list/places-list.jsx';
 import {GalleryBlock} from '../gallery-block/gallery-block.jsx';
@@ -17,18 +17,19 @@ import {OfferFeatures} from '../offer-features/offer-features.jsx';
 import {OfferPrice} from '../offer-price/offer-price.jsx';
 import {OfferHostBlock} from '../offer-host-block/offer-host-block.jsx';
 
-const placesListClasses = {
-  container: `near-places__list`
-};
-
-const placeCardProps = {
+const PlacesListWrapped = withProps({
   classes: {
-    container: `near-places__card`,
-    imageWrapper: `near-places__image-wrapper`
+    container: `near-places__list`
   },
-  imageHeight: 200,
-  imageWidth: 260
-};
+  cardProps: {
+    classes: {
+      container: `near-places__card`,
+      imageWrapper: `near-places__image-wrapper`
+    },
+    imageHeight: 200,
+    imageWidth: 260
+  }
+})(PlacesList);
 
 export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, activeItem}) => {
   if (!offer) {
@@ -98,9 +99,7 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <PlacesList
-            cardProps={placeCardProps}
-            classes={placesListClasses}
+          <PlacesListWrapped
             offers={nearbyPlaces}
             onBookmarkClick={updateBookmark}
             onActiveItemChange={onActiveItemChange}

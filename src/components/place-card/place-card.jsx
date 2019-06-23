@@ -13,8 +13,8 @@ const PlaceCard = (props) => {
     isBookmarked,
     isPremium,
     rating,
-    onPictureMouseEnter,
-    onPictureMouseLeave,
+    onPictureMouseEnter = () => {},
+    onPictureMouseLeave = () => {},
     onBookmarkClick,
     classes = {
       container: ``,
@@ -86,7 +86,6 @@ PlaceCard.propTypes = {
   rating: PropTypes.number,
   isPremium: PropTypes.bool,
   isBookmarked: PropTypes.bool,
-  onPictureClick: PropTypes.func,
   onPictureMouseEnter: PropTypes.func,
   onPictureMouseLeave: PropTypes.func,
   onBookmarkClick: PropTypes.func,

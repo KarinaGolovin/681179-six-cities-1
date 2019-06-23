@@ -113,22 +113,7 @@ exports[`Offer correctly renders 1`] = `
       >
         Other places in the neighbourhood
       </h2>
-      <PlacesList
-        cardProps={
-          Object {
-            "classes": Object {
-              "container": "near-places__card",
-              "imageWrapper": "near-places__image-wrapper",
-            },
-            "imageHeight": 200,
-            "imageWidth": 260,
-          }
-        }
-        classes={
-          Object {
-            "container": "near-places__list",
-          }
-        }
+      <withProps(PlacesList)
         offers={Array []}
         onActiveItemChange={[Function]}
       />

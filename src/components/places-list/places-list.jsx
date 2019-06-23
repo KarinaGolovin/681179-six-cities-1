@@ -6,7 +6,6 @@ class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handlePictureClick = this._handlePictureClick.bind(this);
     this._onPictureMouseEnter = this._onPictureMouseEnter.bind(this);
     this._onPictureMouseLeave = this._onPictureMouseLeave.bind(this);
     this._handleBookmarkClick = this._handleBookmarkClick.bind(this);
@@ -27,9 +26,6 @@ class PlacesList extends PureComponent {
               rating={it.rating}
               isPremium={it.is_premium}
               isBookmarked={it.is_favorite}
-              onPictureClick={() => {
-                this._handlePictureClick(it);
-              }}
               onBookmarkClick={() => {
                 this._handleBookmarkClick(it);
               }}
@@ -47,11 +43,6 @@ class PlacesList extends PureComponent {
         }
       </div>
     );
-  }
-
-  _handlePictureClick(card) {
-    this.props.onActiveItemChange(card);
-    return card;
   }
 
   _handleBookmarkClick(card) {
