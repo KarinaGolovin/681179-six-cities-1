@@ -1,4 +1,5 @@
 import {snakeCaseToCamelCase} from '../../utils';
+import history from '../../history';
 
 const ERROR_RESET_TIMEOUT = 6000;
 
