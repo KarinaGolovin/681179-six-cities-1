@@ -4,6 +4,7 @@ import PlaceCard from '../place-card/place-card.jsx';
 import {connect} from 'react-redux';
 import {getFavoriteOfferList} from '../../store/actions';
 import {withProps} from 'recompose';
+import {getFavoriteOffersByCities, getFavoritesGroupedWithCities} from '../../store/reducers/offers/selectors';
 
 const PlaceCardWrapped = withProps({
   classes: {
@@ -112,19 +113,10 @@ FavoriteLocation.propTypes = {
   onBookmarkClick: PropTypes.func
 };
 
-const groupByCity = (offers) => {
-  return offers.reduce((byCity, it) => {
-    if (!byCity[it.city.name]) {
-      byCity[it.city.name] = [];
-    }
-    byCity[it.city.name].push(it);
-    return byCity;
-  }, {});
-};
-
-const mapStateToProps = (state, {favoriteList}) => {
+const mapStateToProps = (state) => {
   return {
-    favoritesByCity: Object.entries(groupByCity(favoriteList))
+    favoriteList: getFavoriteOffersByCities(state),
+    favoritesByCity: getFavoritesGroupedWithCities(state)
   };
 };
 

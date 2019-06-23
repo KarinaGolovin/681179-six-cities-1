@@ -77,3 +77,20 @@ export const getNearbyPlaces = (() => {
       },
   );
 })();
+
+export const groupByCity = (offers) => {
+  return offers.reduce((byCity, it) => {
+    if (!byCity[it.city.name]) {
+      byCity[it.city.name] = [];
+    }
+    byCity[it.city.name].push(it);
+    return byCity;
+  }, {});
+};
+
+export const getFavoritesGroupedWithCities = createSelector(
+    [getFavoriteOffersByCities],
+    (state) => {
+      return Object.entries(groupByCity(state));
+    }
+);
