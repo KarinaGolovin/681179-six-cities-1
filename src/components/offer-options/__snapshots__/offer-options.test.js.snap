@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferOptions correctly renders 1`] = `
+<ul
+  className="property__features"
+>
+  <li
+    className="property__feature property__feature--entire"
+  >
+    Test
+  </li>
+  <li
+    className="property__feature property__feature--bedrooms"
+  >
+    1 Bedrooms
+  </li>
+  <li
+    className="property__feature property__feature--adults"
+  >
+    Max 1 adults
+  </li>
+</ul>
+`;

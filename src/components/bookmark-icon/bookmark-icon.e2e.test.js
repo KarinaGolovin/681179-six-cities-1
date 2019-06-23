@@ -15,8 +15,9 @@ it(`Bookmark button works correctly`, () => {
       />
   );
 
-  component.find(`.place-card__bookmark-button`).simulate(`click`);
+  const button = component.find(`.place-card__bookmark-button`);
+  button.simulate(`click`);
 
   expect(onBookmarkClick).toHaveBeenCalledTimes(1);
-  expect(component.firstChild).toHaveClass(`place-card__bookmark-button--active`);
+  expect(button.hasClass(`place-card__bookmark-button--active`)).toEqual(true);
 });

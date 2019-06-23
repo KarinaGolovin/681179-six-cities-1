@@ -10,7 +10,7 @@ exports[`Rating correctly renders 1`] = `
     <span
       style={
         Object {
-          "width": "70%",
+          "width": "80%",
         }
       }
     />

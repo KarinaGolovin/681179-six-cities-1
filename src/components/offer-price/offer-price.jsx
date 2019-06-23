@@ -8,8 +8,8 @@ export const OfferPrice = ({price}) => {
       <span className="property__price-text">&nbsp;night</span>
     </div>
   );
-}
+};
 
 OfferPrice.propTypes = {
   price: PropTypes.number
-}
+};

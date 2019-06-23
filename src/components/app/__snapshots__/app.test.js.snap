@@ -85,7 +85,10 @@ Array [
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 >
-                  <img />
+                  <img
+                    className="user__avatar"
+                    src={null}
+                  />
                 </div>
                 <span
                   className="header__user-name user__name"
@@ -177,6 +180,7 @@ Array [
              
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -190,13 +194,50 @@ Array [
                 />
               </svg>
             </span>
+            <ul
+              className="places__options places__options--custom "
+            >
+              <li
+                className="places__option "
+                onClick={[Function]}
+                tabIndex={0}
+                value="popular"
+              >
+                Popular
+              </li>
+              <li
+                className="places__option "
+                onClick={[Function]}
+                tabIndex={0}
+                value="to-high"
+              >
+                Price: low to high
+              </li>
+              <li
+                className="places__option "
+                onClick={[Function]}
+                tabIndex={0}
+                value="to-low"
+              >
+                Price: high to low
+              </li>
+              <li
+                className="places__option "
+                onClick={[Function]}
+                tabIndex={0}
+                value="top-rated"
+              >
+                Top rated first
+              </li>
+            </ul>
             <select
-              className="places__sorting-type"
+              className="places__sorting-type visually-hidden"
               id="places-sorting"
+              onChange={[Function]}
+              value="popular"
             >
               <option
                 className="places__option"
-                defaultValue=""
                 value="popular"
               >
                 Popular
@@ -222,11 +263,13 @@ Array [
             </select>
           </form>
           <div
-            className="cities__places-list places__list tabs__content"
+            className="places__list cities__places-list tabs__content"
           >
             <article
               className="place-card cities__place-card"
               id={1}
+              onBlur={[Function]}
+              onFocus={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -234,7 +277,7 @@ Array [
                 className="place-card__image-wrapper cities__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/offer/1"
                   onClick={[Function]}
                 >
                   <img
@@ -273,8 +316,8 @@ Array [
                   >
                     <svg
                       className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
+                      height={19}
+                      width={18}
                     >
                       <use
                         xlinkHref="#icon-bookmark"
@@ -311,7 +354,7 @@ Array [
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Test

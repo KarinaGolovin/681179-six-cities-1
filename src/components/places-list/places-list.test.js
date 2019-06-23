@@ -2,6 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import PlacesList from './places-list.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import history from '../../history';
+import {Router} from 'react-router-dom';
 
 const mock = [
   {
@@ -50,11 +52,16 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 
 it(`PlaceCard correctly renders`, () => {
   const component = renderer.create(
-      <PlacesListWrapped
-        offers={mock}
-        onActiveItemChange={() => {}}
-        onBookmarkClick={() => {}}
-      />
+      <Router history={history}>
+        <PlacesListWrapped
+          offers={mock}
+          onActiveItemChange={() => {}}
+          onBookmarkClick={() => {}}
+          classes={{
+            container: ``
+          }}
+        />
+      </Router>
   ).toJSON();
 
   expect(component).toMatchSnapshot();

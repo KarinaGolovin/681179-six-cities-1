@@ -19,4 +19,4 @@ export const GalleryBlock = ({images}) => {
 
 GalleryBlock.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string)
-}
+};

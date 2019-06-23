@@ -35,7 +35,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default compose(
-    connect(mapStateToProps),
-    withAuthRedirect
-);
+export default (path) => {
+  return compose(
+      connect(mapStateToProps),
+      withAuthRedirect(path)
+  );
+};

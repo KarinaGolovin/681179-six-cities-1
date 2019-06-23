@@ -25,4 +25,4 @@ OfferHostBlock.propTypes = {
   userAvatar: PropTypes.string,
   userStatus: PropTypes.bool,
   offerDescription: PropTypes.string,
-}
+};

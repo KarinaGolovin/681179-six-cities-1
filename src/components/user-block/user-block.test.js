@@ -6,7 +6,7 @@ const mock = {
   name: `Test`,
   avatar: ``,
   status: false,
-}
+};
 
 it(`UserBlock correctly renders`, () => {
   const component = renderer.create(

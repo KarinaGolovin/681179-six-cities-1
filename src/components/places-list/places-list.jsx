@@ -81,7 +81,7 @@ PlacesList.propTypes = {
   cardProps: PropTypes.object,
   classes: PropTypes.shape({
     container: PropTypes.string
-  })
+  }).isRequired
 };
 
 export default PlacesList;

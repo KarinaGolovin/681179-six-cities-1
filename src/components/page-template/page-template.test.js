@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PageTemplate from './page-template.jsx';
+import {PageTemplate} from './page-template.jsx';
+import {Router} from 'react-router-dom';
+import history from '../../history';
 
 const mockUser = {
   id: 1,
@@ -12,10 +14,12 @@ const mockUser = {
 
 it(`PageTemplate correctly renders`, () => {
   const component = renderer.create(
-      <PageTemplate
-        isAuthorizationRequired={false}
-        user={mockUser}
-      />
+      <Router history={history}>
+        <PageTemplate
+          isAuthorizationRequired={false}
+          user={mockUser}
+        />
+      </Router>
   ).toJSON();
 
   expect(component).toMatchSnapshot();

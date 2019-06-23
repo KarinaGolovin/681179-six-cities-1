@@ -49,9 +49,11 @@ class Map extends PureComponent {
 
     this._updateActiveMarker();
 
-    this._mapInstance.scrollWheelZoom.disable();
-    this._mapInstance.on(`click`, () => this._mapInstance.scrollWheelZoom.enable());
-    this._mapInstance.on(`mouseout`, () => this._mapInstance.scrollWheelZoom.disable());
+    if (this._mapInstance.scrollWheelZoom) {
+      this._mapInstance.scrollWheelZoom.disable();
+      this._mapInstance.on(`click`, () => this._mapInstance.scrollWheelZoom.enable());
+      this._mapInstance.on(`mouseout`, () => this._mapInstance.scrollWheelZoom.disable());
+    }
   }
 
   componentDidUpdate(prevProps) {

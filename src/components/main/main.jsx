@@ -29,8 +29,8 @@ export const Main = ({
   updateBookmark,
   sortingOptions,
   sortingType,
-  onSortTypeChange,
-  onActiveItemChange,
+  onSortTypeChange = () => {},
+  onActiveItemChange = () => {},
   activeItem
 }) => {
   return (
@@ -102,7 +102,7 @@ Main.propTypes = {
   coordinatesByCity: PropTypes.object,
   currentPlaces: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateBookmark: PropTypes.func,
-  onSortTypeChange: PropTypes.func.isRequired,
+  onSortTypeChange: PropTypes.func,
   onActiveItemChange: PropTypes.func,
   activeItem: PropTypes.object,
   sortingType: PropTypes.string,

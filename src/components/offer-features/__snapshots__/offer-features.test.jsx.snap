@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferFeatures correctly renders 1`] = `
+<div
+  className="property__inside"
+>
+  <h2
+    className="property__inside-title"
+  >
+    What's inside
+  </h2>
+  <ul
+    className="property__inside-list"
+  >
+    <li
+      className="property__inside-item"
+    >
+      Test
+    </li>
+    <li
+      className="property__inside-item"
+    >
+      Test1
+    </li>
+    <li
+      className="property__inside-item"
+    >
+      Test2
+    </li>
+  </ul>
+</div>
+`;

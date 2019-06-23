@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GalleryBlock from './gallery-block.jsx';
+import {GalleryBlock} from './gallery-block.jsx';
 
 const mock = [];
 

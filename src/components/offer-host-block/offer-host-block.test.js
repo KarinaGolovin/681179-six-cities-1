@@ -7,7 +7,7 @@ const mock = {
   avatar: ``,
   status: false,
   description: ``,
-}
+};
 
 it(`OfferHostBlock correctly renders`, () => {
   const component = renderer.create(

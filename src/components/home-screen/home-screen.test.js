@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {HomeScreen} from './home-screen.jsx';
+import HomeScreen from './home-screen.jsx';
 
 it(`HomeScreen correctly renders`, () => {
   const component = renderer.create(

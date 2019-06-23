@@ -28,7 +28,7 @@ export class Reviews extends Component {
             <div className="reviews__user user">
               <div className="reviews__avatar-wrapper user__avatar-wrapper">
                 <img className="reviews__avatar user__avatar" src={it.user.avatar_url} width="54" height="54"
-                     alt="Reviews avatar"/>
+                  alt="Reviews avatar"/>
               </div>
               <span className="reviews__user-name">{it.user.name}</span>
             </div>
@@ -56,12 +56,14 @@ export class Reviews extends Component {
 
 const getSortedByDate = (reviewList) => {
   if (!reviewList || !reviewList.length) {
-    return;
+    return reviewList;
   }
 
-  return reviewList.sort(function (a, b) {
+  const sorted = [...reviewList].sort(function (a, b) {
     return new Date(b.date) - new Date(a.date);
-  }).slice(0, 10);
+  });
+
+  return sorted.slice(0, 10);
 };
 
 Reviews.propTypes = {

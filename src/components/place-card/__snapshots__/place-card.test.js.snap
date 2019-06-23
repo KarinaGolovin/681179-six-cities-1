@@ -8,7 +8,8 @@ exports[`PlaceCard correctly renders 1`] = `
     className="place-card__image-wrapper "
   >
     <a
-      href="#"
+      href="/offer/undefined"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -39,13 +40,13 @@ exports[`PlaceCard correctly renders 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button  button"
+        className="__bookmark-button  button"
         type="button"
       >
         <svg
-          className="place-card__bookmark-icon"
-          height="19"
-          width="18"
+          className="__bookmark-icon"
+          height={19}
+          width={18}
         >
           <use
             xlinkHref="#icon-bookmark"
@@ -81,7 +82,10 @@ exports[`PlaceCard correctly renders 1`] = `
     <h2
       className="place-card__name"
     >
-      <a>
+      <a
+        href="/offer/undefined"
+        onClick={[Function]}
+      >
         Some text
       </a>
     </h2>

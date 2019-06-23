@@ -16,8 +16,8 @@ export const OfferFeatures = ({featureList}) => {
       </ul>
     </div>
   );
-}
+};
 
 OfferFeatures.propTypes = {
   featureList: PropTypes.array,
-}
+};

@@ -2,6 +2,8 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import PlacesList from './places-list.jsx';
+import history from '../../history';
+import {Router} from 'react-router-dom';
 
 configure({adapter: new Adapter()});
 
@@ -31,10 +33,15 @@ const mock = [
 describe(`Check PlacesList functions works correctly`, () => {
   it(`Place card return target value on mouse over`, () => {
     const clickHandler = jest.fn();
-    const component = mount(<PlacesList
-      offers={mock}
-      onActiveItemChange={clickHandler}
-    />);
+    const component = mount(<Router history={history}>
+      <PlacesList
+        offers={mock}
+        onActiveItemChange={clickHandler}
+        classes={{
+          container: ``,
+        }}
+      />
+    </Router>);
 
     const card = component.find(`.place-card`).first();
 
@@ -55,10 +62,15 @@ describe(`Check PlacesList functions works correctly`, () => {
   it(`Place card mouse leave works`, () => {
     const clickHandler = jest.fn();
 
-    const component = mount(<PlacesList
-      offers={mock}
-      onActiveItemChange={clickHandler}
-    />);
+    const component = mount(<Router history={history}>
+      <PlacesList
+        offers={mock}
+        onActiveItemChange={clickHandler}
+        classes={{
+          container: ``,
+        }}
+      />
+    </Router>);
 
     const card = component.find(`.place-card`).first();
     card.simulate(`mouseenter`);

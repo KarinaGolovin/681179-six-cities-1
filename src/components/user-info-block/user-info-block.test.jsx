@@ -5,7 +5,7 @@ import {UserInfoBlock} from './user-info-block.jsx';
 const mock = {
   avatar: ``,
   email: ``,
-}
+};
 
 it(`UserInfoBlock correctly renders`, () => {
   const component = renderer.create(

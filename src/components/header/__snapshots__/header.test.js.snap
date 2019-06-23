@@ -85,7 +85,10 @@ Array [
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 >
-                  <img />
+                  <img
+                    className="user__avatar"
+                    src={null}
+                  />
                 </div>
                 <span
                   className="header__user-name user__name"

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectForm correctly renders 1`] = `
+<form
+  action="#"
+  className="places__sorting"
+  method="get"
+>
+  <span
+    className="places__sorting-caption"
+  >
+    Sort by
+  </span>
+   
+  <span
+    className="places__sorting-type"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    
+    <svg
+      className="places__sorting-arrow"
+      height="4"
+      width="7"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+      />
+    </svg>
+  </span>
+  <ul
+    className="places__options places__options--custom "
+  />
+  <select
+    className="places__sorting-type visually-hidden"
+    id="places-sorting"
+    onChange={[Function]}
+  />
+</form>
+`;

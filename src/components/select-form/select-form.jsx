@@ -5,7 +5,7 @@ import {compose, withState, withHandlers} from 'recompose';
 export const SelectForm = ({
   value,
   open,
-  options,
+  options = [],
   toggleOpen,
   handleSelectChange
 }) => {

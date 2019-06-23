@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Favorites} from './favorites.jsx';
+import history from '../../history';
+import {Router} from 'react-router-dom';
 
 const mock = [
   {
@@ -26,10 +28,12 @@ const mock = [
 
 it(`Favorites correctly renders`, () => {
   const component = renderer.create(
-      <Favorites
-        onCityClick={() => {}}
-        favoriteList={mock}
-      />
+      <Router history={history}>
+        <Favorites
+          onCityClick={() => {}}
+          favoriteList={mock}
+        />
+      </Router>
   ).toJSON();
 
   expect(component).toMatchSnapshot();

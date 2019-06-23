@@ -11,7 +11,7 @@ import {
 const MIN_LENGTH = 50;
 const MAX_LENGTH = 300;
 
-const ReviewForm = ({
+export const ReviewForm = ({
   isValid,
   onFormChange,
   onFormSubmit,

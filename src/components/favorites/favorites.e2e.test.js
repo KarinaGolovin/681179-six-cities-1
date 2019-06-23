@@ -2,6 +2,8 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Favorites} from './favorites.jsx';
+import history from '../../history';
+import {Router} from 'react-router-dom';
 
 configure({adapter: new Adapter()});
 
@@ -31,10 +33,12 @@ const mock = [
 it(`Favorites City title link works correctly`, () => {
   const onCityClick = jest.fn();
   const component = mount(
-      <Favorites
-        onCityClick={onCityClick}
-        favoriteList={mock}
-      />
+      <Router history={history}>
+        <Favorites
+          onCityClick={onCityClick}
+          favoriteList={mock}
+        />
+      </Router>
   );
 
   component.find(`.locations__item-link`).simulate(`click`);

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserInfoBlock correctly renders 1`] = `
+Array [
+  <div
+    className="header__avatar-wrapper user__avatar-wrapper"
+  >
+    <img
+      className="user__avatar"
+      src=""
+    />
+  </div>,
+  <span
+    className="header__user-name user__name"
+  >
+    
+  </span>,
+]
+`;

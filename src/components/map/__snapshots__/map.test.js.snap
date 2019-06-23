@@ -2,7 +2,7 @@
 
 exports[`Map correctly renders 1`] = `
 <section
-  className="cities__map map"
+  className="undefined map"
   id="map"
 />
 `;

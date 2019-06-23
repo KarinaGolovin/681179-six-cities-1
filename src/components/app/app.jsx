@@ -15,11 +15,11 @@ export default class App extends PureComponent {
   render() {
     return (
       <Switch>
-        <Route path="/" exact component={HomeScreenWithRootClassname} />
-        <Route path="/city/:cityName" component={HomeScreenWithRootClassname} />
+        <Route path="/" exact component={(props) => <HomeScreenWithRootClassname cityName={props.match.params.cityName}/>} />
+        <Route path="/city/:cityName" component={(props) => <HomeScreenWithRootClassname cityName={props.match.params.cityName}/>} />
         <Route path="/login" component={LoginScreenWithRootClassname} />
         <Route path="/favorites" component={FavoritesScreen} />
-        <Route path="/offer/:offerId" component={OfferScreen} />
+        <Route path="/offer/:offerId" component={(props) => <OfferScreen offerId={Number(props.match.params.offerId)}/>} />
       </Switch>
     );
   }

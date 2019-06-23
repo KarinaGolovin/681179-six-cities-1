@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserBlock correctly renders 1`] = `
+<div
+  className="property__host-user user"
+>
+  <div
+    className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
+  >
+    <img
+      alt="Host avatar"
+      className="property__avatar user__avatar"
+      height="74"
+      src="/"
+      width="74"
+    />
+  </div>
+  <span
+    className="property__user-name"
+  >
+    Test
+  </span>
+</div>
+`;

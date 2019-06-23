@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Offer correctly renders 1`] = `
+<main
+  className="page__main page__main--property"
+>
+  <section
+    className="property"
+  >
+    <GalleryBlock
+      images={Array []}
+    />
+    <div
+      className="property__container container"
+    >
+      <div
+        className="property__wrapper"
+      >
+        <div
+          className="property__name-wrapper"
+        >
+          <h1
+            className="property__name"
+          >
+            The house among olive 
+          </h1>
+          <BookmarkIcon
+            bookmarkClass="property"
+            onBookmarkClick={[Function]}
+            sizeKey="big"
+          />
+        </div>
+        <Rating
+          classes={
+            Object {
+              "container": "property__rating",
+              "stars": "property__stars",
+              "value": "property__rating-value",
+            }
+          }
+          rating={4.5}
+        />
+        <OfferOptions
+          offerBedrooms={1}
+          offerType="apartment"
+        />
+        <OfferPrice
+          price={163}
+        />
+        <OfferFeatures
+          featureList={Array []}
+        />
+        <OfferHostBlock
+          offerDescription="This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets."
+          userName="Angelina"
+        />
+        <Memo(ConnectFunction)
+          offerId={1}
+        />
+      </div>
+    </div>
+    <Map
+      activePlaceId={1}
+      cityCoords={
+        Array [
+          0,
+          0,
+        ]
+      }
+      mapClass="property__map"
+      placesList={
+        Array [
+          Object {
+            "bedrooms": 1,
+            "city": Object {
+              "location": Object {
+                "latitude": 0,
+                "longitude": 0,
+                "zoom": 13,
+              },
+              "name": "Test",
+            },
+            "description": "This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+            "goods": Array [],
+            "host": Object {
+              "id": 0,
+              "name": "Angelina",
+            },
+            "id": 1,
+            "images": Array [],
+            "location": Object {
+              "latitude": 0,
+              "longitude": 0,
+              "zoom": 1,
+            },
+            "price": 163,
+            "rating": 4.5,
+            "title": "The house among olive ",
+            "type": "apartment",
+          },
+        ]
+      }
+    />
+  </section>
+  <div
+    className="container"
+  >
+    <section
+      className="near-places places"
+    >
+      <h2
+        className="near-places__title"
+      >
+        Other places in the neighbourhood
+      </h2>
+      <PlacesList
+        cardProps={
+          Object {
+            "classes": Object {
+              "container": "near-places__card",
+              "imageWrapper": "near-places__image-wrapper",
+            },
+            "imageHeight": 200,
+            "imageWidth": 260,
+          }
+        }
+        classes={
+          Object {
+            "container": "near-places__list",
+          }
+        }
+        offers={Array []}
+        onActiveItemChange={[Function]}
+      />
+    </section>
+  </div>
+</main>
+`;

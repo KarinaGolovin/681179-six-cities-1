@@ -4,7 +4,7 @@ import SelectForm from './select-form.jsx';
 
 it(`SelectForm correctly renders`, () => {
   const component = renderer.create(
-      <SelectForm />
+      <SelectForm onSortTypeChange={() => {}}/>
   ).toJSON();
 
   expect(component).toMatchSnapshot();

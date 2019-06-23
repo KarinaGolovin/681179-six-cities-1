@@ -68,9 +68,10 @@ exports[`Main correctly renders 1`] = `
            
           <span
             className="places__sorting-type"
+            onClick={[Function]}
             tabIndex="0"
           >
-            Popular
+            
             <svg
               className="places__sorting-arrow"
               height="4"
@@ -81,43 +82,23 @@ exports[`Main correctly renders 1`] = `
               />
             </svg>
           </span>
+          <ul
+            className="places__options places__options--custom "
+          />
           <select
-            className="places__sorting-type"
+            className="places__sorting-type visually-hidden"
             id="places-sorting"
-          >
-            <option
-              className="places__option"
-              defaultValue=""
-              value="popular"
-            >
-              Popular
-            </option>
-            <option
-              className="places__option"
-              value="to-high"
-            >
-              Price: low to high
-            </option>
-            <option
-              className="places__option"
-              value="to-low"
-            >
-              Price: high to low
-            </option>
-            <option
-              className="places__option"
-              value="top-rated"
-            >
-              Top rated first
-            </option>
-          </select>
+            onChange={[Function]}
+          />
         </form>
         <div
-          className="cities__places-list places__list tabs__content"
+          className="places__list cities__places-list tabs__content"
         >
           <article
             className="place-card cities__place-card"
             id={1}
+            onBlur={[Function]}
+            onFocus={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
@@ -125,7 +106,7 @@ exports[`Main correctly renders 1`] = `
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
-                href="#"
+                href="/offer/1"
                 onClick={[Function]}
               >
                 <img
@@ -164,8 +145,8 @@ exports[`Main correctly renders 1`] = `
                 >
                   <svg
                     className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
+                    height={19}
+                    width={18}
                   >
                     <use
                       xlinkHref="#icon-bookmark"
@@ -202,7 +183,7 @@ exports[`Main correctly renders 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
+                  href="/offer/1"
                   onClick={[Function]}
                 >
                   Test
@@ -218,6 +199,8 @@ exports[`Main correctly renders 1`] = `
           <article
             className="place-card cities__place-card"
             id={2}
+            onBlur={[Function]}
+            onFocus={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
@@ -225,7 +208,7 @@ exports[`Main correctly renders 1`] = `
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
-                href="#"
+                href="/offer/2"
                 onClick={[Function]}
               >
                 <img
@@ -264,8 +247,8 @@ exports[`Main correctly renders 1`] = `
                 >
                   <svg
                     className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
+                    height={19}
+                    width={18}
                   >
                     <use
                       xlinkHref="#icon-bookmark"
@@ -302,7 +285,7 @@ exports[`Main correctly renders 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
+                  href="/offer/2"
                   onClick={[Function]}
                 >
                   Test
@@ -318,6 +301,8 @@ exports[`Main correctly renders 1`] = `
           <article
             className="place-card cities__place-card"
             id={3}
+            onBlur={[Function]}
+            onFocus={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
@@ -325,7 +310,7 @@ exports[`Main correctly renders 1`] = `
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
-                href="#"
+                href="/offer/3"
                 onClick={[Function]}
               >
                 <img
@@ -364,8 +349,8 @@ exports[`Main correctly renders 1`] = `
                 >
                   <svg
                     className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
+                    height={19}
+                    width={18}
                   >
                     <use
                       xlinkHref="#icon-bookmark"
@@ -402,7 +387,7 @@ exports[`Main correctly renders 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
+                  href="/offer/3"
                   onClick={[Function]}
                 >
                   Test
@@ -418,6 +403,8 @@ exports[`Main correctly renders 1`] = `
           <article
             className="place-card cities__place-card"
             id={4}
+            onBlur={[Function]}
+            onFocus={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
@@ -425,7 +412,7 @@ exports[`Main correctly renders 1`] = `
               className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
-                href="#"
+                href="/offer/4"
                 onClick={[Function]}
               >
                 <img
@@ -464,8 +451,8 @@ exports[`Main correctly renders 1`] = `
                 >
                   <svg
                     className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
+                    height={19}
+                    width={18}
                   >
                     <use
                       xlinkHref="#icon-bookmark"
@@ -502,7 +489,7 @@ exports[`Main correctly renders 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
+                  href="/offer/4"
                   onClick={[Function]}
                 >
                   Test

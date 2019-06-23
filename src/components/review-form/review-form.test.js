@@ -5,7 +5,10 @@ import {ReviewForm} from './review-form.jsx';
 it(`ReviewForm correctly renders`, () => {
   const component = renderer.create(
       <ReviewForm
-        onSubmitRating={() => {}}
+        onFormChange={() => {}}
+        onFormSubmit={() => {}}
+        setFormRef={() => {}}
+        isValid={false}
       />
   ).toJSON();
 

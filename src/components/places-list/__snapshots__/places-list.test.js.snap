@@ -2,19 +2,21 @@
 
 exports[`PlaceCard correctly renders 1`] = `
 <div
-  className="cities__places-list places__list tabs__content"
+  className="places__list "
 >
   <article
-    className="place-card cities__place-card"
+    className="place-card "
     id={1}
+    onBlur={[Function]}
+    onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="place-card__image-wrapper cities__image-wrapper"
+      className="place-card__image-wrapper "
     >
       <a
-        href="#"
+        href="/offer/1"
         onClick={[Function]}
       >
         <img
@@ -47,14 +49,14 @@ exports[`PlaceCard correctly renders 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button"
+          className="__bookmark-button  button"
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
+            className="__bookmark-icon"
+            height={19}
+            width={18}
           >
             <use
               xlinkHref="#icon-bookmark"
@@ -91,7 +93,7 @@ exports[`PlaceCard correctly renders 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/1"
           onClick={[Function]}
         >
           Test
@@ -105,16 +107,18 @@ exports[`PlaceCard correctly renders 1`] = `
     </div>
   </article>
   <article
-    className="place-card cities__place-card"
+    className="place-card "
     id={2}
+    onBlur={[Function]}
+    onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="place-card__image-wrapper cities__image-wrapper"
+      className="place-card__image-wrapper "
     >
       <a
-        href="#"
+        href="/offer/2"
         onClick={[Function]}
       >
         <img
@@ -147,14 +151,14 @@ exports[`PlaceCard correctly renders 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button"
+          className="__bookmark-button  button"
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
+            className="__bookmark-icon"
+            height={19}
+            width={18}
           >
             <use
               xlinkHref="#icon-bookmark"
@@ -191,7 +195,7 @@ exports[`PlaceCard correctly renders 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/2"
           onClick={[Function]}
         >
           Test
@@ -205,16 +209,18 @@ exports[`PlaceCard correctly renders 1`] = `
     </div>
   </article>
   <article
-    className="place-card cities__place-card"
+    className="place-card "
     id={3}
+    onBlur={[Function]}
+    onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="place-card__image-wrapper cities__image-wrapper"
+      className="place-card__image-wrapper "
     >
       <a
-        href="#"
+        href="/offer/3"
         onClick={[Function]}
       >
         <img
@@ -247,14 +253,14 @@ exports[`PlaceCard correctly renders 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button"
+          className="__bookmark-button  button"
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
+            className="__bookmark-icon"
+            height={19}
+            width={18}
           >
             <use
               xlinkHref="#icon-bookmark"
@@ -291,7 +297,7 @@ exports[`PlaceCard correctly renders 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/3"
           onClick={[Function]}
         >
           Test
@@ -305,16 +311,18 @@ exports[`PlaceCard correctly renders 1`] = `
     </div>
   </article>
   <article
-    className="place-card cities__place-card"
+    className="place-card "
     id={4}
+    onBlur={[Function]}
+    onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="place-card__image-wrapper cities__image-wrapper"
+      className="place-card__image-wrapper "
     >
       <a
-        href="#"
+        href="/offer/4"
         onClick={[Function]}
       >
         <img
@@ -347,14 +355,14 @@ exports[`PlaceCard correctly renders 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button"
+          className="__bookmark-button  button"
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
+            className="__bookmark-icon"
+            height={19}
+            width={18}
           >
             <use
               xlinkHref="#icon-bookmark"
@@ -391,7 +399,7 @@ exports[`PlaceCard correctly renders 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/4"
           onClick={[Function]}
         >
           Test

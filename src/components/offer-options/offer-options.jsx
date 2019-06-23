@@ -29,7 +29,7 @@ export const OfferOptions = ({offerType, offerBedrooms, offerCapacity}) => {
       })}
     </ul>
   );
-}
+};
 
 OfferOptions.propTypes = {
   offerType: PropTypes.string,

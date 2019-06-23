@@ -19,5 +19,5 @@ UserBlock.propTypes = {
   userAvatar: PropTypes.string,
   userName: PropTypes.string,
   userStatus: PropTypes.bool,
-}
+};
 
