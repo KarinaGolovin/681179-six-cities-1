@@ -16,14 +16,14 @@ export const SET_POST_COMMENT_PROGRESS = `SET_POST_COMMENT_PROGRESS`;
 export const loadOffers = (offers) => {
   return {
     type: LOAD_OFFERS,
-    payload: snakeCaseToCamelCase(offers)
+    payload: offers
   };
 };
 
 export const loadFavorites = (favorites) => {
   return {
     type: LOAD_FAVORITES,
-    payload: snakeCaseToCamelCase(favorites)
+    payload: favorites
   };
 };
 
@@ -31,7 +31,7 @@ export const updateComments = (offerId, comments) => {
   return {
     type: RECEIVED_COMMENTS,
     payload: {
-      [offerId]: snakeCaseToCamelCase(comments)
+      [offerId]: comments
     }
   };
 };
@@ -53,14 +53,14 @@ export const requiredAuthorization = (status) => {
 export const setUser = (user) => {
   return {
     type: SET_USER_DATA,
-    payload: snakeCaseToCamelCase(user),
+    payload: user,
   };
 };
 
 export const updateOffer = (offer) => {
   return {
     type: UPDATE_OFFER,
-    payload: snakeCaseToCamelCase(offer),
+    payload: offer,
   };
 };
 
@@ -97,7 +97,7 @@ export const networkError = ({message, displayTimeout = ERROR_RESET_TIMEOUT}) =>
 export const getOfferList = () => {
   return (dispatch, getState, api) => {
     return api.get(`/hotels`).then((response) => {
-      dispatch(loadOffers(response.data));
+      dispatch(loadOffers(snakeCaseToCamelCase(response.data)));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
     });
@@ -107,7 +107,7 @@ export const getOfferList = () => {
 export const getFavoriteOfferList = () => {
   return (dispatch, getState, api) => {
     return api.get(`/favorite`).then((response) => {
-      dispatch(loadFavorites(response.data));
+      dispatch(loadFavorites(snakeCaseToCamelCase(response.data)));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
     });
@@ -117,7 +117,7 @@ export const getFavoriteOfferList = () => {
 export const fetchComments = (offerId) => {
   return (dispatch, getState, api) => {
     return api.get(`/comments/${offerId}`).then((response) => {
-      dispatch(updateComments(offerId, response.data));
+      dispatch(updateComments(offerId, snakeCaseToCamelCase(response.data)));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
     });
@@ -127,7 +127,7 @@ export const fetchComments = (offerId) => {
 export const checkLogin = (() => {
   return (dispatch, getState, api) => {
     return api.get(`/login`).then((response) => {
-      dispatch(setUser(response.data));
+      dispatch(setUser(snakeCaseToCamelCase(response.data)));
       dispatch(requiredAuthorization(false));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
@@ -138,7 +138,7 @@ export const checkLogin = (() => {
 export const signIn = ({email, password}) => {
   return (dispatch, getState, api) => {
     return api.post(`/login`, {email, password}).then((response) => {
-      dispatch(setUser(response.data));
+      dispatch(setUser(snakeCaseToCamelCase(response.data)));
       dispatch(requiredAuthorization(false));
     }).catch((err) => {
       handleNetworkError({err, dispatch});
@@ -149,7 +149,7 @@ export const signIn = ({email, password}) => {
 export const toggleFavorite = ({hotelId, status}) => {
   return (dispatch, getState, api) => {
     return api.post(`/favorite/${hotelId}/${status}`).then((response) => {
-      dispatch(updateOffer(response.data));
+      dispatch(updateOffer(snakeCaseToCamelCase(response.data)));
     }).catch((err) => {
       handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
     });
@@ -161,7 +161,7 @@ export const postComments = ({offerId, rating, review}) => {
     dispatch(setCommentsPostInProgress(true));
     return api.post(`/comments/${offerId}`, {rating, comment: review}).then((response) => {
       dispatch(setCommentsPostInProgress(false));
-      dispatch(updateComments(offerId, response.data));
+      dispatch(updateComments(offerId, snakeCaseToCamelCase(response.data)));
     }).catch((err) => {
       dispatch(setCommentsPostInProgress(false));
       handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
