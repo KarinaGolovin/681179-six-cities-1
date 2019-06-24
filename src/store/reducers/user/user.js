@@ -1,14 +1,14 @@
-import {REQUIRED_AUTHORIZATION, SET_USER_DATA} from '../../actions';
+import {ActionType} from '../../actions';
 const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case REQUIRED_AUTHORIZATION:
+    case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
         isAuthorizationRequired: action.payload,
       };
-    case SET_USER_DATA:
+    case ActionType.SET_USER_DATA:
       return {
         ...action.payload,
         isAuthorizationRequired: false

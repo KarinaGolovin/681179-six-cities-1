@@ -1,4 +1,4 @@
-import {NETWORK_ERROR, NETWORK_ERROR_RESET} from '../../actions';
+import {ActionType} from '../../actions';
 
 const initialState = {
   error: {}
@@ -6,13 +6,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case NETWORK_ERROR: {
+    case ActionType.NETWORK_ERROR: {
       return {
         ...state,
         error: action.payload
       };
     }
-    case NETWORK_ERROR_RESET: {
+    case ActionType.NETWORK_ERROR_RESET: {
       return {
         ...state,
         error: {

@@ -1,4 +1,4 @@
-import {checkLogin, signIn, REQUIRED_AUTHORIZATION, requiredAuthorization, SET_USER_DATA, setUser} from '../../actions';
+import {ActionType, checkLogin, signIn, requiredAuthorization, setUser} from '../../actions';
 import reducer from '../user/user';
 import {configureAPI} from '../../../api';
 import MockAdapter from 'axios-mock-adapter';
@@ -59,7 +59,7 @@ it(`Expect that login API call to server changes authorization status`, () => {
   return checkLogin()(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({
-      type: REQUIRED_AUTHORIZATION,
+      type: ActionType.REQUIRED_AUTHORIZATION,
       payload: false
     });
   });
@@ -77,7 +77,7 @@ it(`Expect that login API call to server changes updates user data`, () => {
   return checkLogin()(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({
-      type: SET_USER_DATA,
+      type: ActionType.SET_USER_DATA,
       payload: {
         name: `Tester`
       }
@@ -97,7 +97,7 @@ it(`Expect that login API call to server changes authorization status`, () => {
   return signIn({email: `a@a.com`, password: `password`})(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({
-      type: REQUIRED_AUTHORIZATION,
+      type: ActionType.REQUIRED_AUTHORIZATION,
       payload: false
     });
   });
@@ -115,7 +115,7 @@ it(`Expect that login API call to server changes updates user data`, () => {
   return signIn({email: `a@a.com`, password: `password`})(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({
-      type: SET_USER_DATA,
+      type: ActionType.SET_USER_DATA,
       payload: {
         name: `Tester`
       }

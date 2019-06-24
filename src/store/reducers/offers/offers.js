@@ -1,14 +1,14 @@
-import {LOAD_FAVORITES, LOAD_OFFERS, UPDATE_OFFER} from '../../actions';
+import {ActionType} from '../../actions';
 
 const initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_OFFERS:
+    case ActionType.LOAD_OFFERS:
       return action.payload || [];
-    case UPDATE_OFFER:
+    case ActionType.UPDATE_OFFER:
       return updateOffer(state, action.payload);
-    case LOAD_FAVORITES:
+    case ActionType.LOAD_FAVORITES:
       return updateFavoriteOffers(state, action.payload);
   }
 

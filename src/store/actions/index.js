@@ -3,35 +3,37 @@ import history from '../../history';
 
 const ERROR_RESET_TIMEOUT = 6000;
 
-export const LOAD_OFFERS = `LOAD_OFFERS`;
-export const UPDATE_OFFER = `UPDATE_OFFER`;
-export const REQUIRED_AUTHORIZATION = `REQUIRED_AUTHORIZATION`;
-export const SET_USER_DATA = `SET_USER_DATA`;
-export const LOAD_FAVORITES = `LOAD_FAVORITES`;
-export const RECEIVED_COMMENTS = `RECEIVED_COMMENTS`;
-export const NETWORK_ERROR = `NETWORK_ERROR`;
-export const NETWORK_ERROR_RESET = `NETWORK_ERROR_RESET`;
-export const SET_POST_COMMENT_PROGRESS = `SET_POST_COMMENT_PROGRESS`;
-export const UPDATE_COMMENT_FORM = `UPDATE_COMMENT_FORM`;
-export const RESET_COMMENT_FORM = `RESET_COMMENT_FORM`;
+export const ActionType = {
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  UPDATE_OFFER: `UPDATE_OFFER`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_USER_DATA: `SET_USER_DATA`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
+  RECEIVED_COMMENTS: `RECEIVED_COMMENTS`,
+  NETWORK_ERROR: `NETWORK_ERROR`,
+  NETWORK_ERROR_RESET: `NETWORK_ERROR_RESET`,
+  SET_POST_COMMENT_PROGRESS: `SET_POST_COMMENT_PROGRESS`,
+  UPDATE_COMMENT_FORM: `UPDATE_COMMENT_FORM`,
+  RESET_COMMENT_FORM: `RESET_COMMENT_FORM`
+};
 
 export const loadOffers = (offers) => {
   return {
-    type: LOAD_OFFERS,
+    type: ActionType.LOAD_OFFERS,
     payload: offers
   };
 };
 
 export const loadFavorites = (favorites) => {
   return {
-    type: LOAD_FAVORITES,
+    type: ActionType.LOAD_FAVORITES,
     payload: favorites
   };
 };
 
 export const updateComments = (offerId, comments) => {
   return {
-    type: RECEIVED_COMMENTS,
+    type: ActionType.RECEIVED_COMMENTS,
     payload: {
       [offerId]: comments
     }
@@ -40,48 +42,48 @@ export const updateComments = (offerId, comments) => {
 
 export const updateCommentForm = (fields) => {
   return {
-    type: UPDATE_COMMENT_FORM,
+    type: ActionType.UPDATE_COMMENT_FORM,
     payload: fields
   };
 };
 
 export const resetCommentForm = () => {
   return {
-    type: RESET_COMMENT_FORM
+    type: ActionType.RESET_COMMENT_FORM
   };
 };
 
 export const setCommentFormLock = (status) => {
   return {
-    type: SET_POST_COMMENT_PROGRESS,
+    type: ActionType.SET_POST_COMMENT_PROGRESS,
     payload: status
   };
 };
 
 export const requiredAuthorization = (status) => {
   return {
-    type: REQUIRED_AUTHORIZATION,
+    type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
   };
 };
 
 export const setUser = (user) => {
   return {
-    type: SET_USER_DATA,
+    type: ActionType.SET_USER_DATA,
     payload: user,
   };
 };
 
 export const updateOffer = (offer) => {
   return {
-    type: UPDATE_OFFER,
+    type: ActionType.UPDATE_OFFER,
     payload: offer,
   };
 };
 
 export const showNetworkErrorMessage = (message) => {
   return {
-    type: NETWORK_ERROR,
+    type: ActionType.NETWORK_ERROR,
     payload: {
       message
     },
@@ -90,7 +92,7 @@ export const showNetworkErrorMessage = (message) => {
 
 export const resetNetworkErrorMessage = () => {
   return {
-    type: NETWORK_ERROR_RESET
+    type: ActionType.NETWORK_ERROR_RESET
   };
 };
 

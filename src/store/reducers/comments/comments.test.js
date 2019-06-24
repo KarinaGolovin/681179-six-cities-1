@@ -1,4 +1,4 @@
-import {updateComments, postComments, updateCommentForm, resetCommentForm, fetchComments, setCommentFormLock, RECEIVED_COMMENTS} from '../../actions';
+import {updateComments, postComments, updateCommentForm, resetCommentForm, fetchComments, setCommentFormLock, ActionType} from '../../actions';
 import reducer from './comments';
 import {configureAPI} from '../../../api';
 import MockAdapter from 'axios-mock-adapter';
@@ -15,7 +15,7 @@ it(`Expect correct load comments API call to server`, () => {
   return fetchComments(1)(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
-      type: RECEIVED_COMMENTS,
+      type: ActionType.RECEIVED_COMMENTS,
       payload: {'1': [{test: `Test`}]}
     });
   });
@@ -33,7 +33,7 @@ it(`Expect correct post comments API call to server`, () => {
   return postComments({offerId: 1, rating: 5, review: `Test`})(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(4);
     expect(dispatch).toHaveBeenCalledWith({
-      type: RECEIVED_COMMENTS,
+      type: ActionType.RECEIVED_COMMENTS,
       payload: {'1': [{test: `Test`}]}
     });
   });

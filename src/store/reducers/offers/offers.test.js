@@ -6,8 +6,7 @@ import {
   updateOffer,
   loadFavorites,
   loadOffers,
-  LOAD_FAVORITES,
-  LOAD_OFFERS
+  ActionType
 } from '../../actions';
 
 import reducer from './offers';
@@ -25,7 +24,7 @@ it(`Expect correct load offers API call to server`, () => {
   return getOfferList()(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
-      type: LOAD_OFFERS,
+      type: ActionType.LOAD_OFFERS,
       payload: [{test: `Test`}]
     });
   });
@@ -43,7 +42,7 @@ it(`Expect correct load favorites API call to server`, () => {
   return getFavoriteOfferList()(dispatch, jest.fn(), api).then(() => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
-      type: LOAD_FAVORITES,
+      type: ActionType.LOAD_FAVORITES,
       payload: [{test: `Test`}]
     });
   });
