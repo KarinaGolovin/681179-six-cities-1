@@ -53,7 +53,7 @@ export const getOfferById = createSelector(
 );
 
 export const getNearbyPlaces = (() => {
-  // do not want to reload all nearby places on bookmark status change
+  // Need it to not reload all nearby places on bookmark status change
   const cache = {};
 
   return createSelector(

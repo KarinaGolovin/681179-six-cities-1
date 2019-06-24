@@ -66,7 +66,24 @@ class PlacesList extends PureComponent {
 }
 
 PlacesList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object),
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    price: PropTypes.number,
+    previewImage: PropTypes.string,
+    rating: PropTypes.number,
+    isPremium: PropTypes.bool,
+    isBookmarked: PropTypes.bool,
+    isFavorite: PropTypes.bool,
+    onPictureMouseEnter: PropTypes.func,
+    onPictureMouseLeave: PropTypes.func,
+    onBookmarkClick: PropTypes.func,
+    id: PropTypes.number,
+    classes: PropTypes.object,
+    imageWidth: PropTypes.number,
+    imageHeight: PropTypes.number,
+    bookmarkSize: PropTypes.oneOf([`big`, `small`])
+  })),
   onActiveItemChange: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func,
   cardProps: PropTypes.object,

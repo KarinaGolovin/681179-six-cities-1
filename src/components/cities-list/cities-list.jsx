@@ -23,7 +23,7 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   activeItem: PropTypes.string,
-  cities: PropTypes.array.isRequired
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default CitiesList;

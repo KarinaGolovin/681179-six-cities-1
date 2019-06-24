@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {capitalizeFirstLetter} from '../../utils';
 
 export const OfferOptions = ({offerType, offerBedrooms, offerCapacity}) => {
-  const OPTIONS = [
+  const options = [
     {
       optionClass: `property__feature--entire`,
       optionText: capitalizeFirstLetter(offerType),
@@ -20,10 +20,10 @@ export const OfferOptions = ({offerType, offerBedrooms, offerCapacity}) => {
 
   return (
     <ul className="property__features">
-      {OPTIONS.map((option) => {
+      {options.map((optionItem) => {
         return (
-          <li className={`property__feature ${option.optionClass}`} key={option.optionClass}>
-            {option.optionText}
+          <li className={`property__feature ${optionItem.optionClass}`} key={optionItem.optionClass}>
+            {optionItem.optionText}
           </li>
         );
       })}

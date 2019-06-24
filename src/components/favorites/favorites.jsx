@@ -107,7 +107,19 @@ const FavoriteLocation = ({city, cards, onCityClick, onBookmarkClick}) => {
 };
 
 FavoriteLocation.propTypes = {
-  cards: PropTypes.array,
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    price: PropTypes.number,
+    previewImage: PropTypes.string,
+    rating: PropTypes.number,
+    isPremium: PropTypes.bool,
+    isBookmarked: PropTypes.bool,
+    onBookmarkClick: PropTypes.func,
+    id: PropTypes.number,
+    imageWidth: PropTypes.number,
+    imageHeight: PropTypes.number,
+  })),
   city: PropTypes.string,
   onCityClick: PropTypes.func,
   onBookmarkClick: PropTypes.func

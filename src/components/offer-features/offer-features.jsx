@@ -19,5 +19,5 @@ export const OfferFeatures = ({featureList}) => {
 };
 
 OfferFeatures.propTypes = {
-  featureList: PropTypes.array,
+  featureList: PropTypes.arrayOf(PropTypes.string),
 };

@@ -67,7 +67,6 @@ export const Offer = ({offer, nearbyPlaces, updateBookmark, onActiveItemChange, 
                 value: `property__rating-value`
               }}
             />
-            {/* TODO check ending */}
             <OfferOptions
               offerType={offer.type}
               offerBedrooms={offer.bedrooms}
@@ -122,8 +121,32 @@ const mapDispatchToProps = {
 
 Offer.propTypes = {
   updateBookmark: PropTypes.func,
-  offer: PropTypes.object,
-  nearbyPlaces: PropTypes.array,
+  offer: PropTypes.shape({
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string.isRequired,
+    isBookmarked: PropTypes.bool,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
+    host: PropTypes.shape({
+      id: PropTypes.number,
+      isPro: PropTypes.bool,
+      name: PropTypes.string,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+    }),
+  }),
+  nearbyPlaces: PropTypes.arrayOf(PropTypes.object),
   onActiveItemChange: PropTypes.func,
   activeItem: PropTypes.object
 };
