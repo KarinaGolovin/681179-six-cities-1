@@ -4,7 +4,7 @@ import {withFormValidation} from '../../hocs/with-form-validation/with-form-vali
 import {
   compose,
   withHandlers,
-  withState,
+  mapProps,
   lifecycle
 } from 'recompose';
 
@@ -20,7 +20,10 @@ export const ReviewForm = ({
     maxLength: MAX_LENGTH,
   },
   isDisabled = false,
-  form
+  form = {
+    rating: null,
+    review: ``
+  }
 }) => {
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={onFormSubmit}>
@@ -76,18 +79,6 @@ export const ReviewForm = ({
 };
 
 export default compose(
-    withState(`form`, `setForm`, {
-      rating: null,
-      review: ``,
-    }),
-    withHandlers({
-      resetForm: (props) => () => {
-        props.setForm({
-          rating: null,
-          review: ``,
-        });
-      },
-    }),
     withFormValidation({
       review: (value, rules) => value.length >= rules.minLength && value.length <= rules.maxLength,
       rating: (value) => value > 0
@@ -95,19 +86,23 @@ export default compose(
       minLength: MIN_LENGTH,
       maxLength: MAX_LENGTH,
     }),
-    withHandlers({
-      onFormChange: (props) => (evt) => {
-        const fieldName = evt.target.name;
-        const value = evt.target.value;
-        const valueConverters = {
-          rating: Number
-        };
+    mapProps((props) => {
+      return {
+        ...props,
+        onFormChange: (evt) => {
+          const fieldName = evt.target.name;
+          const value = evt.target.value;
+          const valueConverters = {
+            rating: Number
+          };
 
-        props.setForm({
-          ...props.form,
-          [fieldName]: valueConverters[fieldName] ? valueConverters[fieldName](value) : value
-        });
-      },
+          props.onFormChange({
+            [fieldName]: valueConverters[fieldName] ? valueConverters[fieldName](value) : value
+          });
+        }
+      };
+    }),
+    withHandlers({
       onFormSubmit: (props) => (evt) => {
         evt.preventDefault();
         props.onSubmitRating({
@@ -115,14 +110,10 @@ export default compose(
           rating: props.form.rating,
           review: props.form.review,
         });
-        props.resetForm();
       }
     }),
     lifecycle({
-      componentDidUpdate(prevProps) {
-        if (this.props.offerId !== prevProps.offerId) {
-          this.props.resetForm();
-        }
+      componentDidUpdate() {
         this.props.validateForm({
           rating: this.props.form.rating,
           review: this.props.form.review,

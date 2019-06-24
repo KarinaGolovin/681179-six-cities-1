@@ -1,1 +1,1 @@
-export const getCommentPostInProgress = (state) => state.comments.isPostInProgress;
+export const getCommentPostInProgress = (state) => state.comments.isFormLocked;

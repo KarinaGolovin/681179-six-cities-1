@@ -11,7 +11,10 @@ it(`ReviewForm on submit with data works correctly`, () => {
       <ReviewForm
         onFormSubmit={onFormSubmit}
         onFormChange={jest.fn()}
-        setFormRef={jest.fn()}
+        form={{
+          rating: null,
+          review: ``
+        }}
         isValid={true}
       />
   );

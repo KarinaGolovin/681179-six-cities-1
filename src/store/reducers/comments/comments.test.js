@@ -1,4 +1,4 @@
-import {updateComments, postComments, fetchComments, setCommentsPostInProgress, RECEIVED_COMMENTS} from '../../actions';
+import {updateComments, postComments, updateCommentForm, resetCommentForm, fetchComments, setCommentFormLock, RECEIVED_COMMENTS} from '../../actions';
 import reducer from './comments';
 import {configureAPI} from '../../../api';
 import MockAdapter from 'axios-mock-adapter';
@@ -31,7 +31,7 @@ it(`Expect correct post comments API call to server`, () => {
   }]);
 
   return postComments({offerId: 1, rating: 5, review: `Test`})(dispatch, jest.fn(), api).then(() => {
-    expect(dispatch).toHaveBeenCalledTimes(3);
+    expect(dispatch).toHaveBeenCalledTimes(4);
     expect(dispatch).toHaveBeenCalledWith({
       type: RECEIVED_COMMENTS,
       payload: {'1': [{test: `Test`}]}
@@ -41,12 +41,16 @@ it(`Expect correct post comments API call to server`, () => {
 
 it(`Expect that comments list will be updated correctly`, () => {
   const initialState = {
-    '1': [{id: 0}]
+    byOfferId: {
+      '1': [{id: 0}]
+    }
   };
   const message = updateComments(1, [{id: 1}, {id: 2}]);
 
   const expectedState = {
-    '1': [{id: 1}, {id: 2}]
+    byOfferId: {
+      '1': [{id: 1}, {id: 2}]
+    }
   };
 
   expect(reducer(initialState, message)).toEqual(expectedState);
@@ -54,12 +58,12 @@ it(`Expect that comments list will be updated correctly`, () => {
 
 it(`Expect that post in progress state will be updated correctly 1`, () => {
   const initialState = {
-    isPostInProgress: false
+    isFormLocked: false
   };
-  const message = setCommentsPostInProgress(true);
+  const message = setCommentFormLock(true);
 
   const expectedState = {
-    isPostInProgress: true
+    isFormLocked: true
   };
 
   expect(reducer(initialState, message)).toEqual(expectedState);
@@ -67,12 +71,54 @@ it(`Expect that post in progress state will be updated correctly 1`, () => {
 
 it(`Expect that post in progress state will be updated correctly 2`, () => {
   const initialState = {
-    isPostInProgress: true
+    isFormLocked: true
   };
-  const message = setCommentsPostInProgress(false);
+  const message = setCommentFormLock(false);
 
   const expectedState = {
-    isPostInProgress: false
+    isFormLocked: false
+  };
+
+  expect(reducer(initialState, message)).toEqual(expectedState);
+});
+
+it(`Expect comment form updates correctly`, () => {
+  const initialState = {
+    form: {
+      val1: `Test 1`,
+      val3: `Test 3`
+    }
+  };
+  const message = updateCommentForm({
+    val2: `Test 2`,
+    val3: `Test 3 Updated`
+  });
+
+  const expectedState = {
+    form: {
+      val1: `Test 1`,
+      val2: `Test 2`,
+      val3: `Test 3 Updated`
+    }
+  };
+
+  expect(reducer(initialState, message)).toEqual(expectedState);
+});
+
+it(`Expect comment form resets correctly`, () => {
+  const initialState = {
+    form: {
+      rating: 5,
+      review: `Test review`
+    }
+  };
+  const message = resetCommentForm();
+
+  const expectedState = {
+    form: {
+      rating: null,
+      review: ``,
+    }
   };
 
   expect(reducer(initialState, message)).toEqual(expectedState);

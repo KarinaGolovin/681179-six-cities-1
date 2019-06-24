@@ -7,7 +7,10 @@ it(`ReviewForm correctly renders`, () => {
       <ReviewForm
         onFormChange={() => {}}
         onFormSubmit={() => {}}
-        setFormRef={() => {}}
+        form={{
+          rating: null,
+          review: ``
+        }}
         isValid={false}
       />
   ).toJSON();

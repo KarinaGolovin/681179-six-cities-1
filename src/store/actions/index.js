@@ -12,6 +12,8 @@ export const RECEIVED_COMMENTS = `RECEIVED_COMMENTS`;
 export const NETWORK_ERROR = `NETWORK_ERROR`;
 export const NETWORK_ERROR_RESET = `NETWORK_ERROR_RESET`;
 export const SET_POST_COMMENT_PROGRESS = `SET_POST_COMMENT_PROGRESS`;
+export const UPDATE_COMMENT_FORM = `UPDATE_COMMENT_FORM`;
+export const RESET_COMMENT_FORM = `RESET_COMMENT_FORM`;
 
 export const loadOffers = (offers) => {
   return {
@@ -36,7 +38,20 @@ export const updateComments = (offerId, comments) => {
   };
 };
 
-export const setCommentsPostInProgress = (status) => {
+export const updateCommentForm = (fields) => {
+  return {
+    type: UPDATE_COMMENT_FORM,
+    payload: fields
+  };
+};
+
+export const resetCommentForm = () => {
+  return {
+    type: RESET_COMMENT_FORM
+  };
+};
+
+export const setCommentFormLock = (status) => {
   return {
     type: SET_POST_COMMENT_PROGRESS,
     payload: status
@@ -124,6 +139,20 @@ export const fetchComments = (offerId) => {
   };
 };
 
+export const postComments = ({offerId, rating, review}) => {
+  return (dispatch, getState, api) => {
+    dispatch(setCommentFormLock(true));
+    return api.post(`/comments/${offerId}`, {rating, comment: review}).then((response) => {
+      dispatch(resetCommentForm());
+      dispatch(setCommentFormLock(false));
+      dispatch(updateComments(offerId, snakeCaseToCamelCase(response.data)));
+    }).catch((err) => {
+      dispatch(setCommentFormLock(false));
+      handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
+    });
+  };
+};
+
 export const checkLogin = (() => {
   return (dispatch, getState, api) => {
     return api.get(`/login`).then((response) => {
@@ -151,19 +180,6 @@ export const toggleFavorite = ({hotelId, status}) => {
     return api.post(`/favorite/${hotelId}/${status}`).then((response) => {
       dispatch(updateOffer(snakeCaseToCamelCase(response.data)));
     }).catch((err) => {
-      handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
-    });
-  };
-};
-
-export const postComments = ({offerId, rating, review}) => {
-  return (dispatch, getState, api) => {
-    dispatch(setCommentsPostInProgress(true));
-    return api.post(`/comments/${offerId}`, {rating, comment: review}).then((response) => {
-      dispatch(setCommentsPostInProgress(false));
-      dispatch(updateComments(offerId, snakeCaseToCamelCase(response.data)));
-    }).catch((err) => {
-      dispatch(setCommentsPostInProgress(false));
       handleNetworkError({err, dispatch, shouldRedirectToLoginScreen: true});
     });
   };

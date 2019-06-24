@@ -3,7 +3,7 @@ import {Rating} from '../rating/rating.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchComments, postComments} from '../../store/actions';
+import {fetchComments, postComments, updateCommentForm, resetCommentForm} from '../../store/actions';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 import {formatDate} from '../../utils';
 import {getCommentPostInProgress} from '../../store/reducers/comments/selectors';
@@ -15,11 +15,12 @@ export class Reviews extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.offerId !== prevProps.offerId) {
       this.props.loadComments(this.props.offerId);
+      this.props.resetForm();
     }
   }
 
   render() {
-    const {comments = [], isAuthorizationRequired, isPostInProgress, sendComment} = this.props;
+    const {comments = [], isAuthorizationRequired, isFormLocked, sendComment, handleFormUpdate, form} = this.props;
 
     return <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
@@ -48,9 +49,11 @@ export class Reviews extends Component {
         ))}
       </ul>
       {!isAuthorizationRequired ? <ReviewForm
+        form={form}
         offerId={this.props.offerId}
         onSubmitRating={sendComment}
-        isDisabled={isPostInProgress}
+        onFormChange={handleFormUpdate}
+        isDisabled={isFormLocked}
       /> : null}
     </section>;
   }
@@ -85,17 +88,24 @@ Reviews.propTypes = {
   onSubmitRating: PropTypes.func,
   loadComments: PropTypes.func,
   isAuthorizationRequired: PropTypes.bool,
-  isPostInProgress: PropTypes.bool,
+  isFormLocked: PropTypes.bool,
   sendComment: PropTypes.func,
+  handleFormUpdate: PropTypes.func,
+  resetForm: PropTypes.func,
+  form: PropTypes.shape({
+    review: PropTypes.string,
+    rating: PropTypes.oneOf([1, 2, 3, 4, 5])
+  })
 };
 
 
 const mapStateToProps = (state, {offerId}) => {
   return {
-    isPostInProgress: getCommentPostInProgress(state),
+    form: state.comments.form,
+    isFormLocked: getCommentPostInProgress(state),
     isAuthorizationRequired: getAuthorizationStatus(state),
     offerId,
-    comments: getSortedByDate(state.comments[offerId]),
+    comments: getSortedByDate(state.comments.byOfferId[offerId]),
   };
 };
 
@@ -103,6 +113,8 @@ const mapStateToProps = (state, {offerId}) => {
 const mapDispatchToProps = {
   loadComments: fetchComments,
   sendComment: postComments,
+  resetForm: resetCommentForm,
+  handleFormUpdate: updateCommentForm,
 };
 
 export default connect(

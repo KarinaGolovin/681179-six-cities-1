@@ -21,7 +21,6 @@ exports[`Reviews correctly renders 1`] = `
     action="#"
     className="reviews__form form"
     method="post"
-    onChange={[Function]}
     onSubmit={[Function]}
   >
     <label
@@ -34,9 +33,11 @@ exports[`Reviews correctly renders 1`] = `
       className="reviews__rating-form form__rating"
     >
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="5-stars"
         name="rating"
+        onChange={[Function]}
         type="radio"
         value={5}
       />
@@ -56,9 +57,11 @@ exports[`Reviews correctly renders 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="4-stars"
         name="rating"
+        onChange={[Function]}
         type="radio"
         value={4}
       />
@@ -78,9 +81,11 @@ exports[`Reviews correctly renders 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="3-stars"
         name="rating"
+        onChange={[Function]}
         type="radio"
         value={3}
       />
@@ -100,9 +105,11 @@ exports[`Reviews correctly renders 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="2-stars"
         name="rating"
+        onChange={[Function]}
         type="radio"
         value={2}
       />
@@ -122,9 +129,11 @@ exports[`Reviews correctly renders 1`] = `
         </svg>
       </label>
       <input
+        checked={false}
         className="form__rating-input visually-hidden"
         id="1-stars"
         name="rating"
+        onChange={[Function]}
         type="radio"
         value={1}
       />
@@ -150,8 +159,10 @@ exports[`Reviews correctly renders 1`] = `
       maxLength={300}
       minLength={50}
       name="review"
+      onChange={[Function]}
       placeholder="Tell how was your stay, what you like and what can be improved"
       required={true}
+      value=""
     />
     <div
       className="reviews__button-wrapper"
